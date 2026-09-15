@@ -120,7 +120,7 @@ export const App: React.FC = () => {
       subtitle: 'Royal Heritage Signature Suite',
       tagline: 'Exquisite craftsmanship and precious stones create a timeless allure of heritage & expression',
       description: 'The crowning centerpiece of HK Jewellers. Featuring multi-layered 22K yellow gold harams, cabochon Zambian emerald strands, handcrafted jhumkis, and repoussé kadas.',
-      image: '/assets/hero/hero_bust.png',
+      image: '/assets/hero/herojewellery_cutout.png',
       goldPurity: '22K Antique Yellow Gold',
     });
   };
