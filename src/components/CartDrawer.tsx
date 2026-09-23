@@ -70,7 +70,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             items.map((item) => (
               <div
                 key={item.title}
-                className="flex items-center gap-3 p-2.5 bg-[#F7EBDD] rounded-lg border border-[#E9D1B5]"
+                className="flex items-center gap-3 p-2.5 bg-[#FAE7D8] rounded-lg border border-[#E9D1B5]"
               >
                 <img
                   src={item.image}

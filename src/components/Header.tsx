@@ -34,8 +34,8 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full bg-[#F7EBDD]/95 backdrop-blur-md transition-all duration-300 border-b ${
-        isScrolled ? 'border-[#E9D1B5] shadow-[0_4px_16px_rgba(42,22,18,0.06)] py-1.5' : 'border-transparent py-2.5'
+      className={`sticky top-0 z-40 w-full bg-[#FAE7D8]/95 backdrop-blur-md transition-all duration-300 ${
+        isScrolled ? 'shadow-[0_4px_16px_rgba(42,22,18,0.06)] py-1.5' : 'py-2.5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 flex items-center justify-between">

@@ -32,7 +32,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ onSelectCategory }) =>
   return (
     <nav 
       aria-label="Categories"
-      className="w-full bg-[#F7EBDD] border-b border-[#E9D1B5]/60 py-2.5 sm:py-3 overflow-x-auto no-scrollbar"
+      className="w-full bg-transparent relative z-20 py-2.5 sm:py-3 overflow-x-auto no-scrollbar"
     >
       <div className="flex items-center justify-start md:justify-center min-w-max px-4 md:px-8 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
         {NAV_ITEMS.map((item) => {

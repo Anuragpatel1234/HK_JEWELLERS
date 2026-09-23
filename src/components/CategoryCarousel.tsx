@@ -42,12 +42,12 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
   }, []);
 
   return (
-    <section className="w-full bg-[#F7EBDD] pt-4 sm:pt-6 pb-6 sm:pb-8">
+    <section className="w-full bg-[#FAE7D8] pt-4 sm:pt-6 pb-6 sm:pb-8">
       {/* Section Heading with Ornamental Flourishes */}
       <SectionHeading title="Collection made just for her." />
 
-      {/* Pagination Indicators (● ○ ○ ○) */}
-      <div className="flex items-center justify-center gap-2.5 mb-5 -mt-2">
+      {/* Pagination Indicators (● ○ ○ ○) - mobile/tablet only */}
+      <div className="flex lg:hidden items-center justify-center gap-2.5 mb-5 -mt-2">
         {[0, 1, 2, 3].map((idx) => {
           const isActive = activeIndex === idx;
           return (
@@ -69,7 +69,7 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
       <div className="max-w-7xl mx-auto px-3 sm:px-6">
         <div
           ref={scrollContainerRef}
-          className="flex items-stretch gap-3 sm:gap-4 md:gap-5 overflow-x-auto no-scrollbar scroll-smooth px-1 py-2 scroll-reveal-stagger revealed"
+          className="flex items-stretch justify-start lg:justify-center gap-3 sm:gap-4 md:gap-5 overflow-x-auto no-scrollbar scroll-smooth px-1 py-2 scroll-reveal-stagger revealed"
           style={{ scrollSnapType: 'x mandatory' }}
         >
           {CATEGORIES.map((cat) => (
@@ -85,26 +85,26 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
               }}
               title={cat.name}
             >
-              {/* Ornate Jharokha Arch Container with Antique Gold Border */}
-              <div className="relative flex flex-col bg-[#1A0C0A] rounded-t-[40%] rounded-b-[10px] p-[5px] sm:p-[6px] border border-[#B88A3B]/50 group-hover:border-[#D8B477] shadow-[0_6px_18px_rgba(42,22,18,0.3)] group-hover:shadow-[0_10px_28px_rgba(184,138,59,0.35)] transition-all duration-300 overflow-hidden h-full">
+              {/* Ornate Arch Card Container with Antique Gold Border */}
+              <div className="relative flex flex-col bg-[#1A0C0A] rounded-[10px] p-[2.5px] sm:p-[3px] border border-[#B88A3B]/45 group-hover:border-[#D8B477] shadow-[0_4px_16px_rgba(42,22,18,0.25)] group-hover:shadow-[0_8px_24px_rgba(184,138,59,0.35)] transition-all duration-300 overflow-hidden h-full">
                 
-                {/* Scalloped Arch Cutout Frame */}
-                <div className="relative w-full aspect-[1/1.22] rounded-t-[38%] rounded-b-[6px] overflow-hidden bg-black/40 flex items-center justify-center border border-[#B88A3B]/25">
+                {/* Full Painting Container with Miniature Frame */}
+                <div className="relative w-full aspect-[1/1.4] rounded-[8px] overflow-hidden bg-[#240C11] flex items-center justify-center">
                   <img
                     src={cat.image}
                     alt={`${cat.name} Collection`}
-                    className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110 group-hover:brightness-110"
+                    className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
-                  {/* Subtle inner shadow and antique highlight */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10 pointer-events-none" />
-                </div>
+                  {/* Subtle inner highlight */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                {/* Crisp Vector Typography Label at Bottom */}
-                <div className="pt-2.5 pb-1 text-center">
-                  <span className="font-sans text-[8.5px] sm:text-[9.5px] md:text-[10.5px] tracking-[0.2em] uppercase font-semibold text-[#D8B477] group-hover:text-[#FFF7ED] transition-colors truncate block">
-                    {cat.name}
-                  </span>
+                  {/* Crisp Typography Label over Velvet Area */}
+                  <div className="absolute bottom-[4.2%] sm:bottom-[4.8%] left-0 right-0 text-center px-1 pointer-events-none">
+                    <span className="font-sans text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.16em] uppercase font-semibold text-[#E6C687] group-hover:text-[#FFF7ED] drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)] transition-colors truncate block">
+                      {cat.name}
+                    </span>
+                  </div>
                 </div>
               </div>
             </button>

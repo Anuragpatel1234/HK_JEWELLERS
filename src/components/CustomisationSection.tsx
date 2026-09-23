@@ -13,7 +13,7 @@ export const CustomisationSection: React.FC<CustomisationSectionProps> = ({
   onViewAllClick,
 }) => {
   return (
-    <section className="w-full bg-[#F7EBDD] pt-4 sm:pt-6 pb-6 sm:pb-8 px-2.5 sm:px-4 md:px-6">
+    <section className="w-full bg-[#FAE7D8] pt-4 sm:pt-6 pb-6 sm:pb-8 px-2.5 sm:px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Section Heading with Ornamental Flourishes */}
         <SectionHeading title="Jewellery Customisation" />

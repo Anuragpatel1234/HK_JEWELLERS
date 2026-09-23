@@ -29,7 +29,7 @@ export const CATEGORIES: CategoryItem[] = [
   {
     id: 'necklaces',
     name: 'NECKLACES',
-    image: '/assets/categories/cat_necklaces_highres.jpg',
+    image: '/assets/categories/cat_necklaces.jpg',
     count: '142 Designs',
     tagline: 'Imperial Chokers & Layered Harams',
     description: 'Masterpieces in 22K yellow gold adorned with uncut Polki diamonds and Zambian emeralds.',
@@ -37,7 +37,7 @@ export const CATEGORIES: CategoryItem[] = [
   {
     id: 'earrings',
     name: 'EARRINGS',
-    image: '/assets/categories/cat_earrings_highres.jpg',
+    image: '/assets/categories/cat_earrings.jpg',
     count: '98 Designs',
     tagline: 'Chandbalis & Temple Jhumkas',
     description: 'Intricately handcrafted filigree jhumkis with delicate natural pearl drops and ruby accents.',
@@ -45,7 +45,7 @@ export const CATEGORIES: CategoryItem[] = [
   {
     id: 'bangles',
     name: 'BANGLES',
-    image: '/assets/categories/cat_bangles_highres.jpg',
+    image: '/assets/categories/cat_bangles.jpg',
     count: '86 Designs',
     tagline: 'Royal Kadas & Jadau Bangles',
     description: 'Hand-engraved nakshi bangles inspired by vintage Rajasthani royal dynasties.',
@@ -53,7 +53,7 @@ export const CATEGORIES: CategoryItem[] = [
   {
     id: 'banges',
     name: 'BANGES',
-    image: '/assets/categories/cat_banges_highres.jpg',
+    image: '/assets/categories/cat_banges.jpg',
     count: '45 Designs',
     tagline: 'Gemstone Cuffs & Navratna Bands',
     description: 'Statement gold cuffs featuring bezel-set rubies, emeralds, and south-sea pearls.',
@@ -61,26 +61,18 @@ export const CATEGORIES: CategoryItem[] = [
   {
     id: 'rings',
     name: 'RINGS',
-    image: '/assets/categories/cat_rings_highres.jpg',
+    image: '/assets/categories/cat_rings.jpg',
     count: '112 Designs',
     tagline: 'Solitaire & Polki Cocktail Rings',
     description: 'Architectural cocktail rings sculpted in solid gold with floral enamel work.',
   },
   {
-    id: 'nose-pins',
-    name: 'NOSE PINS',
-    image: '/assets/categories/cat_nose_pins_highres.jpg',
+    id: 'pendants',
+    name: 'PENDANTS & SETS',
+    image: '/assets/categories/cat_pendants.jpg',
     count: '64 Designs',
-    tagline: 'Bridal Naths & Daily Solitaires',
-    description: 'Graceful bridal naths and celestial diamond nose studs embodying feminine grace.',
-  },
-  {
-    id: 'bracelets',
-    name: 'BRACELETS',
-    image: '/assets/categories/cat_bracelets_highres.jpg',
-    count: '54 Designs',
-    tagline: 'Mesh Gold & Tennis Chains',
-    description: 'Flexible woven gold mesh bracelets crafted for both modern gala and ceremonial wear.',
+    tagline: 'Bridal Naths & Pendant Suites',
+    description: 'Graceful diamond pendant suites and celestial studs embodying feminine grace.',
   },
 ];
 

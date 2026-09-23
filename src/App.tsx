@@ -183,7 +183,7 @@ export const App: React.FC = () => {
   const cartTotalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#F7EBDD] text-[#2A1612] flex flex-col selection:bg-[#4A0712] selection:text-[#FFF7ED]">
+    <div className="min-h-screen bg-[#FAE7D8] text-[#2A1612] flex flex-col selection:bg-[#4A0712] selection:text-[#FFF7ED]">
       {/* 1. Top Announcement Bar */}
       <AnnouncementBar />
 

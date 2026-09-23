@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         hk: {
-          bg: '#F7EBDD',
+          bg: '#FAE7D8',
           cream: '#FFF7ED',
           champagne: '#FAF3EB',
           beige: '#E9D1B5',

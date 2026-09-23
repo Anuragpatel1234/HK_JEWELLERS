@@ -16,13 +16,13 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full bg-[#F7EBDD] border-t border-[#E9D1B5] pt-8 sm:pt-12 pb-0 text-[#2A1612]">
+    <footer className="w-full bg-[#FAE7D8] pt-8 sm:pt-12 pb-0 text-[#2A1612]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main 5-Column Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 pb-8 sm:pb-12 border-b border-[#E9D1B5]/80">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 pb-8 sm:pb-12">
           
           {/* Column 1: SHOP OUR JEWELLERY */}
-          <div className="border-b md:border-b-0 border-[#E9D1B5]/60 pb-3 md:pb-0">
+          <div className="pb-3 md:pb-0">
             <button
               onClick={() => toggleSection('shop')}
               className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4"
@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Column 2: HELP & SUPPORT */}
-          <div className="border-b md:border-b-0 border-[#E9D1B5]/60 pb-3 md:pb-0">
+          <div className="pb-3 md:pb-0">
             <button
               onClick={() => toggleSection('support')}
               className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4"
@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Column 3: INFORMATION */}
-          <div className="border-b md:border-b-0 border-[#E9D1B5]/60 pb-3 md:pb-0">
+          <div className="pb-3 md:pb-0">
             <button
               onClick={() => toggleSection('information')}
               className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4"
@@ -88,7 +88,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Column 4: POLICIES */}
-          <div className="border-b md:border-b-0 border-[#E9D1B5]/60 pb-3 md:pb-0">
+          <div className="pb-3 md:pb-0">
             <button
               onClick={() => toggleSection('policies')}
               className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4"
@@ -173,67 +173,33 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Bar — 3 Cards: App Download | We Accept | 100% Secure (matching UI) */}
-      <div className="w-full bg-[#EEDCCC]/60 border-t border-[#E9D1B5]">
+      {/* Bottom Bar — 2 Cards: We Accept | 100% Secure */}
+      <div className="w-full bg-[#EEDCCC]/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-center">
             
-            {/* Card 1: App Download Pill Card */}
-            <div className="bg-[#F7EBDD]/80 border border-[#E9D1B5]/80 rounded-[8px] p-3 sm:p-3.5 flex flex-col items-center justify-center text-center">
-              <span className="font-sans text-[10px] sm:text-[11px] font-semibold text-[#2A1612] mb-2 tracking-wider">
-                Download the HK Jewellers App
-              </span>
-              <div className="flex items-center gap-2">
-                <a
-                  href="#download-play"
-                  className="inline-flex items-center gap-1.5 bg-[#2A1612] hover:bg-[#4A0712] text-white px-3 py-1.5 rounded-[4px] text-[9px] sm:text-[9.5px] font-sans transition-colors"
-                >
-                  <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                    <path d="M3.609 1.814L13.793 12 3.61 22.186c-.378-.456-.61-.994-.61-1.636V3.45c0-.642.232-1.18.61-1.636zm1.144-.814L15.65 6.772 14.85 11 4.753 1zm0 22l10.097-10 1.06 4.39-11.157 5.61zm11.904-12.872l3.447 1.94c1.196.674 1.196 1.77 0 2.444l-3.447 1.94-1.28-3.162 1.28-3.162z"/>
-                  </svg>
-                  <div className="text-left leading-tight">
-                    <div className="text-[6.5px] sm:text-[7px] text-gray-300 uppercase">Get it on</div>
-                    <div className="font-semibold">Google Play</div>
-                  </div>
-                </a>
-
-                <a
-                  href="#download-apple"
-                  className="inline-flex items-center gap-1.5 bg-[#2A1612] hover:bg-[#4A0712] text-white px-3 py-1.5 rounded-[4px] text-[9px] sm:text-[9.5px] font-sans transition-colors"
-                >
-                  <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.64 1.35-.57.65-1.07 1.7-0.94 2.72 1 .08 2.03-.47 2.65-1.22z"/>
-                  </svg>
-                  <div className="text-left leading-tight">
-                    <div className="text-[6.5px] sm:text-[7px] text-gray-300 uppercase">Download on</div>
-                    <div className="font-semibold">App Store</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            {/* Card 2: WE ACCEPT Payment Methods */}
+            {/* Card 1: WE ACCEPT Payment Methods */}
             <div className="flex flex-col items-center justify-center text-center">
               <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-[#2A1612]/70 mb-2.5">
                 We Accept
               </span>
               <div className="flex items-center gap-2.5 text-xs font-semibold text-[#2A1612]/85">
-                <span className="px-3 py-1.5 bg-[#FAF3EB] border border-[#E9D1B5]/80 rounded-[4px] text-[10px] tracking-wider font-bold shadow-sm">
+                <span className="px-3 py-1.5 bg-[#FAF3EB] rounded-[4px] text-[10px] tracking-wider font-bold shadow-sm">
                   VISA
                 </span>
-                <span className="px-3 py-1.5 bg-[#FAF3EB] border border-[#E9D1B5]/80 rounded-[4px] text-[10px] tracking-wider font-bold shadow-sm">
+                <span className="px-3 py-1.5 bg-[#FAF3EB] rounded-[4px] text-[10px] tracking-wider font-bold shadow-sm">
                   Mastercard
                 </span>
-                <span className="px-3 py-1.5 bg-[#FAF3EB] border border-[#E9D1B5]/80 rounded-[4px] text-[10px] tracking-wider font-bold shadow-sm">
+                <span className="px-3 py-1.5 bg-[#FAF3EB] rounded-[4px] text-[10px] tracking-wider font-bold shadow-sm">
                   RuPay
                 </span>
-                <span className="px-3 py-1.5 bg-[#FAF3EB] border border-[#E9D1B5]/80 rounded-[4px] text-[10px] tracking-wider font-bold text-[#4A0712] shadow-sm">
+                <span className="px-3 py-1.5 bg-[#FAF3EB] rounded-[4px] text-[10px] tracking-wider font-bold text-[#4A0712] shadow-sm">
                   UPI
                 </span>
               </div>
             </div>
 
-            {/* Card 3: 100% SECURE PAYMENTS Trust Badges */}
+            {/* Card 2: 100% SECURE PAYMENTS Trust Badges */}
             <div className="flex flex-col items-center justify-center text-center">
               <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-[#2A1612]/70 mb-2.5">
                 100% Secure Payments
@@ -259,3 +225,4 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+

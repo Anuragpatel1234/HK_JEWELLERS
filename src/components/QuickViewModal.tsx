@@ -86,7 +86,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
             </p>
 
             {/* Specifications */}
-            <div className="bg-[#F7EBDD] p-3 rounded-lg border border-[#E9D1B5] grid grid-cols-2 gap-2 text-xs">
+            <div className="bg-[#FAE7D8] p-3 rounded-lg border border-[#E9D1B5] grid grid-cols-2 gap-2 text-xs">
               <div>
                 <span className="text-[#8F6623] block text-[10px] uppercase font-semibold">Purity</span>
                 <span className="font-medium text-[#2A1612]">{product.goldPurity || '22 Karat Yellow Gold'}</span>
@@ -115,7 +115,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                 className={`p-3 rounded-[4px] border transition-colors ${
                   isWishlisted
                     ? 'bg-[#4A0712] border-[#4A0712] text-[#D8B477]'
-                    : 'bg-[#F7EBDD] border-[#B88A3B]/40 hover:border-[#4A0712] text-[#4A0712]'
+                    : 'bg-[#FAE7D8] border-[#B88A3B]/40 hover:border-[#4A0712] text-[#4A0712]'
                 }`}
               >
                 <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />

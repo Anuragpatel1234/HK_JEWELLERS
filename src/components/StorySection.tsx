@@ -12,7 +12,7 @@ export const StorySection: React.FC<StorySectionProps> = ({ onSelectStory }) => 
   const chhankaarStory = STORIES[2]; // Chhankaar
 
   return (
-    <section className="w-full bg-[#F7EBDD] px-2.5 sm:px-4 md:px-6 py-4 sm:py-6">
+    <section className="w-full bg-[#FAE7D8] px-2.5 sm:px-4 md:px-6 py-4 sm:py-6">
       <div className="max-w-7xl mx-auto">
         {/* 3-Column Luxury Campaign Editorial Showcase */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 items-stretch">

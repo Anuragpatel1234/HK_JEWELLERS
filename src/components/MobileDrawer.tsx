@@ -99,7 +99,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
                 key={item.label}
                 href={item.href}
                 onClick={onClose}
-                className="flex items-center justify-between py-2.5 px-3 rounded text-xs font-semibold tracking-[0.18em] uppercase text-[#2A1612] hover:bg-[#F7EBDD] hover:text-[#4A0712] transition-colors border-b border-[#E9D1B5]/40"
+                className="flex items-center justify-between py-2.5 px-3 rounded text-xs font-semibold tracking-[0.18em] uppercase text-[#2A1612] hover:bg-[#FAE7D8] hover:text-[#4A0712] transition-colors border-b border-[#E9D1B5]/40"
               >
                 <span>{item.label}</span>
                 <span className="text-[#B88A3B] text-xs">›</span>
@@ -117,7 +117,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
         </div>
 
         {/* Drawer Footer Contact Info */}
-        <div className="p-4 bg-[#F7EBDD] border-t border-[#E9D1B5] text-xs text-[#2A1612]/80 space-y-1.5">
+        <div className="p-4 bg-[#FAE7D8] border-t border-[#E9D1B5] text-xs text-[#2A1612]/80 space-y-1.5">
           <div className="flex items-center gap-2">
             <MapPin className="w-3.5 h-3.5 text-[#B88A3B]" />
             <span>Karol Bagh, New Delhi, 110005</span>

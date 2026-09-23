@@ -69,7 +69,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   <button
                     key={tag}
                     onClick={() => setQuery(tag)}
-                    className="px-3 py-1 bg-[#F7EBDD] hover:bg-[#4A0712] hover:text-[#FFF7ED] text-[#2A1612] text-xs rounded-full border border-[#B88A3B]/30 transition-colors font-sans"
+                    className="px-3 py-1 bg-[#FAE7D8] hover:bg-[#4A0712] hover:text-[#FFF7ED] text-[#2A1612] text-xs rounded-full border border-[#B88A3B]/30 transition-colors font-sans"
                   >
                     {tag}
                   </button>
@@ -98,7 +98,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         });
                         onClose();
                       }}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#F7EBDD] cursor-pointer border border-transparent hover:border-[#B88A3B]/30 transition-all"
+                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#FAE7D8] cursor-pointer border border-transparent hover:border-[#B88A3B]/30 transition-all"
                     >
                       <img src={cat.image} alt={cat.name} className="w-12 h-12 object-cover rounded bg-[#1E0E0B]" />
                       <div>
@@ -121,7 +121,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         });
                         onClose();
                       }}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#F7EBDD] cursor-pointer border border-transparent hover:border-[#B88A3B]/30 transition-all"
+                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#FAE7D8] cursor-pointer border border-transparent hover:border-[#B88A3B]/30 transition-all"
                     >
                       <img src={item.image} alt={item.title} className="w-12 h-12 object-cover rounded bg-[#1E0E0B]" />
                       <div>

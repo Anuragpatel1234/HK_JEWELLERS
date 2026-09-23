@@ -6,60 +6,51 @@ interface DivineIdolsBannerProps {
 
 export const DivineIdolsBanner: React.FC<DivineIdolsBannerProps> = ({ onExploreDivine }) => {
   return (
-    <section className="w-full bg-[#4A0712] overflow-hidden my-6 sm:my-8 relative border-y border-[#B88A3B]/40 shadow-lg">
-      
-      {/* Background Subtle Damask/Floral Pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.10] pointer-events-none bg-repeat"
-        style={{
-          backgroundImage: `radial-gradient(circle at center, #D8B477 1px, transparent 1px)`,
-          backgroundSize: '20px 20px'
-        }}
-      />
-
-      {/* Warm maroon-to-dark gradient for depth */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#3A0510] via-[#4A0712] to-[#3A0510] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-7 sm:py-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 relative z-10">
+    <section className="w-full relative overflow-hidden my-4 sm:my-6 md:my-8 bg-[#3A0510]">
+      {/* Aspect-ratio container matching the banner proportions (2163 x 391) */}
+      <div className="relative w-full aspect-[2.2/1] sm:aspect-[3.2/1] md:aspect-[2163/391] min-h-[170px] sm:min-h-[200px] md:min-h-[220px] max-h-[340px] flex items-center">
         
-        {/* Left: Ultra-Sharp Antique Gold Lord Ganesha Idol */}
-        <div className="w-full md:w-5/12 flex items-center justify-center">
-          <div className="relative group max-w-[260px] sm:max-w-[320px]">
-            {/* Radial gold halo glow */}
-            <div className="absolute inset-0 bg-[#D8B477]/12 rounded-full filter blur-2xl transform scale-110 pointer-events-none" />
-            <img
-              src="/assets/divine/ganesha_highres.jpg"
-              alt="Lord Ganesha Divine Idol in 22K Antique Gold on Lotus Pedestal"
-              className="w-full h-auto max-h-[260px] sm:max-h-[300px] object-contain rounded-xl shadow-[0_10px_36px_rgba(0,0,0,0.5)] border border-[#B88A3B]/35 transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-            />
+        {/* Background Banner Image - zoomed out, full view */}
+        <picture className="absolute inset-0 w-full h-full">
+          <source srcSet="/assets/divine/divine_banner_bg.webp" type="image/webp" />
+          <img
+            src="/assets/divine/divine_banner_bg.png"
+            alt="Lord Ganesha Divine Idols"
+            className="w-full h-full object-cover md:object-fill object-left md:object-center"
+            loading="lazy"
+          />
+        </picture>
+
+        {/* Readability gradient for smaller screens */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-[#3A0510]/85 md:to-transparent pointer-events-none" />
+
+        {/* Content Container positioned cleanly on the right half */}
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 lg:px-16 relative z-10 flex items-center justify-between">
+          
+          {/* Left spacer so Ganesha remains completely unobstructed */}
+          <div className="hidden md:block w-5/12 lg:w-1/2 pointer-events-none" aria-hidden="true" />
+
+          {/* Right: Typography & CTA */}
+          <div className="w-full md:w-7/12 lg:w-1/2 text-center md:text-left pl-0 md:pl-6 lg:pl-10 space-y-1.5 sm:space-y-2 md:space-y-2.5">
+            <h2 className="font-serif text-[20px] sm:text-[26px] md:text-[30px] lg:text-[34px] text-[#E6C687] font-normal tracking-[0.14em] uppercase leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+              Divine Idols
+            </h2>
+
+            <p className="font-serif text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] text-[#FDF5E6]/90 max-w-md leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+              Sacred idols, crafted to fill your space with love, devotion &amp; timeless blessings.
+            </p>
+
+            <div className="pt-1 sm:pt-1.5 md:pt-2">
+              <button
+                onClick={onExploreDivine}
+                className="inline-flex items-center justify-center bg-transparent hover:bg-[#E6C687] text-[#FDF5E6] hover:text-[#3A0510] font-sans text-[9px] sm:text-[9.5px] md:text-[10.5px] font-semibold tracking-[0.18em] py-1.5 sm:py-2 md:py-2 px-4 sm:px-6 md:px-7 rounded-[2px] border border-[#E6C687]/80 hover:border-[#E6C687] shadow-[0_2px_10px_rgba(0,0,0,0.4)] transition-all duration-300 active:scale-[0.98] uppercase cursor-pointer"
+              >
+                Explore Divine Collection
+              </button>
+            </div>
           </div>
+
         </div>
-
-        {/* Right: Crisp Gold Typography & CTA */}
-        <div className="w-full md:w-7/12 text-center md:text-left space-y-3 sm:space-y-4">
-          <span className="font-serif italic text-[11px] sm:text-xs tracking-[0.22em] text-[#D8B477] uppercase font-semibold block">
-            Sacred Devotional Collection
-          </span>
-
-          <h2 className="font-serif text-[32px] sm:text-[40px] md:text-[48px] text-[#FDF5E6] font-medium tracking-wide leading-tight">
-            Divine Idols
-          </h2>
-
-          <p className="font-sans text-[13px] sm:text-sm md:text-[15px] text-[#FAF3EB]/80 max-w-lg leading-relaxed">
-            Sacred idols, crafted to fill your space with love, devotion &amp; timeless blessings.
-          </p>
-
-          <div className="pt-3">
-            <button
-              onClick={onExploreDivine}
-              className="inline-flex items-center justify-center bg-transparent hover:bg-[#FDF5E6] text-[#FFF7ED] hover:text-[#4A0712] font-sans text-[10.5px] sm:text-xs font-semibold tracking-[0.2em] py-3 px-7 sm:px-9 rounded-[3px] border-2 border-[#D8B477]/70 hover:border-[#FDF5E6] shadow-[0_4px_16px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_22px_rgba(184,138,59,0.3)] transition-all duration-300 active:scale-[0.98] uppercase cursor-pointer"
-            >
-              Explore Divine Collection
-            </button>
-          </div>
-        </div>
-
       </div>
     </section>
   );
