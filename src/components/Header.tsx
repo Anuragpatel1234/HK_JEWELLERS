@@ -6,6 +6,7 @@ interface HeaderProps {
   onOpenSearch: () => void;
   onOpenCart: () => void;
   onOpenWishlist: () => void;
+  onOpenAccount: () => void;
   cartCount: number;
   wishlistCount: number;
 }
@@ -15,6 +16,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSearch,
   onOpenCart,
   onOpenWishlist,
+  onOpenAccount,
   cartCount,
   wishlistCount,
 }) => {
@@ -44,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onOpenMenu}
             aria-label="Open Navigation Menu"
-            className="p-1.5 -ml-1 text-[#2A1612] hover:text-[#4A0712] transition-colors rounded-sm focus:outline-none focus:ring-1 focus:ring-[#B88A3B]"
+            className="p-1.5 -ml-1 text-[#2A1612] hover:text-[#4A0712] transition-colors rounded-sm focus:outline-none focus:ring-1 focus:ring-[#B88A3B] cursor-pointer"
           >
             <Menu className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.4]" />
           </button>
@@ -52,7 +54,10 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Center: HK Jewellers Monogram Logo */}
         <div className="text-center select-none cursor-pointer flex flex-col items-center">
-          <a href="#" className="inline-flex flex-col items-center group">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="inline-flex flex-col items-center group cursor-pointer focus:outline-none"
+          >
             <div className="flex items-center justify-center relative">
               <span className="font-serif text-2xl sm:text-3xl md:text-4xl font-semibold tracking-wider text-[#2A1612] group-hover:text-[#4A0712] transition-colors leading-none">
                 HK
@@ -65,7 +70,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="font-serif italic text-[7.5px] sm:text-[9px] tracking-widest text-[#B88A3B] -mt-0.5">
               Since 1994
             </span>
-          </a>
+          </button>
         </div>
 
         {/* Right: Action Icons */}
@@ -73,14 +78,15 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onOpenSearch}
             aria-label="Search Collection"
-            className="p-1 hover:text-[#4A0712] transition-colors rounded-sm"
+            className="p-1 hover:text-[#4A0712] transition-colors rounded-sm cursor-pointer"
           >
             <Search className="w-[18px] h-[18px] sm:w-5 sm:h-5 stroke-[1.4]" />
           </button>
 
           <button
+            onClick={onOpenAccount}
             aria-label="Customer Account"
-            className="hidden xs:inline-flex p-1 hover:text-[#4A0712] transition-colors rounded-sm"
+            className="hidden xs:inline-flex p-1 hover:text-[#4A0712] transition-colors rounded-sm cursor-pointer"
           >
             <User className="w-[18px] h-[18px] sm:w-5 sm:h-5 stroke-[1.4]" />
           </button>

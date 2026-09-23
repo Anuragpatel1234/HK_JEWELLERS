@@ -10,13 +10,14 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'our-story', label: 'OUR STORY' },
-  { id: 'our-rituals', label: 'OUR RITUALS' },
+  { id: 'story', label: 'OUR STORY' },
+  { id: 'rituals', label: 'OUR RITUALS' },
   { id: 'jewellery', label: 'JEWELLERY' },
   { id: 'collections', label: 'COLLECTIONS' },
   { id: 'customisation', label: 'CUSTOMISATION' },
-  { id: 'just-for-you', label: 'JUST FOR YOU' },
-  { id: 'shop-by-type', label: 'SHOP BY TYPE' },
+  { id: 'for-you', label: 'JUST FOR YOU' },
+  { id: 'types', label: 'SHOP BY TYPE' },
+  { id: 'divine-idols', label: 'DIVINE IDOLS' },
 ];
 
 export const CategoryNav: React.FC<CategoryNavProps> = ({ onSelectCategory }) => {

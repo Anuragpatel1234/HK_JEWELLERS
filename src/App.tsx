@@ -16,6 +16,14 @@ import type { ModalProductDetails } from './components/QuickViewModal';
 import { CartDrawer } from './components/CartDrawer';
 import type { CartItem } from './components/CartDrawer';
 import { SearchModal } from './components/SearchModal';
+import { WishlistDrawer } from './components/WishlistDrawer';
+import { AccountDrawer } from './components/AccountDrawer';
+import { CheckoutModal } from './components/CheckoutModal';
+import { CustomisationStudioModal } from './components/CustomisationStudioModal';
+import { RitualsModal } from './components/RitualsModal';
+import { ShopByTypeModal } from './components/ShopByTypeModal';
+import { InfoModal } from './components/InfoModal';
+import { CATEGORIES, CUSTOM_DESIGNS } from './data/jewelleryData';
 import type { CategoryItem, StoryItem, CustomJewelleryItem } from './data/jewelleryData';
 
 /** Hook: IntersectionObserver-based scroll reveal */
@@ -58,6 +66,14 @@ export const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isCustomStudioOpen, setIsCustomStudioOpen] = useState(false);
+  const [isRitualsOpen, setIsRitualsOpen] = useState(false);
+  const [isShopByTypeOpen, setIsShopByTypeOpen] = useState(false);
+  const [infoTopic, setInfoTopic] = useState<string | null>(null);
+
   const [selectedProduct, setSelectedProduct] = useState<ModalProductDetails | null>(null);
 
   // E-commerce state
@@ -77,6 +93,53 @@ export const App: React.FC = () => {
     'NECKLACES',
     'Gaja Makara Antique Kadas'
   ]);
+
+  // Unified catalog for wishlist lookup
+  const allKnownProducts: ModalProductDetails[] = [
+    ...CATEGORIES.map(c => ({
+      title: c.name,
+      subtitle: 'Imperial Collection',
+      tagline: c.tagline,
+      description: c.description,
+      image: c.image,
+      goldPurity: '22K Hallmarked Gold',
+    })),
+    ...CUSTOM_DESIGNS.map(c => ({
+      title: c.title,
+      subtitle: c.craft,
+      tagline: c.gemstone,
+      description: `Bespoke jewellery customisation sculpted in ${c.goldPurity} featuring ${c.gemstone}. Traditional karigari handcrafted over 300 man-hours.`,
+      image: c.image,
+      goldPurity: c.goldPurity,
+    })),
+    {
+      title: 'The Nizam Polki Choker',
+      subtitle: 'Kundan Meenakari',
+      tagline: 'Uncut Diamonds & Colombian Emeralds',
+      description: 'Masterfully set in 22K hallmarked gold with certified uncut diamonds and natural emerald droplets.',
+      image: '/assets/customisation/custom_1_choker.jpg',
+      goldPurity: '22K Hallmarked Gold',
+    },
+    {
+      title: 'Lord Ganesha Divine Idol',
+      subtitle: 'Divine Idols Sacred Collection',
+      tagline: 'Sacred idols, crafted to fill your space with love, devotion & timeless blessings',
+      description: 'Sculpted in solid 22K hallmarked gold with intricate floral repoussé engraving and radiant lotus pedestal. Bestows prosperity, peace, and spiritual abundance.',
+      image: '/assets/divine/ganesha_idol.png',
+      goldPurity: '22K Solid Gold with 24K Leaf Finish',
+    },
+  ];
+
+  const wishlistProducts = wishlistTitles.map(title => {
+    const match = allKnownProducts.find(p => p.title.toLowerCase() === title.toLowerCase());
+    return match || {
+      title,
+      subtitle: 'Heirloom Piece',
+      description: 'Handcrafted in 22K certified hallmarked gold with traditional karigari.',
+      image: '/assets/hero/herojewellery_cutout.png',
+      goldPurity: '22K Hallmarked Gold',
+    };
+  });
 
   // Initialize scroll reveal animations
   useScrollReveal();
@@ -176,9 +239,45 @@ export const App: React.FC = () => {
     });
   };
 
-  const handleCheckout = () => {
-    alert('Thank you for exploring HK Jewellers! Our private concierge will connect with you shortly for insured VIP dispatch.');
-    setIsCartOpen(false);
+  const handleMoveWishlistToBag = (item: ModalProductDetails) => {
+    handleAddToCart(item);
+    setWishlistTitles(prev => prev.filter(t => t.toLowerCase() !== item.title.toLowerCase()));
+  };
+
+  const handleMoveAllWishlistToBag = () => {
+    wishlistProducts.forEach(product => {
+      setCartItems(prev => {
+        const existing = prev.find(i => i.title === product.title);
+        if (existing) {
+          return prev.map(i => i.title === product.title ? { ...i, quantity: i.quantity + 1 } : i);
+        } else {
+          return [...prev, { ...product, quantity: 1 }];
+        }
+      });
+    });
+    setWishlistTitles([]);
+    setIsWishlistOpen(false);
+    setIsCartOpen(true);
+  };
+
+  const handleRemoveWishlist = (title: string) => {
+    setWishlistTitles(prev => prev.filter(t => t.toLowerCase() !== title.toLowerCase()));
+  };
+
+  // Navigation action dispatcher
+  const handleSelectNavItem = (id: string) => {
+    if (id === 'rituals') {
+      setIsRitualsOpen(true);
+    } else if (id === 'customisation') {
+      setIsCustomStudioOpen(true);
+    } else if (id === 'for-you' || id === 'types') {
+      setIsShopByTypeOpen(true);
+    } else {
+      const match = document.getElementById(id);
+      if (match) {
+        match.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   const cartTotalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -193,26 +292,14 @@ export const App: React.FC = () => {
         onOpenMenu={() => setIsMenuOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenWishlist={() => {
-          if (cartItems.length > 0) {
-            setSelectedProduct(cartItems[0]);
-          } else {
-            alert('Your wishlist currently contains: ' + wishlistTitles.join(', '));
-          }
-        }}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
         cartCount={cartTotalCount}
         wishlistCount={wishlistTitles.length}
       />
 
       {/* 3. Category Horizontal Navigation */}
-      <CategoryNav
-        onSelectCategory={(catId) => {
-          const match = document.getElementById(catId);
-          if (match) {
-            match.scrollIntoView({ behavior: 'smooth' });
-          }
-        }}
-      />
+      <CategoryNav onSelectCategory={handleSelectNavItem} />
 
       {/* Main Content Sections */}
       <main className="flex-1 w-full max-w-full">
@@ -235,16 +322,7 @@ export const App: React.FC = () => {
         <div id="customisation" className="scroll-reveal">
           <CustomisationSection
             onSelectDesign={handleSelectCustomDesign}
-            onViewAllClick={() => {
-              handleSelectCategory({
-                id: 'custom-all',
-                name: 'BESPOKE CUSTOM CREATIONS',
-                image: '/assets/customisation/custom_2_kadas.jpg',
-                count: 'By Appointment',
-                tagline: 'Tailored by Master Karigars',
-                description: 'Bring your personal heirloom vision to life with our master craftsmen. From ancestral resets to bridal suites.',
-              });
-            }}
+            onViewAllClick={() => setIsCustomStudioOpen(true)}
           />
         </div>
 
@@ -255,19 +333,16 @@ export const App: React.FC = () => {
       </main>
 
       {/* 9. Luxury Multi-Column Footer */}
-      <Footer />
+      <Footer
+        onOpenInfo={(topic) => setInfoTopic(topic)}
+        onOpenShopCategory={() => setIsShopByTypeOpen(true)}
+      />
 
       {/* 10. Mobile Sticky Bottom Navigation Bar */}
       <MobileBottomBar
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenWishlist={() => {
-          if (cartItems.length > 0) {
-            setSelectedProduct(cartItems[0]);
-          } else {
-            alert('Your wishlist contains: ' + wishlistTitles.join(', '));
-          }
-        }}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
         onNavigateHome={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         onNavigateCollections={() => {
           const match = document.getElementById('collections');
@@ -286,9 +361,10 @@ export const App: React.FC = () => {
         onClose={() => setIsMenuOpen(false)}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenWishlist={() => {
-          alert('Your wishlist contains: ' + wishlistTitles.join(', '));
-        }}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenAccount={() => setIsAccountOpen(true)}
+        onSelectNavItem={handleSelectNavItem}
+        onOpenInfo={(topic) => setInfoTopic(topic)}
         cartCount={cartTotalCount}
         wishlistCount={wishlistTitles.length}
       />
@@ -310,7 +386,72 @@ export const App: React.FC = () => {
         items={cartItems}
         onRemoveItem={handleRemoveFromCart}
         onUpdateQuantity={handleUpdateQuantity}
-        onCheckout={handleCheckout}
+        onCheckout={() => {
+          setIsCartOpen(false);
+          setIsCheckoutOpen(true);
+        }}
+      />
+
+      {/* Wishlist Slide-Out Drawer */}
+      <WishlistDrawer
+        isOpen={isWishlistOpen}
+        onClose={() => setIsWishlistOpen(false)}
+        items={wishlistProducts}
+        onRemoveItem={handleRemoveWishlist}
+        onMoveToBag={handleMoveWishlistToBag}
+        onMoveAllToBag={handleMoveAllWishlistToBag}
+        onExploreCollections={() => {
+          const match = document.getElementById('collections');
+          if (match) match.scrollIntoView({ behavior: 'smooth' });
+        }}
+      />
+
+      {/* VIP Concierge & Account Drawer */}
+      <AccountDrawer
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+      />
+
+      {/* Multi-step VIP Checkout Modal */}
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        items={cartItems}
+        onOrderComplete={() => setCartItems([])}
+      />
+
+      {/* Bespoke Customisation Studio Modal */}
+      <CustomisationStudioModal
+        isOpen={isCustomStudioOpen}
+        onClose={() => setIsCustomStudioOpen(false)}
+        onSelectDesign={handleSelectCustomDesign}
+      />
+
+      {/* Brand Rituals Modal */}
+      <RitualsModal
+        isOpen={isRitualsOpen}
+        onClose={() => setIsRitualsOpen(false)}
+        onOpenConsultation={() => {
+          setIsRitualsOpen(false);
+          setIsAccountOpen(true);
+        }}
+      />
+
+      {/* Curated Shop By Type Modal */}
+      <ShopByTypeModal
+        isOpen={isShopByTypeOpen}
+        onClose={() => setIsShopByTypeOpen(false)}
+        onSelectItem={(item) => setSelectedProduct(item)}
+        onAddToCart={handleAddToCart}
+        onToggleWishlist={handleToggleWishlist}
+        wishlistTitles={wishlistTitles}
+      />
+
+      {/* Comprehensive Information, Support & Policies Modal */}
+      <InfoModal
+        isOpen={infoTopic !== null}
+        onClose={() => setInfoTopic(null)}
+        initialTopic={infoTopic || 'faqs'}
       />
 
       {/* Live Search Modal */}

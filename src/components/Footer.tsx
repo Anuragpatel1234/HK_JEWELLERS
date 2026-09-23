@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { FOOTER_SECTIONS } from '../data/jewelleryData';
 import { ShieldCheck, Award, Lock, ChevronDown, ChevronUp } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenInfo: (topic: string) => void;
+  onOpenShopCategory: (category: string) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }) => {
   // Mobile accordion state for footer columns
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     shop: false,
@@ -15,6 +20,10 @@ export const Footer: React.FC = () => {
     setOpenSections(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const getTopicKey = (item: string) => {
+    return item.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-');
+  };
+
   return (
     <footer className="w-full bg-[#FAE7D8] pt-8 sm:pt-12 pb-0 text-[#2A1612]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,7 +34,7 @@ export const Footer: React.FC = () => {
           <div className="pb-3 md:pb-0">
             <button
               onClick={() => toggleSection('shop')}
-              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4"
+              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4 cursor-pointer"
             >
               <span>Shop Our Jewellery</span>
               <span className="md:hidden text-[#B88A3B]">
@@ -35,9 +44,12 @@ export const Footer: React.FC = () => {
             <ul className={`space-y-1.5 text-[11px] sm:text-xs text-[#2A1612]/70 font-sans md:block ${openSections.shop ? 'block' : 'hidden md:block'}`}>
               {FOOTER_SECTIONS.shop.map((item) => (
                 <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-[#4A0712] transition-colors py-0.5 inline-block">
+                  <button
+                    onClick={() => onOpenShopCategory(item)}
+                    className="hover:text-[#4A0712] transition-colors py-0.5 inline-block text-left cursor-pointer"
+                  >
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -47,7 +59,7 @@ export const Footer: React.FC = () => {
           <div className="pb-3 md:pb-0">
             <button
               onClick={() => toggleSection('support')}
-              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4"
+              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4 cursor-pointer"
             >
               <span>Help & Support</span>
               <span className="md:hidden text-[#B88A3B]">
@@ -57,9 +69,12 @@ export const Footer: React.FC = () => {
             <ul className={`space-y-1.5 text-[11px] sm:text-xs text-[#2A1612]/70 font-sans md:block ${openSections.support ? 'block' : 'hidden md:block'}`}>
               {FOOTER_SECTIONS.support.map((item) => (
                 <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-[#4A0712] transition-colors py-0.5 inline-block">
+                  <button
+                    onClick={() => onOpenInfo(getTopicKey(item))}
+                    className="hover:text-[#4A0712] transition-colors py-0.5 inline-block text-left cursor-pointer"
+                  >
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -69,7 +84,7 @@ export const Footer: React.FC = () => {
           <div className="pb-3 md:pb-0">
             <button
               onClick={() => toggleSection('information')}
-              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4"
+              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4 cursor-pointer"
             >
               <span>Information</span>
               <span className="md:hidden text-[#B88A3B]">
@@ -79,9 +94,12 @@ export const Footer: React.FC = () => {
             <ul className={`space-y-1.5 text-[11px] sm:text-xs text-[#2A1612]/70 font-sans md:block ${openSections.information ? 'block' : 'hidden md:block'}`}>
               {FOOTER_SECTIONS.information.map((item) => (
                 <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-[#4A0712] transition-colors py-0.5 inline-block">
+                  <button
+                    onClick={() => onOpenInfo(getTopicKey(item))}
+                    className="hover:text-[#4A0712] transition-colors py-0.5 inline-block text-left cursor-pointer"
+                  >
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -91,7 +109,7 @@ export const Footer: React.FC = () => {
           <div className="pb-3 md:pb-0">
             <button
               onClick={() => toggleSection('policies')}
-              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4"
+              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4 cursor-pointer"
             >
               <span>Policies</span>
               <span className="md:hidden text-[#B88A3B]">
@@ -101,9 +119,12 @@ export const Footer: React.FC = () => {
             <ul className={`space-y-1.5 text-[11px] sm:text-xs text-[#2A1612]/70 font-sans md:block ${openSections.policies ? 'block' : 'hidden md:block'}`}>
               {FOOTER_SECTIONS.policies.map((item) => (
                 <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-[#4A0712] transition-colors py-0.5 inline-block">
+                  <button
+                    onClick={() => onOpenInfo(getTopicKey(item))}
+                    className="hover:text-[#4A0712] transition-colors py-0.5 inline-block text-left cursor-pointer"
+                  >
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -116,7 +137,12 @@ export const Footer: React.FC = () => {
             </h3>
             <div className="space-y-1 text-[11px] sm:text-xs text-[#2A1612]/75 font-sans">
               <p className="font-semibold text-[#4A0712]">{FOOTER_SECTIONS.contact.brand}</p>
-              <p>{FOOTER_SECTIONS.contact.address}</p>
+              <button
+                onClick={() => onOpenInfo('store-locator')}
+                className="text-left hover:text-[#4A0712] transition-colors cursor-pointer"
+              >
+                {FOOTER_SECTIONS.contact.address}
+              </button>
               <p className="pt-1">
                 <a href={`tel:${FOOTER_SECTIONS.contact.phone.replace(/\s+/g, '')}`} className="hover:text-[#4A0712]">
                   {FOOTER_SECTIONS.contact.phone}
