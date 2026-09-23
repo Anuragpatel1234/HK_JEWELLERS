@@ -10,6 +10,7 @@ import { DivineIdolsBanner } from './components/DivineIdolsBanner';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
 import { MobileDrawer } from './components/MobileDrawer';
+import { MobileBottomBar } from './components/MobileBottomBar';
 import { QuickViewModal } from './components/QuickViewModal';
 import type { ModalProductDetails } from './components/QuickViewModal';
 import { CartDrawer } from './components/CartDrawer';
@@ -183,7 +184,7 @@ export const App: React.FC = () => {
   const cartTotalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#FAE7D8] text-[#2A1612] flex flex-col selection:bg-[#4A0712] selection:text-[#FFF7ED]">
+    <div className="min-h-screen bg-[#FAE7D8] text-[#2A1612] flex flex-col selection:bg-[#4A0712] selection:text-[#FFF7ED] pb-16 md:pb-0">
       {/* 1. Top Announcement Bar */}
       <AnnouncementBar />
 
@@ -256,7 +257,27 @@ export const App: React.FC = () => {
       {/* 9. Luxury Multi-Column Footer */}
       <Footer />
 
-      {/* 10. Floating Back to Top Button */}
+      {/* 10. Mobile Sticky Bottom Navigation Bar */}
+      <MobileBottomBar
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenCart={() => setIsCartOpen(true)}
+        onOpenWishlist={() => {
+          if (cartItems.length > 0) {
+            setSelectedProduct(cartItems[0]);
+          } else {
+            alert('Your wishlist contains: ' + wishlistTitles.join(', '));
+          }
+        }}
+        onNavigateHome={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onNavigateCollections={() => {
+          const match = document.getElementById('collections');
+          if (match) match.scrollIntoView({ behavior: 'smooth' });
+        }}
+        cartCount={cartTotalCount}
+        wishlistCount={wishlistTitles.length}
+      />
+
+      {/* 11. Floating Back to Top Button */}
       <BackToTop />
 
       {/* Mobile Slide-Out Drawer Navigation */}

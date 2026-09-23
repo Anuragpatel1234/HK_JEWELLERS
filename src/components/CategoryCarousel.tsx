@@ -46,19 +46,19 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
       {/* Section Heading with Ornamental Flourishes */}
       <SectionHeading title="Collection made just for her." />
 
-      {/* Pagination Indicators (● ○ ○ ○) - mobile/tablet only */}
-      <div className="flex lg:hidden items-center justify-center gap-2.5 mb-5 -mt-2">
-        {[0, 1, 2, 3].map((idx) => {
+      {/* Dynamic Pagination Indicators on Mobile */}
+      <div className="flex lg:hidden items-center justify-center gap-2 mb-4 -mt-2">
+        {CATEGORIES.map((_, idx) => {
           const isActive = activeIndex === idx;
           return (
             <button
               key={idx}
               onClick={() => scrollToDot(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
+              aria-label={`Go to item ${idx + 1}`}
               className={`transition-all duration-300 rounded-full focus:outline-none focus:ring-1 focus:ring-[#B88A3B] cursor-pointer ${
                 isActive
-                  ? 'w-2.5 h-2.5 bg-[#4A0712] scale-110'
-                  : 'w-2 h-2 bg-[#D8B477]/60 hover:bg-[#B88A3B]'
+                  ? 'w-3 h-2 bg-[#4A0712] rounded-full scale-105'
+                  : 'w-1.5 h-1.5 bg-[#D8B477]/60 hover:bg-[#B88A3B]'
               }`}
             />
           );
@@ -66,23 +66,20 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
       </div>
 
       {/* Horizontal Carousel Container */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6">
+      <div className="relative max-w-7xl mx-auto px-3 sm:px-6">
+        {/* Mobile Edge Fade Cues */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-[#FAE7D8] to-transparent lg:hidden z-10" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-[#FAE7D8] to-transparent lg:hidden z-10" />
+
         <div
           ref={scrollContainerRef}
-          className="flex items-stretch justify-start lg:justify-center gap-3 sm:gap-4 md:gap-5 overflow-x-auto no-scrollbar scroll-smooth px-1 py-2 scroll-reveal-stagger revealed"
-          style={{ scrollSnapType: 'x mandatory' }}
+          className="flex items-stretch justify-start lg:justify-center gap-3 sm:gap-4 md:gap-5 overflow-x-auto no-scrollbar scroll-smooth px-2 py-2 scroll-reveal-stagger revealed snap-x snap-mandatory"
         >
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat)}
-              className="flex-shrink-0 group focus:outline-none focus:ring-2 focus:ring-[#B88A3B] rounded-lg transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.98] text-left cursor-pointer"
-              style={{
-                scrollSnapAlign: 'start',
-                width: 'calc((100% - 32px) / 3.5)',
-                minWidth: '110px',
-                maxWidth: '152px',
-              }}
+              className="flex-shrink-0 group focus:outline-none focus:ring-2 focus:ring-[#B88A3B] rounded-lg transition-all duration-300 hover:-translate-y-1.5 active:scale-95 text-left cursor-pointer snap-start w-[132px] xs:w-[140px] sm:w-[150px] md:w-[156px]"
               title={cat.name}
             >
               {/* Ornate Arch Card Container with Antique Gold Border */}
@@ -100,8 +97,8 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                   {/* Crisp Typography Label over Velvet Area */}
-                  <div className="absolute bottom-[4.2%] sm:bottom-[4.8%] left-0 right-0 text-center px-1 pointer-events-none">
-                    <span className="font-sans text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.16em] uppercase font-semibold text-[#E6C687] group-hover:text-[#FFF7ED] drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)] transition-colors truncate block">
+                  <div className="absolute bottom-[4%] sm:bottom-[4.6%] left-0 right-0 text-center px-1 pointer-events-none">
+                    <span className="font-sans text-[8.5px] xs:text-[9.5px] sm:text-[10px] md:text-[10.5px] tracking-[0.16em] uppercase font-semibold text-[#E6C687] group-hover:text-[#FFF7ED] drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)] transition-colors truncate block">
                       {cat.name}
                     </span>
                   </div>
