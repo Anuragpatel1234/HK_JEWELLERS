@@ -25,14 +25,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
 
           {/* Left Side (Desktop) / Bottom (Mobile): Cutout Jewellery Mannequin & Stands resting directly at the bottom */}
           <div className="order-2 md:order-1 w-full md:w-[48%] lg:w-[45%] flex items-end justify-center md:justify-start relative z-30 pb-0 animate-slide-in-left -mt-2 sm:mt-0">
-            <div className="relative group flex flex-col items-center justify-end translate-y-3 sm:translate-y-6 md:translate-y-7 lg:translate-y-8">
-              {/* Natural ground shadow under stands at the bottom */}
-              <div className="absolute -bottom-1 w-[90%] h-3.5 bg-black/45 rounded-[50%] blur-[4px] pointer-events-none" />
+            <div className="relative group flex flex-col items-center justify-end translate-y-2 sm:translate-y-3 md:translate-y-4 lg:translate-y-5">
+              {/* Layered realistic contact and ambient ground shadows */}
+              {/* 1. Left side contact shadow specifically for the earring stand base */}
+              <div className="absolute -bottom-0.5 left-[6%] sm:left-[8%] w-14 sm:w-18 md:w-22 h-2.5 sm:h-3 bg-black/60 rounded-[50%] blur-[2.5px] pointer-events-none z-0" />
+
+              {/* 2. Center & right side contact shadow under the bust and bangle display */}
+              <div className="absolute -bottom-0.5 right-[4%] w-[68%] sm:w-[72%] h-3 sm:h-3.5 bg-black/55 rounded-[50%] blur-[3.5px] pointer-events-none z-0" />
+
+              {/* 3. Soft ambient diffused shadow spreading across the entire bottom and sides */}
+              <div className="absolute -bottom-1.5 -left-3 -right-3 w-[calc(100%+24px)] h-4 sm:h-5 bg-gradient-to-r from-transparent via-black/35 to-transparent rounded-[50%] blur-[6px] pointer-events-none z-0" />
               
               <img
                 src="/assets/hero/herojewellery_cutout.png"
                 alt="HK Jewellers A Legacy You Can Wear - 22K Antique Gold Haram with Zambian Emeralds, Jhumkas, and Bangles"
-                className="relative z-10 w-auto max-w-full h-[250px] xs:h-[280px] sm:h-[350px] md:h-[470px] lg:h-[520px] xl:h-[560px] object-contain object-bottom transition-transform duration-700 group-hover:scale-[1.015]"
+                className="relative z-10 w-auto max-w-full h-[250px] xs:h-[280px] sm:h-[350px] md:h-[470px] lg:h-[520px] xl:h-[560px] object-contain object-bottom transition-transform duration-700 group-hover:scale-[1.015] drop-shadow-[0_8px_18px_rgba(20,10,8,0.28)]"
                 loading="eager"
               />
             </div>

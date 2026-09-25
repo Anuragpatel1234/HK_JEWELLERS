@@ -7,12 +7,14 @@ interface CustomisationStudioModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectDesign: (item: CustomJewelleryItem) => void;
+  initialDesign?: CustomJewelleryItem | null;
 }
 
 export const CustomisationStudioModal: React.FC<CustomisationStudioModalProps> = ({
   isOpen,
   onClose,
   onSelectDesign,
+  initialDesign,
 }) => {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -22,6 +24,17 @@ export const CustomisationStudioModal: React.FC<CustomisationStudioModalProps> =
     notes: 'Looking to reset ancestral rubies into an imperial choker with matching chandbalis.',
     phone: '+91 98765 43210',
   });
+
+  React.useEffect(() => {
+    if (initialDesign) {
+      setFormData(prev => ({
+        ...prev,
+        jewelleryType: initialDesign.title,
+        purity: initialDesign.goldPurity.includes('Antique') ? '22K Antique Yellow Gold' : initialDesign.goldPurity.includes('Solid') ? '24K Pure Gold Idol Sculpting' : '22K High-Polish Yellow Gold',
+        notes: `Inquiry for customising "${initialDesign.title}" (${initialDesign.craft}, ${initialDesign.gemstone}).`,
+      }));
+    }
+  }, [initialDesign]);
 
   if (!isOpen) return null;
 

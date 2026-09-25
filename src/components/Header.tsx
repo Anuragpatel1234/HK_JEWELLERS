@@ -7,6 +7,7 @@ interface HeaderProps {
   onOpenCart: () => void;
   onOpenWishlist: () => void;
   onOpenAccount: () => void;
+  onNavigateHome?: () => void;
   cartCount: number;
   wishlistCount: number;
 }
@@ -17,6 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenCart,
   onOpenWishlist,
   onOpenAccount,
+  onNavigateHome,
   cartCount,
   wishlistCount,
 }) => {
@@ -55,7 +57,13 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Center: HK Jewellers Monogram Logo */}
         <div className="text-center select-none cursor-pointer flex flex-col items-center">
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => {
+              if (onNavigateHome) {
+                onNavigateHome();
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
             className="inline-flex flex-col items-center group cursor-pointer focus:outline-none"
           >
             <div className="flex items-center justify-center relative">

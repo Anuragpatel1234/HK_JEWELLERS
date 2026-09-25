@@ -23,7 +23,8 @@ import { CustomisationStudioModal } from './components/CustomisationStudioModal'
 import { RitualsModal } from './components/RitualsModal';
 import { ShopByTypeModal } from './components/ShopByTypeModal';
 import { InfoModal } from './components/InfoModal';
-import { CATEGORIES, CUSTOM_DESIGNS } from './data/jewelleryData';
+import { CustomDesignsPage } from './components/CustomDesignsPage';
+import { CATEGORIES, ALL_CUSTOM_DESIGNS } from './data/jewelleryData';
 import type { CategoryItem, StoryItem, CustomJewelleryItem } from './data/jewelleryData';
 
 /** Hook: IntersectionObserver-based scroll reveal */
@@ -62,6 +63,10 @@ function useScrollReveal() {
 }
 
 export const App: React.FC = () => {
+  // Page view routing state
+  const [currentPage, setCurrentPage] = useState<'home' | 'custom-designs'>('home');
+  const [studioInitialDesign, setStudioInitialDesign] = useState<CustomJewelleryItem | null>(null);
+
   // Navigation & Drawer States
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -75,6 +80,38 @@ export const App: React.FC = () => {
   const [infoTopic, setInfoTopic] = useState<string | null>(null);
 
   const [selectedProduct, setSelectedProduct] = useState<ModalProductDetails | null>(null);
+
+  // Sync hash routing
+  useEffect(() => {
+    const handleHash = () => {
+      if (window.location.hash === '#custom-designs') {
+        setCurrentPage('custom-designs');
+      } else {
+        setCurrentPage('home');
+      }
+    };
+    if (window.location.hash === '#custom-designs') {
+      setCurrentPage('custom-designs');
+    }
+    window.addEventListener('hashchange', handleHash);
+    window.addEventListener('popstate', handleHash);
+    return () => {
+      window.removeEventListener('hashchange', handleHash);
+      window.removeEventListener('popstate', handleHash);
+    };
+  }, []);
+
+  const navigateTo = (page: 'home' | 'custom-designs') => {
+    setCurrentPage(page);
+    if (page === 'custom-designs') {
+      window.location.hash = '#custom-designs';
+    } else {
+      if (window.location.hash === '#custom-designs') {
+        window.history.pushState(null, '', window.location.pathname + window.location.search);
+      }
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // E-commerce state
   const [cartItems, setCartItems] = useState<CartItem[]>([
@@ -104,13 +141,14 @@ export const App: React.FC = () => {
       image: c.image,
       goldPurity: '22K Hallmarked Gold',
     })),
-    ...CUSTOM_DESIGNS.map(c => ({
+    ...ALL_CUSTOM_DESIGNS.map(c => ({
       title: c.title,
-      subtitle: c.craft,
+      subtitle: `${c.craft} · ${c.categoryLabel || 'Bespoke'}`,
       tagline: c.gemstone,
-      description: `Bespoke jewellery customisation sculpted in ${c.goldPurity} featuring ${c.gemstone}. Traditional karigari handcrafted over 300 man-hours.`,
+      description: c.description || `Bespoke jewellery customisation sculpted in ${c.goldPurity} featuring ${c.gemstone}. Traditional karigari handcrafted over ${c.karigariHours || 250} man-hours.`,
       image: c.image,
       goldPurity: c.goldPurity,
+      price: c.priceEst,
     })),
     {
       title: 'The Nizam Polki Choker',
@@ -266,16 +304,31 @@ export const App: React.FC = () => {
 
   // Navigation action dispatcher
   const handleSelectNavItem = (id: string) => {
-    if (id === 'rituals') {
+    if (id === 'customisation') {
+      navigateTo('custom-designs');
+    } else if (id === 'rituals') {
       setIsRitualsOpen(true);
-    } else if (id === 'customisation') {
-      setIsCustomStudioOpen(true);
     } else if (id === 'for-you' || id === 'types') {
       setIsShopByTypeOpen(true);
     } else {
-      const match = document.getElementById(id);
-      if (match) {
-        match.scrollIntoView({ behavior: 'smooth' });
+      if (currentPage !== 'home') {
+        setCurrentPage('home');
+        if (window.location.hash === '#custom-designs') {
+          window.history.pushState(null, '', window.location.pathname + window.location.search);
+        }
+        setTimeout(() => {
+          const match = document.getElementById(id);
+          if (match) {
+            match.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }, 60);
+      } else {
+        const match = document.getElementById(id);
+        if (match) {
+          match.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
   };
@@ -294,6 +347,7 @@ export const App: React.FC = () => {
         onOpenCart={() => setIsCartOpen(true)}
         onOpenWishlist={() => setIsWishlistOpen(true)}
         onOpenAccount={() => setIsAccountOpen(true)}
+        onNavigateHome={() => navigateTo('home')}
         cartCount={cartTotalCount}
         wishlistCount={wishlistTitles.length}
       />
@@ -303,33 +357,49 @@ export const App: React.FC = () => {
 
       {/* Main Content Sections */}
       <main className="flex-1 w-full max-w-full">
-        {/* 4. Hero Section */}
-        <div id="jewellery">
-          <HeroSection onExploreClick={handleExploreHero} />
-        </div>
-
-        {/* 5. Collection Intro Section & Category Carousel */}
-        <div id="collections" className="scroll-reveal">
-          <CategoryCarousel onSelectCategory={handleSelectCategory} />
-        </div>
-
-        {/* 6. Heritage Story Section */}
-        <div id="story" className="scroll-reveal">
-          <StorySection onSelectStory={handleSelectStory} />
-        </div>
-
-        {/* 7. Jewellery Customisation Section */}
-        <div id="customisation" className="scroll-reveal">
-          <CustomisationSection
-            onSelectDesign={handleSelectCustomDesign}
-            onViewAllClick={() => setIsCustomStudioOpen(true)}
+        {currentPage === 'custom-designs' ? (
+          <CustomDesignsPage
+            onBackToHome={() => navigateTo('home')}
+            onSelectProduct={(product) => setSelectedProduct(product)}
+            onAddToCart={handleAddToCart}
+            onToggleWishlist={handleToggleWishlist}
+            onOpenCustomStudio={(design) => {
+              setStudioInitialDesign(design || null);
+              setIsCustomStudioOpen(true);
+            }}
+            wishlistTitles={wishlistTitles}
           />
-        </div>
+        ) : (
+          <>
+            {/* 4. Hero Section */}
+            <div id="jewellery">
+              <HeroSection onExploreClick={handleExploreHero} />
+            </div>
 
-        {/* 8. Divine Idols Section */}
-        <div id="divine-idols" className="scroll-reveal">
-          <DivineIdolsBanner onExploreDivine={handleExploreDivine} />
-        </div>
+            {/* 5. Collection Intro Section & Category Carousel */}
+            <div id="collections" className="scroll-reveal">
+              <CategoryCarousel onSelectCategory={handleSelectCategory} />
+            </div>
+
+            {/* 6. Heritage Story Section */}
+            <div id="story" className="scroll-reveal">
+              <StorySection onSelectStory={handleSelectStory} />
+            </div>
+
+            {/* 7. Jewellery Customisation Section */}
+            <div id="customisation" className="scroll-reveal">
+              <CustomisationSection
+                onSelectDesign={handleSelectCustomDesign}
+                onViewAllClick={() => navigateTo('custom-designs')}
+              />
+            </div>
+
+            {/* 8. Divine Idols Section */}
+            <div id="divine-idols" className="scroll-reveal">
+              <DivineIdolsBanner onExploreDivine={handleExploreDivine} />
+            </div>
+          </>
+        )}
       </main>
 
       {/* 9. Luxury Multi-Column Footer */}
@@ -343,10 +413,21 @@ export const App: React.FC = () => {
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenWishlist={() => setIsWishlistOpen(true)}
-        onNavigateHome={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onNavigateHome={() => navigateTo('home')}
         onNavigateCollections={() => {
-          const match = document.getElementById('collections');
-          if (match) match.scrollIntoView({ behavior: 'smooth' });
+          if (currentPage !== 'home') {
+            setCurrentPage('home');
+            if (window.location.hash === '#custom-designs') {
+              window.history.pushState(null, '', window.location.pathname + window.location.search);
+            }
+            setTimeout(() => {
+              const match = document.getElementById('collections');
+              if (match) match.scrollIntoView({ behavior: 'smooth' });
+            }, 60);
+          } else {
+            const match = document.getElementById('collections');
+            if (match) match.scrollIntoView({ behavior: 'smooth' });
+          }
         }}
         cartCount={cartTotalCount}
         wishlistCount={wishlistTitles.length}
@@ -423,8 +504,12 @@ export const App: React.FC = () => {
       {/* Bespoke Customisation Studio Modal */}
       <CustomisationStudioModal
         isOpen={isCustomStudioOpen}
-        onClose={() => setIsCustomStudioOpen(false)}
+        onClose={() => {
+          setIsCustomStudioOpen(false);
+          setStudioInitialDesign(null);
+        }}
         onSelectDesign={handleSelectCustomDesign}
+        initialDesign={studioInitialDesign}
       />
 
       {/* Brand Rituals Modal */}

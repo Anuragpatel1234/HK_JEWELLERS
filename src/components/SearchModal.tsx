@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Search } from 'lucide-react';
-import { CATEGORIES, CUSTOM_DESIGNS } from '../data/jewelleryData';
+import { CATEGORIES, ALL_CUSTOM_DESIGNS } from '../data/jewelleryData';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -17,7 +17,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   if (!isOpen) return null;
 
-  const popularTags = ['Necklaces', 'Earrings', 'Polki Choker', 'Kadas', 'Lord Ganesha', 'Temple Gold', 'Bridal'];
+  const popularTags = ['Necklaces', 'Earrings', 'Polki Choker', 'Kadas', 'Lord Ganesha', 'Temple Gold', 'Bridal', 'Payal', 'Rings'];
 
   const filteredCategories = query.trim() === ''
     ? []
@@ -25,7 +25,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   const filteredCustom = query.trim() === ''
     ? []
-    : CUSTOM_DESIGNS.filter(c => c.title.toLowerCase().includes(query.toLowerCase()) || c.craft.toLowerCase().includes(query.toLowerCase()));
+    : ALL_CUSTOM_DESIGNS.filter(c =>
+        c.title.toLowerCase().includes(query.toLowerCase()) ||
+        c.craft.toLowerCase().includes(query.toLowerCase()) ||
+        c.gemstone.toLowerCase().includes(query.toLowerCase()) ||
+        (c.categoryLabel && c.categoryLabel.toLowerCase().includes(query.toLowerCase()))
+      );
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4 animate-in fade-in duration-200">
