@@ -246,7 +246,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({ isOpen, onClose })
 
         {/* Footer info */}
         <div className="p-4 bg-[#FAE7D8] border-t border-[#E9D1B5] text-center text-[10px] text-[#2A1612]/70">
-          HK Jewellers Flagship Salon • Karol Bagh, New Delhi • Concierge: +91 98765 43210
+          H K JEWELLERS Flagship Showroom • Ahmedabad, Gujarat • Concierge: +91 70699 16916
         </div>
       </div>
     </div>

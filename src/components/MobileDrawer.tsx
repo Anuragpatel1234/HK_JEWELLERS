@@ -134,15 +134,15 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             className="flex items-center gap-2 hover:text-[#4A0712] text-left w-full cursor-pointer"
           >
             <MapPin className="w-3.5 h-3.5 text-[#B88A3B] flex-shrink-0" />
-            <span>1502, Karol Bagh, New Delhi, 110005</span>
+            <span>Madhavbag Tenament, Nirnay Nagar, Ahmedabad 382481</span>
           </button>
           <div className="flex items-center gap-2">
             <Phone className="w-3.5 h-3.5 text-[#B88A3B] flex-shrink-0" />
-            <a href="tel:+919876543210" className="hover:text-[#4A0712]">+91 98765 43210</a>
+            <a href="tel:+917069916916" className="hover:text-[#4A0712]">+91 70699 16916</a>
           </div>
           <div className="flex items-center gap-2">
             <Mail className="w-3.5 h-3.5 text-[#B88A3B] flex-shrink-0" />
-            <a href="mailto:hello@hkjewellers.com" className="hover:text-[#4A0712]">hello@hkjewellers.com</a>
+            <a href="mailto:contact@hkjewellers.shop" className="hover:text-[#4A0712]">contact@hkjewellers.shop</a>
           </div>
         </div>
       </div>

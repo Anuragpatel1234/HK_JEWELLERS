@@ -125,7 +125,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                   {huidCode}
                 </div>
                 <div className="text-[10px] text-emerald-800 font-medium">
-                  Karol Bagh Salon
+                  Ahmedabad Showroom
                 </div>
               </div>
 
@@ -252,7 +252,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                     <MapPin className="w-3.5 h-3.5 text-[#8F6623]" />
                     <span>Check Delivery &amp; Salon Appointment</span>
                   </span>
-                  <span className="text-[10px] text-[#8F6623]">Karol Bagh Flagship</span>
+                  <span className="text-[10px] text-[#8F6623]">Ahmedabad Showroom</span>
                 </div>
 
                 <form onSubmit={handleCheckPincode} className="flex gap-2">
@@ -275,7 +275,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                 {pincodeVerified && (
                   <p className="text-[11px] text-[#1B5E20] flex items-center gap-1">
                     <Check className="w-3.5 h-3.5" />
-                    <span>Complimentary Insured Delivery by <strong>Thursday</strong> | Available for Karol Bagh Salon Try-On</span>
+                    <span>Complimentary Insured Delivery by <strong>Thursday</strong> | Available for Ahmedabad Showroom Try-On</span>
                   </p>
                 )}
               </div>
@@ -386,17 +386,17 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                 </button>
               </div>
 
-              {/* Salon Consultation & Video Call CTA */}
+              {/* Showroom Consultation CTA */}
               <div className="pt-1 flex items-center justify-between text-[11px] text-[#8F6623]">
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+917069916916"
                   className="flex items-center gap-1.5 hover:text-[#4A0712] transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5" />
-                  <span>Call Salon: +91 98765 43210</span>
+                  <span>Call Showroom: +91 70699 16916</span>
                 </a>
                 <span className="text-[#2A1612]/50">|</span>
-                <span className="text-[#2A1612]/70">1502, Karol Bagh, New Delhi</span>
+                <span className="text-[#2A1612]/70">Nirnay Nagar, Ahmedabad</span>
               </div>
 
             </div>

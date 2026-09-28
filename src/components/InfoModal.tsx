@@ -205,34 +205,34 @@ export const InfoModal: React.FC<InfoModalProps> = ({
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#4A0712]" />
-                <h4 className="font-serif text-lg font-bold text-[#2A1612]">Flagship Karol Bagh Boutique</h4>
+                <h4 className="font-serif text-lg font-bold text-[#2A1612]">Flagship Ahmedabad Showroom</h4>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-[#FAE7D8] p-4 rounded-xl border border-[#E9D1B5] space-y-3 text-xs">
                   <div>
-                    <h5 className="font-serif text-sm font-bold text-[#4A0712]">HK Jewellers Karol Bagh Salon</h5>
-                    <p className="text-[#2A1612]/80 mt-1">1502, Bank Street, Near Gurudwara Road, Karol Bagh, New Delhi, 110005</p>
+                    <h5 className="font-serif text-sm font-bold text-[#4A0712]">H K JEWELLERS Showroom</h5>
+                    <p className="text-[#2A1612]/80 mt-1">Madhavbag Tenament, Nirnay Nagar Rd, Nirnay Nagar Sector II, Nirnay Nagar, Ahmedabad, Gujarat 382481</p>
                   </div>
 
                   <div className="space-y-1.5 pt-2 border-t border-[#E9D1B5] text-[#2A1612]/80">
                     <div className="flex items-center gap-2">
                       <Clock className="w-3.5 h-3.5 text-[#B88A3B]" />
-                      <span>Monday – Sunday: 11:00 AM – 8:30 PM</span>
+                      <span>Mon–Sat: 10:00 AM – 9:00 PM | Sun: 10:00 AM – 8:00 PM</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Phone className="w-3.5 h-3.5 text-[#B88A3B]" />
-                      <span>+91 98765 43210 / +91 11 2875 1994</span>
+                      <span>+91 70699 16916 / +91 84878 16916</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Mail className="w-3.5 h-3.5 text-[#B88A3B]" />
-                      <span>salon@hkjewellers.com</span>
+                      <span>contact@hkjewellers.shop</span>
                     </div>
                   </div>
 
                   <div className="pt-2">
                     <a
-                      href="https://maps.google.com/?q=Karol+Bagh+Jewellers+New+Delhi"
+                      href="https://maps.google.com/maps/place/H+K+JEWELLERS/data=!4m2!3m1!1s0x0:0xd03766d520f79ae4"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 bg-[#4A0712] hover:bg-[#35050D] text-[#FFF7ED] text-xs font-semibold py-2 px-4 rounded transition-colors"

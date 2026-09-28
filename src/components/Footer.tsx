@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { FOOTER_SECTIONS } from '../data/jewelleryData';
-import { ShieldCheck, Award, Lock, ChevronDown, ChevronUp } from 'lucide-react';
+import {
+  ShieldCheck,
+  Lock,
+  ChevronDown,
+  ChevronUp,
+  MapPin,
+  Phone,
+  Clock,
+  Star,
+  MessageCircle,
+  ExternalLink,
+} from 'lucide-react';
 
 interface FooterProps {
   onOpenInfo: (topic: string) => void;
@@ -8,12 +19,10 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }) => {
-  // Mobile accordion state for footer columns
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     shop: false,
     support: false,
-    information: false,
-    policies: false,
+    info: false,
   });
 
   const toggleSection = (key: string) => {
@@ -24,24 +33,138 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }
     return item.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-');
   };
 
+  const contact = FOOTER_SECTIONS.contact;
+
   return (
-    <footer className="w-full bg-[#FAE7D8] pt-8 sm:pt-12 pb-0 text-[#2A1612]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main 5-Column Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 sm:gap-8 pb-8 sm:pb-12">
+    <footer className="w-full bg-[#FAF3EB] border-t border-[#E9D1B5] text-[#2A1612]">
+      {/* Compact Main Content Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-9">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
           
-          {/* Column 1: SHOP OUR JEWELLERY */}
-          <div className="pb-3 md:pb-0">
+          {/* Brand & Showroom Details (5 cols on md+) */}
+          <div className="md:col-span-5 space-y-3">
+            <div>
+              <div className="inline-flex items-center gap-2">
+                <span className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-[#4A0712]">
+                  H K JEWELLERS
+                </span>
+                <span className="text-[#B88A3B] text-xs">✦</span>
+              </div>
+              <p className="text-[11px] font-sans tracking-[0.2em] uppercase text-[#8F6623] font-semibold">
+                {contact.tagline}
+              </p>
+            </div>
+
+            {/* Google Rating Badge */}
+            <a
+              href={contact.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#FFF7ED] border border-[#E9D1B5] hover:border-[#B88A3B] text-[11px] text-[#2A1612] transition-colors group cursor-pointer shadow-xs"
+              title="View on Google Maps"
+            >
+              <div className="flex items-center text-amber-500">
+                <Star className="w-3.5 h-3.5 fill-current" />
+              </div>
+              <span className="font-semibold text-[#4A0712]">4.6 ★</span>
+              <span className="text-[#8F6623] font-sans text-[10.5px]">19+ Google Reviews</span>
+              <ExternalLink className="w-3 h-3 text-[#8F6623] group-hover:text-[#4A0712]" />
+            </a>
+
+            {/* Showroom Address & Timings */}
+            <div className="space-y-1.5 text-xs text-[#2A1612]/80 font-sans">
+              <a
+                href={contact.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2 hover:text-[#4A0712] transition-colors leading-relaxed group"
+              >
+                <MapPin className="w-3.5 h-3.5 text-[#B88A3B] flex-shrink-0 mt-0.5 group-hover:text-[#4A0712]" />
+                <span>{contact.address}</span>
+              </a>
+
+              <div className="flex items-center gap-2 text-[11.5px] text-[#2A1612]/75">
+                <Clock className="w-3.5 h-3.5 text-[#B88A3B] flex-shrink-0" />
+                <span>{contact.timing}</span>
+              </div>
+
+              <div className="flex items-center gap-3 pt-1">
+                <a
+                  href={`tel:${contact.phone.replace(/[^0-9+]/g, '')}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#4A0712] hover:underline"
+                >
+                  <Phone className="w-3 h-3 text-[#B88A3B]" />
+                  <span>{contact.phone}</span>
+                </a>
+                <span className="text-[#E9D1B5]">|</span>
+                <a
+                  href={contact.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 hover:text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200"
+                >
+                  <MessageCircle className="w-3 h-3 text-emerald-700" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Social Media Links */}
+            <div className="flex items-center gap-2.5 pt-1">
+              {/* Instagram */}
+              <a
+                href={contact.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram @h.k.jewellers"
+                className="p-1.5 rounded-full bg-[#FFF7ED] border border-[#E9D1B5] hover:border-[#4A0712] text-[#4A0712] transition-colors"
+                title="Follow @h.k.jewellers on Instagram"
+              >
+                <svg className="w-4 h-4 fill-none stroke-current stroke-[1.8]" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+              </a>
+
+              {/* Google Maps Location */}
+              <a
+                href={contact.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Google Maps Location"
+                className="p-1.5 rounded-full bg-[#FFF7ED] border border-[#E9D1B5] hover:border-[#4A0712] text-[#4A0712] transition-colors"
+                title="Locate H K Jewellers on Google Maps"
+              >
+                <MapPin className="w-4 h-4" />
+              </a>
+
+              {/* WhatsApp */}
+              <a
+                href={contact.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp H K Jewellers"
+                className="p-1.5 rounded-full bg-[#FFF7ED] border border-[#E9D1B5] hover:border-emerald-700 text-emerald-700 transition-colors"
+                title="Chat on WhatsApp"
+              >
+                <MessageCircle className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Column 2: SHOP OUR JEWELLERY (2 cols on md+) */}
+          <div className="md:col-span-2">
             <button
               onClick={() => toggleSection('shop')}
-              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4 cursor-pointer"
+              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] font-bold tracking-[0.16em] uppercase text-[#4A0712] mb-2 sm:mb-2.5 cursor-pointer"
             >
-              <span>Shop Our Jewellery</span>
+              <span>Shop Jewellery</span>
               <span className="md:hidden text-[#B88A3B]">
-                {openSections.shop ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                {openSections.shop ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </span>
             </button>
-            <ul className={`space-y-1.5 text-[11px] sm:text-xs text-[#2A1612]/70 font-sans md:block ${openSections.shop ? 'block' : 'hidden md:block'}`}>
+            <ul className={`space-y-1.5 text-xs text-[#2A1612]/75 font-sans md:block ${openSections.shop ? 'block' : 'hidden md:block'}`}>
               {FOOTER_SECTIONS.shop.map((item) => (
                 <li key={item}>
                   <button
@@ -55,18 +178,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }
             </ul>
           </div>
 
-          {/* Column 2: HELP & SUPPORT */}
-          <div className="pb-3 md:pb-0">
+          {/* Column 3: HELP & SUPPORT (2.5 cols on md+) */}
+          <div className="md:col-span-2">
             <button
               onClick={() => toggleSection('support')}
-              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4 cursor-pointer"
+              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] font-bold tracking-[0.16em] uppercase text-[#4A0712] mb-2 sm:mb-2.5 cursor-pointer"
             >
               <span>Help & Support</span>
               <span className="md:hidden text-[#B88A3B]">
-                {openSections.support ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                {openSections.support ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </span>
             </button>
-            <ul className={`space-y-1.5 text-[11px] sm:text-xs text-[#2A1612]/70 font-sans md:block ${openSections.support ? 'block' : 'hidden md:block'}`}>
+            <ul className={`space-y-1.5 text-xs text-[#2A1612]/75 font-sans md:block ${openSections.support ? 'block' : 'hidden md:block'}`}>
               {FOOTER_SECTIONS.support.map((item) => (
                 <li key={item}>
                   <button
@@ -80,18 +203,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }
             </ul>
           </div>
 
-          {/* Column 3: INFORMATION */}
-          <div className="pb-3 md:pb-0">
+          {/* Column 4: INFORMATION & POLICIES (2.5 cols on md+) */}
+          <div className="md:col-span-3">
             <button
-              onClick={() => toggleSection('information')}
-              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4 cursor-pointer"
+              onClick={() => toggleSection('info')}
+              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] font-bold tracking-[0.16em] uppercase text-[#4A0712] mb-2 sm:mb-2.5 cursor-pointer"
             >
-              <span>Information</span>
+              <span>Information & Trust</span>
               <span className="md:hidden text-[#B88A3B]">
-                {openSections.information ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                {openSections.info ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </span>
             </button>
-            <ul className={`space-y-1.5 text-[11px] sm:text-xs text-[#2A1612]/70 font-sans md:block ${openSections.information ? 'block' : 'hidden md:block'}`}>
+            <ul className={`space-y-1.5 text-xs text-[#2A1612]/75 font-sans md:block ${openSections.info ? 'block' : 'hidden md:block'}`}>
               {FOOTER_SECTIONS.information.map((item) => (
                 <li key={item}>
                   <button
@@ -102,22 +225,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }
                   </button>
                 </li>
               ))}
-            </ul>
-          </div>
-
-          {/* Column 4: POLICIES */}
-          <div className="pb-3 md:pb-0">
-            <button
-              onClick={() => toggleSection('policies')}
-              className="w-full flex items-center justify-between md:cursor-default text-left font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2 sm:mb-4 cursor-pointer"
-            >
-              <span>Policies</span>
-              <span className="md:hidden text-[#B88A3B]">
-                {openSections.policies ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-              </span>
-            </button>
-            <ul className={`space-y-1.5 text-[11px] sm:text-xs text-[#2A1612]/70 font-sans md:block ${openSections.policies ? 'block' : 'hidden md:block'}`}>
-              {FOOTER_SECTIONS.policies.map((item) => (
+              {FOOTER_SECTIONS.policies.slice(0, 2).map((item) => (
                 <li key={item}>
                   <button
                     onClick={() => onOpenInfo(getTopicKey(item))}
@@ -129,126 +237,54 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }
               ))}
             </ul>
           </div>
-
-          {/* Column 5: CONTACT US & SOCIAL */}
-          <div className="space-y-3">
-            <h3 className="font-sans text-[11px] sm:text-xs font-bold tracking-[0.16em] uppercase text-[#2A1612]">
-              Contact Us
-            </h3>
-            <div className="space-y-1 text-[11px] sm:text-xs text-[#2A1612]/75 font-sans">
-              <p className="font-semibold text-[#4A0712]">{FOOTER_SECTIONS.contact.brand}</p>
-              <button
-                onClick={() => onOpenInfo('store-locator')}
-                className="text-left hover:text-[#4A0712] transition-colors cursor-pointer"
-              >
-                {FOOTER_SECTIONS.contact.address}
-              </button>
-              <p className="pt-1">
-                <a href={`tel:${FOOTER_SECTIONS.contact.phone.replace(/\s+/g, '')}`} className="hover:text-[#4A0712]">
-                  {FOOTER_SECTIONS.contact.phone}
-                </a>
-              </p>
-              <p>
-                <a href={`mailto:${FOOTER_SECTIONS.contact.email}`} className="hover:text-[#4A0712]">
-                  {FOOTER_SECTIONS.contact.email}
-                </a>
-              </p>
-            </div>
-
-            {/* Social Media Links */}
-            <div className="pt-2">
-              <h4 className="font-sans text-[10px] sm:text-[11px] font-bold tracking-[0.16em] uppercase text-[#2A1612] mb-2">
-                Follow Us
-              </h4>
-              <div className="flex items-center gap-3.5 text-[#2A1612]">
-                {/* Instagram Icon */}
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#4A0712] transition-colors">
-                  <svg className="w-[18px] h-[18px] fill-none stroke-current stroke-[1.5]" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-                  </svg>
-                </a>
-                {/* Facebook Icon */}
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-[#4A0712] transition-colors">
-                  <svg className="w-[18px] h-[18px] fill-none stroke-current stroke-[1.5]" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                  </svg>
-                </a>
-                {/* Pinterest Icon */}
-                <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" className="hover:text-[#4A0712] transition-colors">
-                  <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
-                    <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.332 1.365-.053.225-.177.271-.409.165-1.523-.71-2.475-2.935-2.475-4.726 0-3.85 2.796-7.387 8.067-7.387 4.236 0 7.528 3.018 7.528 7.054 0 4.21-2.654 7.597-6.337 7.597-1.238 0-2.402-.644-2.801-1.406l-.762 2.906c-.276 1.055-1.022 2.378-1.523 3.186C9.915 23.864 10.939 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
-                  </svg>
-                </a>
-                {/* YouTube Icon */}
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-[#4A0712] transition-colors">
-                  <svg className="w-[18px] h-[18px] fill-none stroke-current stroke-[1.5]" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/>
-                    <polygon points="10 15 15 12 10 9 10 15" fill="currentColor"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Copyright notice */}
-        <div className="mt-6 sm:mt-8 pb-4 text-center text-[10px] text-[#2A1612]/55 font-sans tracking-wider">
-          © {new Date().getFullYear()} HK Jewellers. All rights reserved. Handcrafted with traditional reverence & luxury precision.
         </div>
       </div>
 
-      {/* Bottom Bar — 2 Cards: We Accept | 100% Secure */}
-      <div className="w-full bg-[#EEDCCC]/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-center">
-            
-            {/* Card 1: WE ACCEPT Payment Methods */}
-            <div className="flex flex-col items-center justify-center text-center">
-              <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-[#2A1612]/70 mb-2.5">
-                We Accept
-              </span>
-              <div className="flex items-center gap-2.5 text-xs font-semibold text-[#2A1612]/85">
-                <span className="px-3 py-1.5 bg-[#FAF3EB] rounded-[4px] text-[10px] tracking-wider font-bold shadow-sm">
-                  VISA
-                </span>
-                <span className="px-3 py-1.5 bg-[#FAF3EB] rounded-[4px] text-[10px] tracking-wider font-bold shadow-sm">
-                  Mastercard
-                </span>
-                <span className="px-3 py-1.5 bg-[#FAF3EB] rounded-[4px] text-[10px] tracking-wider font-bold shadow-sm">
-                  RuPay
-                </span>
-                <span className="px-3 py-1.5 bg-[#FAF3EB] rounded-[4px] text-[10px] tracking-wider font-bold text-[#4A0712] shadow-sm">
-                  UPI
-                </span>
-              </div>
-            </div>
+      {/* Slim, Compact Single-Line Bottom Bar (Drastically Reduces Footer Size) */}
+      <div className="w-full bg-[#EEDCCC]/60 border-t border-[#E9D1B5] py-2.5 sm:py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-2.5 text-center md:text-left">
+          
+          {/* Copyright notice */}
+          <div className="text-[10px] text-[#2A1612]/70 font-sans tracking-wide">
+            © {new Date().getFullYear()} <strong>H K JEWELLERS</strong> · Ahmedabad, Gujarat. All rights reserved.
+          </div>
 
-            {/* Card 2: 100% SECURE PAYMENTS Trust Badges */}
-            <div className="flex flex-col items-center justify-center text-center">
-              <span className="font-sans text-[10px] font-bold tracking-[0.2em] uppercase text-[#2A1612]/70 mb-2.5">
-                100% Secure Payments
-              </span>
-              <div className="flex items-center gap-4 sm:gap-5 text-[9px] sm:text-[10px] text-[#2A1612]/75">
-                <div className="flex items-center gap-1.5">
-                  <Lock className="w-4 h-4 text-[#B88A3B]" />
-                  <span className="font-semibold tracking-wider">SSL SECURED</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-[#B88A3B]" />
-                  <span className="font-semibold tracking-wider">TRUSTED PAYMENTS</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Award className="w-4 h-4 text-[#B88A3B]" />
-                  <span className="font-semibold tracking-wider">HALLMARK CERTIFIED</span>
-                </div>
-              </div>
-            </div>
+          {/* Compact Inline Payment Badges */}
+          <div className="flex items-center gap-1.5 text-[9px] font-bold text-[#2A1612]/80">
+            <span className="text-[9.5px] uppercase tracking-wider text-[#8F6623] font-semibold mr-1">
+              We Accept:
+            </span>
+            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] shadow-xs">
+              VISA
+            </span>
+            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] shadow-xs">
+              Mastercard
+            </span>
+            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] shadow-xs">
+              RuPay
+            </span>
+            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] text-[#4A0712] shadow-xs">
+              UPI
+            </span>
+            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] shadow-xs">
+              NetBanking
+            </span>
+          </div>
+
+          {/* Trust Seals */}
+          <div className="flex items-center gap-2 text-[9.5px] text-[#8F6623] font-semibold">
+            <span className="inline-flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3 text-[#B88A3B]" />
+              <span>BIS 916 &amp; 750</span>
+            </span>
+            <span>•</span>
+            <span className="inline-flex items-center gap-1">
+              <Lock className="w-3 h-3 text-[#B88A3B]" />
+              <span>SSL Secured</span>
+            </span>
           </div>
         </div>
       </div>
     </footer>
   );
 };
-
