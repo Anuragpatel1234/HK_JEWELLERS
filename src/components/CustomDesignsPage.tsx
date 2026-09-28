@@ -15,7 +15,6 @@ import {
   X,
   Layers,
   ChevronRight,
-  MapPin,
 } from 'lucide-react';
 import { ALL_CUSTOM_DESIGNS, JEWELLERY_FILTER_TYPES } from '../data/jewelleryData';
 import type { CustomJewelleryItem } from '../data/jewelleryData';
@@ -408,80 +407,41 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
               <div
                 key={item.id}
                 onClick={() => handleProductCardClick(item)}
-                className="group bg-[#FFF7ED] rounded-xl overflow-hidden border border-[#E9D1B5] hover:border-[#B88A3B] transition-all duration-300 hover:shadow-[0_12px_32px_rgba(42,22,18,0.16)] hover:-translate-y-1 flex flex-col justify-between cursor-pointer relative"
+                className="group bg-[#FFF7ED] rounded-xl overflow-hidden border border-[#E9D1B5] hover:border-[#B88A3B] transition-all duration-300 hover:shadow-[0_12px_28px_rgba(42,22,18,0.12)] hover:-translate-y-1 flex flex-col justify-between cursor-pointer"
               >
-                {/* Image & Badges */}
-                <div className="relative aspect-square w-full bg-[#1E0E0B] overflow-hidden">
+                {/* Product Image: 100% Uncluttered, Pure Luxury Visuals */}
+                <div className="relative aspect-square w-full bg-[#FAF3EB] overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.title}
                     loading="lazy"
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 group-hover:brightness-105"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   />
 
-                  {/* Gradient Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 pointer-events-none" />
-
-                  {/* Top Badges */}
-                  <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
-                    {/* BIS Hallmark Badge */}
-                    <span className="text-[8.5px] uppercase tracking-wider font-sans font-bold bg-[#D8B477] text-[#1E0E0B] px-2 py-0.5 rounded shadow-md flex items-center gap-1">
-                      <ShieldCheck className="w-3 h-3 text-[#1E0E0B]" />
-                      <span>BIS {item.goldPurity?.includes('18K') ? '750' : '916'} Hallmarked</span>
-                    </span>
-
-                    {/* Category Pill */}
-                    <span className="text-[9px] uppercase tracking-wider font-sans font-semibold bg-[#4A0712]/90 text-[#FFF7ED] px-2 py-0.5 rounded border border-[#B88A3B]/40 shadow-sm backdrop-blur-sm">
-                      {item.categoryLabel || 'Bespoke'}
-                    </span>
-
-                    {item.featured && (
-                      <span className="text-[8px] uppercase tracking-wider font-sans font-bold bg-[#8F6623]/90 text-[#FFF7ED] px-2 py-0.5 rounded shadow-sm backdrop-blur-sm flex items-center gap-1">
-                        <Sparkles className="w-2.5 h-2.5 text-[#D8B477]" />
-                        <span>Masterpiece</span>
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Wishlist Button Overlay */}
-                  <div className="absolute top-2.5 right-2.5 z-10">
-                    <button
-                      onClick={(e) => handleWishlistCardToggle(e, item)}
-                      aria-label="Wishlist"
-                      className={`p-2 rounded-full backdrop-blur-md transition-all cursor-pointer shadow-md ${
-                        isWishlisted
-                          ? 'bg-[#4A0712] text-[#D8B477] scale-110 shadow-lg'
-                          : 'bg-black/40 text-white hover:bg-[#4A0712] hover:text-[#FFF7ED]'
-                      }`}
-                    >
-                      <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
-                    </button>
-                  </div>
-
-                  {/* Salon Try-On & Purity Ribbon at Bottom of Image */}
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[9px] text-[#E8D1A7] pointer-events-none">
-                    <span className="bg-black/70 px-2 py-0.5 rounded backdrop-blur-sm border border-white/10 flex items-center gap-1 font-mono text-[8.5px]">
-                      <Clock className="w-2.5 h-2.5 text-[#D8B477]" />
-                      <span>{item.karigariHours || 240}h Karigari</span>
-                    </span>
-
-                    <span className="bg-[#4A0712]/90 px-2 py-0.5 rounded backdrop-blur-sm border border-[#B88A3B]/30 font-medium text-[8.5px] text-[#D8B477] flex items-center gap-1">
-                      <MapPin className="w-2.5 h-2.5" />
-                      <span>Salon Try-On</span>
-                    </span>
-                  </div>
+                  {/* Wishlist Button: Sleek, unobtrusive luxury circle */}
+                  <button
+                    onClick={(e) => handleWishlistCardToggle(e, item)}
+                    aria-label={`Wishlist ${item.title}`}
+                    className={`absolute top-2.5 right-2.5 p-2 rounded-full backdrop-blur-md transition-all duration-200 z-10 cursor-pointer shadow-md ${
+                      isWishlisted
+                        ? 'bg-[#4A0712] text-[#D8B477] scale-105'
+                        : 'bg-black/30 hover:bg-black/60 text-white/90 hover:text-white'
+                    }`}
+                  >
+                    <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
+                  </button>
                 </div>
 
-                {/* Product Information */}
+                {/* Product Information Body */}
                 <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3">
                   <div className="space-y-1.5">
-                    {/* Lineage & Weight Specs */}
-                    <div className="flex items-center justify-between text-[9px] text-[#8F6623]">
-                      <span className="uppercase tracking-wider font-sans font-bold">
-                        {item.craft}
+                    {/* Eyebrow: Purity & Craft Lineage */}
+                    <div className="flex items-center justify-between text-[10px] text-[#8F6623]">
+                      <span className="uppercase tracking-wider font-sans font-semibold">
+                        {item.goldPurity || '22K Gold'} · {item.craft}
                       </span>
-                      <span className="font-mono bg-[#FAE7D8] px-1.5 py-0.5 rounded text-[#4A0712] font-semibold border border-[#E9D1B5]">
-                        Net Gold: {netWeightVal}
+                      <span className="font-mono text-[#4A0712] font-semibold bg-[#FAE7D8] px-1.5 py-0.5 rounded border border-[#E9D1B5] text-[9px]">
+                        Net: {netWeightVal}
                       </span>
                     </div>
 
@@ -490,30 +450,24 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                       {item.title}
                     </h4>
 
-                    {/* Gemstones */}
-                    <p className="text-[11px] text-[#8F6623] line-clamp-1 italic font-serif flex items-center gap-1">
-                      <Gem className="w-3 h-3 text-[#B88A3B] flex-shrink-0" />
-                      <span>{item.gemstone}</span>
+                    {/* Gemstones / Craft Detail */}
+                    <p className="text-[11.5px] text-[#2A1612]/75 line-clamp-1 italic font-serif">
+                      {item.gemstone}
                     </p>
 
-                    {/* Net weight billing guarantee badge */}
-                    <div className="flex items-center gap-1.5 text-[9.5px] text-[#2A1612]/75 pt-0.5">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-700 flex-shrink-0" />
-                      <span className="font-sans">100% Net Weight Billing (Zero Stone Loss)</span>
+                    {/* Trust Line */}
+                    <div className="flex items-center gap-1.5 text-[10px] text-[#2A1612]/70 pt-0.5">
+                      <ShieldCheck className="w-3 h-3 text-[#B88A3B] flex-shrink-0" />
+                      <span className="font-sans">BIS {item.goldPurity?.includes('18K') ? '750' : '916'} Hallmarked · Net Weight Billing</span>
                     </div>
-
-                    <p className="text-[11px] text-[#2A1612]/70 line-clamp-2 leading-relaxed pt-0.5 font-light">
-                      {item.description}
-                    </p>
                   </div>
 
-                  {/* Pricing and Action Buttons */}
-                  <div className="pt-2.5 border-t border-[#E9D1B5]/80 space-y-2.5">
-                    {/* Tanishq-style MRP Anchor & Atelier Est */}
+                  {/* Pricing and Action CTAs */}
+                  <div className="pt-2 border-t border-[#E9D1B5]/80 space-y-2.5">
                     <div className="flex items-end justify-between">
                       <div>
                         {mrpVal && (
-                          <div className="flex items-center gap-1.5 text-[10px] text-[#2A1612]/50">
+                          <div className="flex items-center gap-1.5 text-[10.5px] text-[#2A1612]/50">
                             <span className="line-through">{mrpVal}</span>
                             <span className="text-[9px] font-semibold text-emerald-800 bg-emerald-100/80 px-1 py-0.2 rounded font-sans">
                               Save {savingsVal}
@@ -524,7 +478,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                           <span className="font-serif text-base sm:text-lg font-bold text-[#4A0712]">
                             {item.priceEst}
                           </span>
-                          <span className="text-[8.5px] text-[#8F6623] font-sans">
+                          <span className="text-[9px] text-[#8F6623] font-sans">
                             (Incl. 3% GST)
                           </span>
                         </div>

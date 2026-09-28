@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ShoppingBag, Eye, Heart, Sparkles, Filter, Search, ShieldCheck } from 'lucide-react';
+import { X, ShoppingBag, Eye, Heart, Sparkles, Filter, Search } from 'lucide-react';
 import { ALL_CUSTOM_DESIGNS, JEWELLERY_FILTER_TYPES } from '../data/jewelleryData';
 import type { ModalProductDetails } from './QuickViewModal';
 
@@ -170,7 +170,8 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
                   key={`${item.title}-${idx}`}
                   className="bg-[#FAF3EB] rounded-lg border border-[#E9D1B5] hover:border-[#B88A3B] shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
                 >
-                  <div className="relative aspect-square bg-[#1E0E0B] overflow-hidden">
+                  {/* Image Container: 100% Uncluttered */}
+                  <div className="relative aspect-square bg-[#FAF3EB] overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -178,42 +179,28 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
                       loading="lazy"
                     />
                     
-                    {/* Top Badges */}
-                    <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
-                      <span className="text-[8px] uppercase tracking-wider font-sans font-bold bg-[#D8B477] text-[#1E0E0B] px-1.5 py-0.5 rounded shadow flex items-center gap-0.5">
-                        <ShieldCheck className="w-2.5 h-2.5 text-[#1E0E0B]" />
-                        <span>BIS 916</span>
-                      </span>
-                    </div>
-
-                    {/* Quick Action Overlay */}
-                    <div className="absolute top-2 right-2 flex flex-col gap-1.5 z-10">
-                      <button
-                        onClick={() => onToggleWishlist(item)}
-                        className={`p-1.5 rounded-full backdrop-blur-md transition-colors cursor-pointer ${
-                          isWishlisted ? 'bg-[#4A0712] text-[#D8B477]' : 'bg-black/40 text-white hover:bg-black/60'
-                        }`}
-                        title="Wishlist"
-                      >
-                        <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-current' : ''}`} />
-                      </button>
-                    </div>
-
-                    <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[8.5px]">
-                      <span className="bg-[#4A0712]/90 text-[#D8B477] font-sans px-1.5 py-0.5 rounded border border-[#B88A3B]/40">
-                        {item.goldPurity || '22K Pure'}
-                      </span>
-                      <span className="bg-black/70 text-[#FFF7ED] font-mono px-1.5 py-0.5 rounded">
-                        Net: {netWeightVal}
-                      </span>
-                    </div>
+                    {/* Wishlist Button */}
+                    <button
+                      onClick={() => onToggleWishlist(item)}
+                      className={`absolute top-2 right-2 p-1.5 rounded-full backdrop-blur-md transition-colors cursor-pointer z-10 shadow-sm ${
+                        isWishlisted ? 'bg-[#4A0712] text-[#D8B477]' : 'bg-black/30 text-white hover:bg-black/60'
+                      }`}
+                      title="Wishlist"
+                    >
+                      <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'fill-current' : ''}`} />
+                    </button>
                   </div>
 
                   <div className="p-3 flex-1 flex flex-col justify-between space-y-2">
                     <div>
-                      <span className="text-[8.5px] font-bold uppercase tracking-wider text-[#8F6623] block">
-                        {item.subtitle}
-                      </span>
+                      <div className="flex items-center justify-between">
+                        <span className="text-[8.5px] font-bold uppercase tracking-wider text-[#8F6623]">
+                          {item.subtitle}
+                        </span>
+                        <span className="text-[9px] font-mono text-[#4A0712] bg-[#FAE7D8] px-1 py-0.2 rounded">
+                          Net: {netWeightVal}
+                        </span>
+                      </div>
                       <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#2A1612] truncate mt-0.5" title={item.title}>
                         {item.title}
                       </h4>

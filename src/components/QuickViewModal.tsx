@@ -106,28 +106,26 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
             
             {/* Left Column: Image Showcase & Trust Seals */}
             <div className="space-y-4">
-              {/* Main Product Image Frame */}
-              <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#1E0E0B] border border-[#D8B477]/40 shadow-inner group">
+              {/* Main Product Image Frame: 100% Clean & Pristine */}
+              <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#FAF3EB] border border-[#D8B477]/40 shadow-inner group">
                 <img
                   src={product.image}
                   alt={product.title}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
+              </div>
 
-                {/* BIS Hallmark Verified Floating Badge */}
-                <div className="absolute top-3 left-3 bg-[#4A0712]/95 backdrop-blur-sm text-[#D8B477] text-[10px] font-sans font-bold px-3 py-1 rounded-full border border-[#B88A3B]/50 shadow-md flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#E6C687]" />
-                  <span>BIS 916 HALLMARKED</span>
+              {/* Hallmark & Verification Strip Under Image */}
+              <div className="flex items-center justify-between px-3.5 py-2 bg-[#FFF7ED] rounded-lg border border-[#E9D1B5] text-[11px] text-[#2A1612]">
+                <div className="flex items-center gap-1.5 font-sans font-semibold text-[#8F6623]">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#B88A3B]" />
+                  <span>BIS {product.goldPurity?.includes('18K') ? '750' : '916'} Hallmarked</span>
                 </div>
-
-                {/* HUID Badge */}
-                <div className="absolute bottom-3 left-3 bg-black/75 backdrop-blur-sm text-[#FAF3EB] text-[9.5px] font-mono px-2.5 py-1 rounded border border-white/20">
+                <div className="font-mono text-[#2A1612]/70 text-[10px]">
                   {huidCode}
                 </div>
-
-                {/* Ready to Ship Badge */}
-                <div className="absolute bottom-3 right-3 bg-[#8F6623]/90 text-[#FFF7ED] text-[9.5px] font-sans font-semibold px-2.5 py-1 rounded">
-                  Ready in Salon
+                <div className="text-[10px] text-emerald-800 font-medium">
+                  Karol Bagh Salon
                 </div>
               </div>
 
