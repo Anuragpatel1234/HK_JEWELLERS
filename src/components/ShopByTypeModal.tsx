@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, ShoppingBag, Eye, Heart, Sparkles, Filter } from 'lucide-react';
-import { CATEGORIES } from '../data/jewelleryData';
+import { X, ShoppingBag, Eye, Heart, Sparkles, Filter, Search } from 'lucide-react';
+import { ALL_CUSTOM_DESIGNS, JEWELLERY_FILTER_TYPES } from '../data/jewelleryData';
 import type { ModalProductDetails } from './QuickViewModal';
 
 interface ShopByTypeModalProps {
@@ -21,73 +21,42 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
   wishlistTitles,
 }) => {
   const [selectedType, setSelectedType] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   if (!isOpen) return null;
 
-  // Combine categories and custom designs into a unified interactive catalog
-  const catalog: ModalProductDetails[] = [
-    {
-      title: 'The Nizam Polki Choker',
-      subtitle: 'Necklaces',
-      tagline: 'Kundan Meenakari with Zambian Emeralds',
-      description: 'Masterfully set in 22K hallmarked gold with certified uncut diamonds and natural emerald droplets.',
-      image: '/assets/customisation/custom_1_highres.jpg',
-      goldPurity: '22K Hallmarked Gold',
-    },
-    {
-      title: 'Gaja Makara Antique Kadas',
-      subtitle: 'Bangles',
-      tagline: 'Nakshi Repoussé with Natural Rubies',
-      description: 'Hand-chased elephant motif kadas in antique 22K gold featuring cabochon Burma rubies.',
-      image: '/assets/customisation/custom_2_highres.jpg',
-      goldPurity: '22K Antique Gold',
-    },
-    {
-      title: 'Maharani Chandelier Earrings',
-      subtitle: 'Earrings',
-      tagline: 'Jadau Filigree with Basra Pearls',
-      description: 'Stately chandeliers with intricate floral jali and graduated Basra seed pearl cascades.',
-      image: '/assets/customisation/custom_3_highres.jpg',
-      goldPurity: '22K Hallmarked Gold',
-    },
-    {
-      title: 'Rani Haar Emerald Cascade',
-      subtitle: 'Necklaces',
-      tagline: 'Temple Setting with Russian Emerald Drops',
-      description: 'Magnificent five-row temple necklace culminating in a grand floral emerald medallion.',
-      image: '/assets/customisation/custom_4_highres.jpg',
-      goldPurity: '22K Solid Gold',
-    },
-    {
-      title: 'Lord Ganesha Divine Idol',
-      subtitle: 'Divine Idols',
-      tagline: 'Solid 22K Gold with 24K Leaf Finish',
-      description: 'Sacred idol sculpted in solid 22K gold with auspicious repoussé lotus pedestal.',
-      image: '/assets/divine/ganesha_idol.png',
-      goldPurity: '22K Solid Gold',
-    },
-    ...CATEGORIES.map(c => ({
-      title: c.name,
-      subtitle: c.name.toLowerCase().includes('necklace') ? 'Necklaces' : c.name.toLowerCase().includes('earring') ? 'Earrings' : c.name.toLowerCase().includes('bangle') || c.name.toLowerCase().includes('bange') ? 'Bangles' : 'Rings',
-      tagline: c.tagline,
-      description: c.description,
-      image: c.image,
-      goldPurity: '22K Hallmarked Gold',
-    })),
-  ];
+  // Convert all 54+ authentic products into interactive catalog
+  const catalog: ModalProductDetails[] = ALL_CUSTOM_DESIGNS.map(item => ({
+    title: item.title,
+    subtitle: item.categoryLabel || item.craft,
+    tagline: item.gemstone,
+    description: item.description || `Sculpted in ${item.goldPurity} featuring ${item.gemstone}. Traditional karigari handcrafted over ${item.karigariHours || 200} man-hours.`,
+    image: item.image,
+    goldPurity: item.goldPurity,
+    price: item.priceEst,
+    tags: item.tags,
+    karigariHours: item.karigariHours,
+    weightGrams: item.weightGrams,
+  }));
 
-  const filteredCatalog = selectedType === 'all'
-    ? catalog
-    : catalog.filter(i => (i.subtitle || '').toLowerCase().includes(selectedType.toLowerCase()));
+  const filteredCatalog = catalog.filter(item => {
+    // 1. Category filter
+    const matchesCategory = selectedType === 'all'
+      ? true
+      : ALL_CUSTOM_DESIGNS.find(d => d.title === item.title)?.category === selectedType;
 
-  const types = [
-    { id: 'all', label: 'All Adornments' },
-    { id: 'necklaces', label: 'Necklaces & Chokers' },
-    { id: 'earrings', label: 'Earrings & Jhumkas' },
-    { id: 'bangles', label: 'Bangles & Kadas' },
-    { id: 'rings', label: 'Rings & Bands' },
-    { id: 'divine idols', label: 'Divine Idols' },
-  ];
+    // 2. Search query filter
+    const matchesSearch = searchQuery.trim() === ''
+      ? true
+      : item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (item.tagline && item.tagline.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (item.subtitle && item.subtitle.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    return matchesCategory && matchesSearch;
+  });
+
+  const types = JEWELLERY_FILTER_TYPES;
+
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 animate-in fade-in duration-200">
@@ -122,26 +91,69 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
           </button>
         </div>
 
-        {/* Filter Bar */}
-        <div className="flex items-center gap-2 px-4 py-3 bg-[#FAE7D8] border-b border-[#E9D1B5] overflow-x-auto no-scrollbar">
-          <Filter className="w-3.5 h-3.5 text-[#8F6623] flex-shrink-0" />
-          {types.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setSelectedType(t.id)}
-              className={`px-3 py-1 text-xs font-sans rounded-full border transition-all whitespace-nowrap cursor-pointer ${
-                selectedType === t.id
-                  ? 'bg-[#4A0712] text-[#FFF7ED] border-[#4A0712] font-semibold'
-                  : 'bg-[#FAF3EB] text-[#2A1612] border-[#E9D1B5] hover:border-[#B88A3B]'
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
+        {/* Search & Filter Bar */}
+        <div className="px-4 py-3 bg-[#FAE7D8] border-b border-[#E9D1B5] space-y-2">
+          {/* Quick Search */}
+          <div className="relative">
+            <Search className="w-4 h-4 text-[#8F6623] absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Search by jewellery piece, gemstone, or craft..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-9 pr-4 py-1.5 bg-[#FAF3EB] text-[#2A1612] placeholder-[#2A1612]/50 text-xs rounded-lg border border-[#E9D1B5] focus:outline-none focus:border-[#B88A3B]"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#2A1612]/60 hover:text-[#4A0712]"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+
+          {/* Filter Pills */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
+            <Filter className="w-3.5 h-3.5 text-[#8F6623] flex-shrink-0 mr-1" />
+            {types.map((t) => {
+              const count = t.id === 'all'
+                ? catalog.length
+                : ALL_CUSTOM_DESIGNS.filter(d => d.category === t.id).length;
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => setSelectedType(t.id)}
+                  className={`px-3 py-1 text-xs font-sans rounded-full border transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+                    selectedType === t.id
+                      ? 'bg-[#4A0712] text-[#FFF7ED] border-[#4A0712] font-semibold'
+                      : 'bg-[#FAF3EB] text-[#2A1612] border-[#E9D1B5] hover:border-[#B88A3B]'
+                  }`}
+                >
+                  <span>{t.label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${selectedType === t.id ? 'bg-[#D8B477] text-[#2A1612]' : 'bg-[#E9D1B5]/70 text-[#2A1612]'}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Catalog Grid */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+          <div className="flex items-center justify-between mb-3 text-xs text-[#8F6623]">
+            <span>Showing {filteredCatalog.length} Hallmarked Masterpieces</span>
+            {selectedType !== 'all' && (
+              <button
+                onClick={() => setSelectedType('all')}
+                className="underline hover:text-[#4A0712] cursor-pointer"
+              >
+                Reset Filter
+              </button>
+            )}
+          </div>
+
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
             {filteredCatalog.map((item, idx) => {
               const isWishlisted = wishlistTitles.includes(item.title);
@@ -155,6 +167,7 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
                       src={item.image}
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                     />
                     
                     {/* Quick Action Overlay */}
@@ -180,13 +193,18 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
                       <span className="text-[9px] font-bold uppercase tracking-wider text-[#8F6623] block">
                         {item.subtitle}
                       </span>
-                      <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#2A1612] truncate mt-0.5">
+                      <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#2A1612] truncate mt-0.5" title={item.title}>
                         {item.title}
                       </h4>
                       {item.tagline && (
                         <p className="text-[10px] text-[#2A1612]/70 line-clamp-1 mt-0.5">
                           {item.tagline}
                         </p>
+                      )}
+                      {item.price && (
+                        <div className="text-xs font-semibold text-[#4A0712] mt-1 font-sans">
+                          {item.price}
+                        </div>
                       )}
                     </div>
 

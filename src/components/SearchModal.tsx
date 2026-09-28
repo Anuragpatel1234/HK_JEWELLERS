@@ -29,7 +29,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         c.title.toLowerCase().includes(query.toLowerCase()) ||
         c.craft.toLowerCase().includes(query.toLowerCase()) ||
         c.gemstone.toLowerCase().includes(query.toLowerCase()) ||
-        (c.categoryLabel && c.categoryLabel.toLowerCase().includes(query.toLowerCase()))
+        (c.categoryLabel && c.categoryLabel.toLowerCase().includes(query.toLowerCase())) ||
+        (c.tags && c.tags.some(t => t.toLowerCase().includes(query.toLowerCase())))
       );
 
   return (

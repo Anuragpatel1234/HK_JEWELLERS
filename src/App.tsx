@@ -120,7 +120,7 @@ export const App: React.FC = () => {
       subtitle: 'Kundan Meenakari',
       tagline: 'Uncut Diamonds & Colombian Emeralds',
       description: 'Masterfully set in 22K hallmarked gold with certified uncut diamonds and natural emerald droplets.',
-      image: '/assets/customisation/custom_1_choker.jpg',
+      image: '/assets/products/necklace_polki_choker.jpg',
       goldPurity: '22K Hallmarked Gold',
       quantity: 1,
     }
@@ -155,7 +155,7 @@ export const App: React.FC = () => {
       subtitle: 'Kundan Meenakari',
       tagline: 'Uncut Diamonds & Colombian Emeralds',
       description: 'Masterfully set in 22K hallmarked gold with certified uncut diamonds and natural emerald droplets.',
-      image: '/assets/customisation/custom_1_choker.jpg',
+      image: '/assets/products/necklace_polki_choker.jpg',
       goldPurity: '22K Hallmarked Gold',
     },
     {
@@ -163,7 +163,7 @@ export const App: React.FC = () => {
       subtitle: 'Divine Idols Sacred Collection',
       tagline: 'Sacred idols, crafted to fill your space with love, devotion & timeless blessings',
       description: 'Sculpted in solid 22K hallmarked gold with intricate floral repoussé engraving and radiant lotus pedestal. Bestows prosperity, peace, and spiritual abundance.',
-      image: '/assets/divine/ganesha_idol.png',
+      image: '/assets/products/divine_ganesha_lotus.png',
       goldPurity: '22K Solid Gold with 24K Leaf Finish',
     },
   ];
