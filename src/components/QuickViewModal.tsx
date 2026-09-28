@@ -1,5 +1,20 @@
-import React from 'react';
-import { X, Heart, ShoppingBag, ShieldCheck, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import {
+  X,
+  Heart,
+  ShoppingBag,
+  ShieldCheck,
+  Sparkles,
+  Truck,
+  RotateCcw,
+  Check,
+  MapPin,
+  ChevronDown,
+  ChevronUp,
+  Gem,
+  Award,
+  Phone,
+} from 'lucide-react';
 
 export interface ModalProductDetails {
   title: string;
@@ -10,6 +25,11 @@ export interface ModalProductDetails {
   goldPurity?: string;
   gemstones?: string;
   price?: string;
+  tags?: string[];
+  karigariHours?: number;
+  weightGrams?: string;
+  craft?: string;
+  category?: string;
 }
 
 interface QuickViewModalProps {
@@ -29,101 +49,365 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
   onToggleWishlist,
   isWishlisted = false,
 }) => {
+  const [activeTab, setActiveTab] = useState<'specs' | 'pricing' | 'assurance'>('specs');
+  const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
+  const [pincode, setPincode] = useState('110005');
+  const [pincodeVerified, setPincodeVerified] = useState(true);
+
   if (!isOpen || !product) return null;
 
+  // Numerical pricing calculations (Tanishq transparent pricing model)
+  const rawPrice = parseInt((product.price || '₹3,50,000').replace(/[^0-9]/g, '')) || 350000;
+  const originalMrp = Math.round(rawPrice * 1.12);
+  const goldComponent = Math.round(rawPrice * 0.64);
+  const stoneComponent = Math.round(rawPrice * 0.20);
+  const makingCharges = Math.round(rawPrice * 0.13);
+  const gstAmount = rawPrice - goldComponent - stoneComponent - makingCharges;
+
+  // Weight derivations
+  const grossWeightNum = parseFloat((product.weightGrams || '50g').replace(/[^0-9.]/g, '')) || 50;
+  const netGoldWeight = (grossWeightNum * 0.82).toFixed(1);
+  const stoneWeight = (grossWeightNum * 0.18).toFixed(1);
+
+  // Dynamic HUID & SKU
+  const skuCode = `HKJ-${(product.title.slice(0, 3) || 'ITM').toUpperCase()}-${(rawPrice % 900) + 100}`;
+  const huidCode = `HUID-916${(rawPrice % 8999) + 1000}`;
+
+  const handleCheckPincode = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pincode.trim().length === 6) {
+      setPincodeVerified(true);
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in duration-200">
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/80 backdrop-blur-md"
       />
 
-      {/* Modal Dialog */}
-      <div className="relative w-full max-w-lg bg-[#FAF3EB] border border-[#B88A3B]/40 rounded-xl shadow-2xl overflow-hidden z-10 flex flex-col max-h-[90vh]">
-        {/* Close Button */}
+      {/* Luxury Product Detail Modal */}
+      <div className="relative w-full max-w-4xl bg-[#FAF3EB] border border-[#B88A3B]/50 rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden z-10 flex flex-col max-h-[92vh]">
+        
+        {/* Top Floating Close Button */}
         <button
           onClick={onClose}
-          aria-label="Close Preview"
-          className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center transition-colors"
+          aria-label="Close Product View"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 w-8 h-8 sm:w-9 sm:py-9 rounded-full bg-black/50 hover:bg-[#4A0712] text-white flex items-center justify-center transition-colors cursor-pointer shadow-lg"
         >
-          <X className="w-4 h-4" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
-        {/* Content Container */}
-        <div className="overflow-y-auto">
-          {/* Image Showcase */}
-          <div className="w-full aspect-[4/3] bg-[#1E0E0B] relative overflow-hidden border-b border-[#E9D1B5]">
-            <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-full object-contain p-4"
-            />
-            <div className="absolute bottom-2 left-3 bg-[#4A0712]/90 text-[#D8B477] text-[10px] font-sans px-2.5 py-1 rounded border border-[#B88A3B]/40 flex items-center gap-1">
-              <Sparkles className="w-3 h-3" />
-              <span>Certified 22K Hallmarked</span>
-            </div>
-          </div>
+        {/* Modal Scrollable Body: 2-Column Responsive Layout */}
+        <div className="overflow-y-auto flex-1 p-4 sm:p-6 md:p-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
+            
+            {/* Left Column: Image Showcase & Trust Seals */}
+            <div className="space-y-4">
+              {/* Main Product Image Frame */}
+              <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#1E0E0B] border border-[#D8B477]/40 shadow-inner group">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                />
 
-          {/* Details */}
-          <div className="p-5 sm:p-6 space-y-4">
-            <div>
-              <span className="text-[10px] font-sans font-bold tracking-[0.2em] text-[#B88A3B] uppercase">
-                {product.subtitle || 'Heritage Collection'}
-              </span>
-              <h3 className="font-serif text-2xl sm:text-3xl text-[#2A1612] font-semibold mt-1">
-                {product.title}
-              </h3>
-              {product.tagline && (
-                <p className="font-serif italic text-sm text-[#4A0712] mt-0.5">
-                  "{product.tagline}"
+                {/* BIS Hallmark Verified Floating Badge */}
+                <div className="absolute top-3 left-3 bg-[#4A0712]/95 backdrop-blur-sm text-[#D8B477] text-[10px] font-sans font-bold px-3 py-1 rounded-full border border-[#B88A3B]/50 shadow-md flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#E6C687]" />
+                  <span>BIS 916 HALLMARKED</span>
+                </div>
+
+                {/* HUID Badge */}
+                <div className="absolute bottom-3 left-3 bg-black/75 backdrop-blur-sm text-[#FAF3EB] text-[9.5px] font-mono px-2.5 py-1 rounded border border-white/20">
+                  {huidCode}
+                </div>
+
+                {/* Ready to Ship Badge */}
+                <div className="absolute bottom-3 right-3 bg-[#8F6623]/90 text-[#FFF7ED] text-[9.5px] font-sans font-semibold px-2.5 py-1 rounded">
+                  Ready in Salon
+                </div>
+              </div>
+
+              {/* Trust Guarantee Grid (Tanishq & Caratlane Standard) */}
+              <div className="grid grid-cols-2 gap-2.5 bg-[#FFF7ED] p-3 rounded-xl border border-[#E9D1B5]">
+                <div className="flex items-center gap-2 text-xs text-[#2A1612]">
+                  <Award className="w-4 h-4 text-[#8F6623] flex-shrink-0" />
+                  <div>
+                    <span className="font-semibold block text-[10.5px]">100% Certified</span>
+                    <span className="text-[9.5px] text-[#2A1612]/70">BIS Hallmarked &amp; IGI</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-[#2A1612]">
+                  <RotateCcw className="w-4 h-4 text-[#8F6623] flex-shrink-0" />
+                  <div>
+                    <span className="font-semibold block text-[10.5px]">Lifetime Exchange</span>
+                    <span className="text-[9.5px] text-[#2A1612]/70">100% Gold Value Assured</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-[#2A1612]">
+                  <Truck className="w-4 h-4 text-[#8F6623] flex-shrink-0" />
+                  <div>
+                    <span className="font-semibold block text-[10.5px]">Insured Delivery</span>
+                    <span className="text-[9.5px] text-[#2A1612]/70">Tamper-Proof Vault Box</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-[#2A1612]">
+                  <Gem className="w-4 h-4 text-[#8F6623] flex-shrink-0" />
+                  <div>
+                    <span className="font-semibold block text-[10.5px]">Natural Gemstones</span>
+                    <span className="text-[9.5px] text-[#2A1612]/70">Ethically Sourced</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Title, Transparent Pricing, Specs & Actions */}
+            <div className="space-y-4 sm:space-y-5">
+              
+              {/* Category, Title & Tagline */}
+              <div className="border-b border-[#E9D1B5] pb-3 space-y-1">
+                <div className="flex items-center justify-between text-[10.5px] font-sans">
+                  <span className="text-[#8F6623] font-bold uppercase tracking-[0.2em]">
+                    {product.subtitle || 'HK Signature Vault'}
+                  </span>
+                  <span className="font-mono text-[#2A1612]/60">
+                    SKU: {skuCode}
+                  </span>
+                </div>
+
+                <h2 className="font-serif text-2xl sm:text-3xl text-[#2A1612] font-semibold leading-tight">
+                  {product.title}
+                </h2>
+
+                {product.tagline && (
+                  <p className="font-serif italic text-xs sm:text-sm text-[#4A0712]">
+                    {product.tagline}
+                  </p>
+                )}
+              </div>
+
+              {/* Price Banner with Net-Weight Transparency */}
+              <div className="bg-[#FFF7ED] p-3.5 sm:p-4 rounded-xl border border-[#E9D1B5] space-y-2">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#4A0712]">
+                    {product.price || '₹3,50,000'}
+                  </span>
+                  <span className="text-sm text-[#2A1612]/50 line-through">
+                    ₹{originalMrp.toLocaleString('en-IN')}
+                  </span>
+                  <span className="text-[10px] font-sans font-bold bg-[#E6C687]/40 text-[#4A0712] px-2 py-0.5 rounded">
+                    Save ₹{(originalMrp - rawPrice).toLocaleString('en-IN')}
+                  </span>
+                </div>
+
+                <p className="text-[10.5px] text-[#2A1612]/70">
+                  Inclusive of all taxes · <strong>Net Weight Billing</strong> (You only pay for gold weight, never stone weight).
                 </p>
-              )}
-            </div>
 
-            <p className="text-xs sm:text-sm text-[#2A1612]/80 leading-relaxed">
-              {product.description}
-            </p>
+                {/* Collapsible Price Breakdown (Tanishq Style) */}
+                <div className="pt-2 border-t border-[#E9D1B5]/80">
+                  <button
+                    onClick={() => setShowPriceBreakdown(!showPriceBreakdown)}
+                    className="flex items-center justify-between w-full text-xs font-semibold text-[#8F6623] hover:text-[#4A0712] cursor-pointer"
+                  >
+                    <span>{showPriceBreakdown ? 'Hide Transparent Price Breakdown' : 'View Transparent Price Breakdown (Tanishq Standard)'}</span>
+                    {showPriceBreakdown ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </button>
 
-            {/* Specifications */}
-            <div className="bg-[#FAE7D8] p-3 rounded-lg border border-[#E9D1B5] grid grid-cols-2 gap-2 text-xs">
-              <div>
-                <span className="text-[#8F6623] block text-[10px] uppercase font-semibold">Purity</span>
-                <span className="font-medium text-[#2A1612]">{product.goldPurity || '22 Karat Yellow Gold'}</span>
+                  {showPriceBreakdown && (
+                    <div className="mt-2.5 space-y-1.5 text-xs text-[#2A1612]/80 bg-[#FAF3EB] p-3 rounded-lg border border-[#E9D1B5]">
+                      <div className="flex justify-between">
+                        <span>Gold Component ({netGoldWeight}g @ 22K 916):</span>
+                        <span className="font-mono font-semibold">₹{goldComponent.toLocaleString('en-IN')}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Precious Stones &amp; Polki Diamonds ({stoneWeight}g):</span>
+                        <span className="font-mono font-semibold">₹{stoneComponent.toLocaleString('en-IN')}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Karigari / Making Charges ({product.karigariHours || 240}h craftsmanship):</span>
+                        <span className="font-mono font-semibold">₹{makingCharges.toLocaleString('en-IN')}</span>
+                      </div>
+                      <div className="flex justify-between text-[#8F6623]">
+                        <span>Applicable GST (3%):</span>
+                        <span className="font-mono font-semibold">₹{gstAmount.toLocaleString('en-IN')}</span>
+                      </div>
+                      <div className="flex justify-between pt-1.5 border-t border-[#E9D1B5] font-bold text-[#4A0712]">
+                        <span>Final Price (Net):</span>
+                        <span className="font-mono">₹{rawPrice.toLocaleString('en-IN')}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-              <div>
-                <span className="text-[#8F6623] block text-[10px] uppercase font-semibold">Certification</span>
-                <span className="font-medium text-[#2A1612] flex items-center gap-1">
-                  <ShieldCheck className="w-3 h-3 text-[#B88A3B]" /> BIS 916 Hallmark
-                </span>
+
+              {/* Delivery Pincode Checker (CaratLane & Tanishq Standard) */}
+              <div className="bg-[#FAF3EB] p-3 rounded-xl border border-[#E9D1B5] space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-semibold text-[#2A1612] flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#8F6623]" />
+                    <span>Check Delivery &amp; Salon Appointment</span>
+                  </span>
+                  <span className="text-[10px] text-[#8F6623]">Karol Bagh Flagship</span>
+                </div>
+
+                <form onSubmit={handleCheckPincode} className="flex gap-2">
+                  <input
+                    type="text"
+                    maxLength={6}
+                    value={pincode}
+                    onChange={(e) => setPincode(e.target.value.replace(/[^0-9]/g, ''))}
+                    placeholder="Enter 6-digit Pincode"
+                    className="flex-1 bg-[#FFF7ED] border border-[#E9D1B5] rounded-lg px-3 py-1.5 text-xs text-[#2A1612] focus:outline-none focus:border-[#B88A3B]"
+                  />
+                  <button
+                    type="submit"
+                    className="px-4 py-1.5 bg-[#4A0712] hover:bg-[#35050D] text-[#FFF7ED] text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+                  >
+                    Check
+                  </button>
+                </form>
+
+                {pincodeVerified && (
+                  <p className="text-[11px] text-[#1B5E20] flex items-center gap-1">
+                    <Check className="w-3.5 h-3.5" />
+                    <span>Complimentary Insured Delivery by <strong>Thursday</strong> | Available for Karol Bagh Salon Try-On</span>
+                  </p>
+                )}
               </div>
+
+              {/* Tabbed Specifications & Craft Details */}
+              <div className="space-y-2.5">
+                <div className="flex border-b border-[#E9D1B5] text-xs">
+                  <button
+                    onClick={() => setActiveTab('specs')}
+                    className={`pb-2 px-3 font-semibold transition-colors cursor-pointer ${
+                      activeTab === 'specs'
+                        ? 'border-b-2 border-[#4A0712] text-[#4A0712]'
+                        : 'text-[#2A1612]/60 hover:text-[#2A1612]'
+                    }`}
+                  >
+                    Specifications
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('pricing')}
+                    className={`pb-2 px-3 font-semibold transition-colors cursor-pointer ${
+                      activeTab === 'pricing'
+                        ? 'border-b-2 border-[#4A0712] text-[#4A0712]'
+                        : 'text-[#2A1612]/60 hover:text-[#2A1612]'
+                    }`}
+                  >
+                    Atelier Karigari
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('assurance')}
+                    className={`pb-2 px-3 font-semibold transition-colors cursor-pointer ${
+                      activeTab === 'assurance'
+                        ? 'border-b-2 border-[#4A0712] text-[#4A0712]'
+                        : 'text-[#2A1612]/60 hover:text-[#2A1612]'
+                    }`}
+                  >
+                    HK Hallmark Promise
+                  </button>
+                </div>
+
+                {activeTab === 'specs' && (
+                  <div className="bg-[#FFF7ED] p-3 rounded-lg border border-[#E9D1B5] grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                      <span className="text-[#8F6623] block text-[9.5px] uppercase font-bold">Gold Purity</span>
+                      <span className="font-medium text-[#2A1612]">{product.goldPurity || '22K Hallmarked Gold'}</span>
+                    </div>
+                    <div>
+                      <span className="text-[#8F6623] block text-[9.5px] uppercase font-bold">Gross / Net Gold</span>
+                      <span className="font-mono text-[#2A1612]">{grossWeightNum}g / {netGoldWeight}g</span>
+                    </div>
+                    <div>
+                      <span className="text-[#8F6623] block text-[9.5px] uppercase font-bold">Precious Gemstones</span>
+                      <span className="font-medium text-[#2A1612]">{product.gemstones || product.tagline || 'Natural Certified Gems'}</span>
+                    </div>
+                    <div>
+                      <span className="text-[#8F6623] block text-[9.5px] uppercase font-bold">Hallmark Standards</span>
+                      <span className="font-medium text-[#2A1612] flex items-center gap-1">
+                        <ShieldCheck className="w-3 h-3 text-[#B88A3B]" /> BIS 916 Laser HUID
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'pricing' && (
+                  <div className="bg-[#FFF7ED] p-3 rounded-lg border border-[#E9D1B5] text-xs space-y-1.5 text-[#2A1612]/80 leading-relaxed">
+                    <p>
+                      <strong>Artisan Craft:</strong> Handcrafted over <strong>{product.karigariHours || 240} man-hours</strong> by master karigars from Rajasthan and Delhi.
+                    </p>
+                    <p className="text-[11px] text-[#2A1612]/70">
+                      {product.description}
+                    </p>
+                  </div>
+                )}
+
+                {activeTab === 'assurance' && (
+                  <div className="bg-[#FFF7ED] p-3 rounded-lg border border-[#E9D1B5] text-xs space-y-1.5 text-[#2A1612]/80">
+                    <p className="flex items-center gap-1.5 text-[#4A0712] font-semibold">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Zero Impurity Guarantee with XRF Spectrometry</span>
+                    </p>
+                    <p className="text-[11px] text-[#2A1612]/70">
+                      Every piece is tested on advanced German Karatmeters before laser inscription. We provide 100% buyback of pure gold value at current salon market rates.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Action Buttons: Add to Bag & Wishlist */}
+              <div className="pt-2 flex items-center gap-3">
+                <button
+                  onClick={() => onAddToCart(product)}
+                  className="flex-1 bg-gradient-to-r from-[#D8B477] to-[#B88A3B] hover:from-[#F0D5A8] hover:to-[#D8B477] text-[#2A1612] font-sans text-xs tracking-[0.16em] uppercase font-bold py-3.5 px-4 rounded-lg border border-[#B88A3B] transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98] cursor-pointer"
+                >
+                  <ShoppingBag className="w-4 h-4 text-[#2A1612]" />
+                  <span>Add To Bag</span>
+                </button>
+
+                <button
+                  onClick={() => onToggleWishlist(product)}
+                  aria-label="Wishlist Item"
+                  className={`p-3.5 rounded-lg border transition-all cursor-pointer shadow-sm ${
+                    isWishlisted
+                      ? 'bg-[#4A0712] border-[#4A0712] text-[#D8B477]'
+                      : 'bg-[#FAE7D8] border-[#B88A3B]/40 hover:border-[#4A0712] text-[#4A0712]'
+                  }`}
+                  title="Save to Wishlist"
+                >
+                  <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
+                </button>
+              </div>
+
+              {/* Salon Consultation & Video Call CTA */}
+              <div className="pt-1 flex items-center justify-between text-[11px] text-[#8F6623]">
+                <a
+                  href="tel:+919876543210"
+                  className="flex items-center gap-1.5 hover:text-[#4A0712] transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>Call Salon: +91 98765 43210</span>
+                </a>
+                <span className="text-[#2A1612]/50">|</span>
+                <span className="text-[#2A1612]/70">1502, Karol Bagh, New Delhi</span>
+              </div>
+
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex items-center gap-3 pt-2">
-              <button
-                onClick={() => onAddToCart(product)}
-                className="flex-1 bg-[#4A0712] hover:bg-[#35050D] text-[#FFF7ED] font-sans text-xs tracking-[0.16em] uppercase font-semibold py-3 px-4 rounded-[4px] border border-[#B88A3B]/40 hover:border-[#D8B477] transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98]"
-              >
-                <ShoppingBag className="w-4 h-4" />
-                <span>Add to Bag</span>
-              </button>
-
-              <button
-                onClick={() => onToggleWishlist(product)}
-                aria-label="Wishlist Item"
-                className={`p-3 rounded-[4px] border transition-colors ${
-                  isWishlisted
-                    ? 'bg-[#4A0712] border-[#4A0712] text-[#D8B477]'
-                    : 'bg-[#FAE7D8] border-[#B88A3B]/40 hover:border-[#4A0712] text-[#4A0712]'
-                }`}
-              >
-                <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
-              </button>
-            </div>
           </div>
         </div>
+
       </div>
     </div>
   );
 };
+

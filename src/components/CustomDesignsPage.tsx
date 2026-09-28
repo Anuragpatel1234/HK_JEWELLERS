@@ -15,6 +15,7 @@ import {
   X,
   Layers,
   ChevronRight,
+  MapPin,
 } from 'lucide-react';
 import { ALL_CUSTOM_DESIGNS, JEWELLERY_FILTER_TYPES } from '../data/jewelleryData';
 import type { CustomJewelleryItem } from '../data/jewelleryData';
@@ -108,7 +109,13 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
       description: item.description || `Bespoke jewellery customisation sculpted in ${item.goldPurity} featuring ${item.gemstone}. Traditional karigari handcrafted over ${item.karigariHours || 250} man-hours.`,
       image: item.image,
       goldPurity: item.goldPurity,
+      gemstones: item.gemstone,
       price: item.priceEst,
+      tags: item.tags,
+      karigariHours: item.karigariHours,
+      weightGrams: item.weightGrams,
+      craft: item.craft,
+      category: item.categoryLabel,
     });
   };
 
@@ -121,7 +128,13 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
       description: item.description || `${item.craft} in ${item.goldPurity}`,
       image: item.image,
       goldPurity: item.goldPurity,
+      gemstones: item.gemstone,
       price: item.priceEst,
+      tags: item.tags,
+      karigariHours: item.karigariHours,
+      weightGrams: item.weightGrams,
+      craft: item.craft,
+      category: item.categoryLabel,
     });
     setAddedToast(`Added "${item.title}" to bag`);
     setTimeout(() => setAddedToast(null), 3200);
@@ -136,7 +149,13 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
       description: item.description || `${item.craft} in ${item.goldPurity}`,
       image: item.image,
       goldPurity: item.goldPurity,
+      gemstones: item.gemstone,
       price: item.priceEst,
+      tags: item.tags,
+      karigariHours: item.karigariHours,
+      weightGrams: item.weightGrams,
+      craft: item.craft,
+      category: item.categoryLabel,
     });
   };
 
@@ -379,12 +398,17 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
           {filteredProducts.map((item) => {
             const isWishlisted = wishlistTitles.includes(item.title);
+            const numPrice = parseInt((item.priceEst || '0').replace(/[^0-9]/g, '')) || 0;
+            const mrpVal = numPrice > 0 ? `₹${Math.round(numPrice * 1.07).toLocaleString('en-IN')}` : null;
+            const savingsVal = numPrice > 0 ? `₹${Math.round(numPrice * 0.07).toLocaleString('en-IN')}` : null;
+            const grossNum = parseFloat((item.weightGrams || '45g').replace(/[^0-9.]/g, '')) || 45;
+            const netWeightVal = `${(grossNum * 0.82).toFixed(1)}g`;
 
             return (
               <div
                 key={item.id}
                 onClick={() => handleProductCardClick(item)}
-                className="group bg-[#FFF7ED] rounded-xl overflow-hidden border border-[#E9D1B5] hover:border-[#D8B477] transition-all duration-300 hover:shadow-[0_10px_28px_rgba(42,22,18,0.14)] hover:-translate-y-1 flex flex-col justify-between cursor-pointer"
+                className="group bg-[#FFF7ED] rounded-xl overflow-hidden border border-[#E9D1B5] hover:border-[#B88A3B] transition-all duration-300 hover:shadow-[0_12px_32px_rgba(42,22,18,0.16)] hover:-translate-y-1 flex flex-col justify-between cursor-pointer relative"
               >
                 {/* Image & Badges */}
                 <div className="relative aspect-square w-full bg-[#1E0E0B] overflow-hidden">
@@ -396,16 +420,24 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                   />
 
                   {/* Gradient Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 pointer-events-none" />
 
                   {/* Top Badges */}
-                  <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 z-10">
+                  <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
+                    {/* BIS Hallmark Badge */}
+                    <span className="text-[8.5px] uppercase tracking-wider font-sans font-bold bg-[#D8B477] text-[#1E0E0B] px-2 py-0.5 rounded shadow-md flex items-center gap-1">
+                      <ShieldCheck className="w-3 h-3 text-[#1E0E0B]" />
+                      <span>BIS {item.goldPurity?.includes('18K') ? '750' : '916'} Hallmarked</span>
+                    </span>
+
+                    {/* Category Pill */}
                     <span className="text-[9px] uppercase tracking-wider font-sans font-semibold bg-[#4A0712]/90 text-[#FFF7ED] px-2 py-0.5 rounded border border-[#B88A3B]/40 shadow-sm backdrop-blur-sm">
                       {item.categoryLabel || 'Bespoke'}
                     </span>
+
                     {item.featured && (
-                      <span className="text-[8.5px] uppercase tracking-wider font-sans font-semibold bg-[#B88A3B]/90 text-[#1E0E0B] px-2 py-0.5 rounded shadow-sm backdrop-blur-sm flex items-center gap-1">
-                        <Sparkles className="w-2.5 h-2.5" />
+                      <span className="text-[8px] uppercase tracking-wider font-sans font-bold bg-[#8F6623]/90 text-[#FFF7ED] px-2 py-0.5 rounded shadow-sm backdrop-blur-sm flex items-center gap-1">
+                        <Sparkles className="w-2.5 h-2.5 text-[#D8B477]" />
                         <span>Masterpiece</span>
                       </span>
                     )}
@@ -418,7 +450,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                       aria-label="Wishlist"
                       className={`p-2 rounded-full backdrop-blur-md transition-all cursor-pointer shadow-md ${
                         isWishlisted
-                          ? 'bg-[#4A0712] text-[#D8B477] scale-110'
+                          ? 'bg-[#4A0712] text-[#D8B477] scale-110 shadow-lg'
                           : 'bg-black/40 text-white hover:bg-[#4A0712] hover:text-[#FFF7ED]'
                       }`}
                     >
@@ -426,56 +458,76 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                     </button>
                   </div>
 
-                  {/* Karigari Hours & Purity Ribbon at Bottom of Image */}
+                  {/* Salon Try-On & Purity Ribbon at Bottom of Image */}
                   <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-[9px] text-[#E8D1A7] pointer-events-none">
-                    <span className="bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm border border-white/10 flex items-center gap-1 font-mono">
+                    <span className="bg-black/70 px-2 py-0.5 rounded backdrop-blur-sm border border-white/10 flex items-center gap-1 font-mono text-[8.5px]">
                       <Clock className="w-2.5 h-2.5 text-[#D8B477]" />
                       <span>{item.karigariHours || 240}h Karigari</span>
                     </span>
 
-                    <span className="bg-[#4A0712]/80 px-2 py-0.5 rounded backdrop-blur-sm border border-[#B88A3B]/30 font-medium">
-                      {item.goldPurity}
+                    <span className="bg-[#4A0712]/90 px-2 py-0.5 rounded backdrop-blur-sm border border-[#B88A3B]/30 font-medium text-[8.5px] text-[#D8B477] flex items-center gap-1">
+                      <MapPin className="w-2.5 h-2.5" />
+                      <span>Salon Try-On</span>
                     </span>
                   </div>
                 </div>
 
                 {/* Product Information */}
                 <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3">
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[9.5px] uppercase tracking-wider font-sans font-bold text-[#8F6623]">
+                  <div className="space-y-1.5">
+                    {/* Lineage & Weight Specs */}
+                    <div className="flex items-center justify-between text-[9px] text-[#8F6623]">
+                      <span className="uppercase tracking-wider font-sans font-bold">
                         {item.craft}
                       </span>
-                      {item.weightGrams && (
-                        <span className="text-[9px] font-mono text-[#2A1612]/60">
-                          {item.weightGrams}
-                        </span>
-                      )}
+                      <span className="font-mono bg-[#FAE7D8] px-1.5 py-0.5 rounded text-[#4A0712] font-semibold border border-[#E9D1B5]">
+                        Net Gold: {netWeightVal}
+                      </span>
                     </div>
 
+                    {/* Title */}
                     <h4 className="font-serif text-sm sm:text-base font-bold text-[#2A1612] line-clamp-1 group-hover:text-[#4A0712] transition-colors">
                       {item.title}
                     </h4>
 
-                    <p className="text-[11px] text-[#8F6623] line-clamp-1 italic font-serif">
-                      {item.gemstone}
+                    {/* Gemstones */}
+                    <p className="text-[11px] text-[#8F6623] line-clamp-1 italic font-serif flex items-center gap-1">
+                      <Gem className="w-3 h-3 text-[#B88A3B] flex-shrink-0" />
+                      <span>{item.gemstone}</span>
                     </p>
 
-                    <p className="text-[11px] text-[#2A1612]/70 line-clamp-2 leading-relaxed pt-1">
+                    {/* Net weight billing guarantee badge */}
+                    <div className="flex items-center gap-1.5 text-[9.5px] text-[#2A1612]/75 pt-0.5">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-700 flex-shrink-0" />
+                      <span className="font-sans">100% Net Weight Billing (Zero Stone Loss)</span>
+                    </div>
+
+                    <p className="text-[11px] text-[#2A1612]/70 line-clamp-2 leading-relaxed pt-0.5 font-light">
                       {item.description}
                     </p>
                   </div>
 
                   {/* Pricing and Action Buttons */}
-                  <div className="pt-2 border-t border-[#E9D1B5]/80 space-y-2.5">
-                    <div className="flex items-baseline justify-between">
+                  <div className="pt-2.5 border-t border-[#E9D1B5]/80 space-y-2.5">
+                    {/* Tanishq-style MRP Anchor & Atelier Est */}
+                    <div className="flex items-end justify-between">
                       <div>
-                        <span className="text-[9px] uppercase tracking-wider text-[#8F6623] block">
-                          Atelier Est.
-                        </span>
-                        <span className="font-serif text-sm sm:text-base font-bold text-[#4A0712]">
-                          {item.priceEst}
-                        </span>
+                        {mrpVal && (
+                          <div className="flex items-center gap-1.5 text-[10px] text-[#2A1612]/50">
+                            <span className="line-through">{mrpVal}</span>
+                            <span className="text-[9px] font-semibold text-emerald-800 bg-emerald-100/80 px-1 py-0.2 rounded font-sans">
+                              Save {savingsVal}
+                            </span>
+                          </div>
+                        )}
+                        <div className="flex items-baseline gap-1">
+                          <span className="font-serif text-base sm:text-lg font-bold text-[#4A0712]">
+                            {item.priceEst}
+                          </span>
+                          <span className="text-[8.5px] text-[#8F6623] font-sans">
+                            (Incl. 3% GST)
+                          </span>
+                        </div>
                       </div>
 
                       <button
@@ -484,22 +536,24 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                           onOpenCustomStudio(item);
                         }}
                         className="text-[10px] font-sans font-semibold text-[#8F6623] hover:text-[#4A0712] underline flex items-center gap-1 cursor-pointer"
+                        title="Modify Karigari or Gemstones"
                       >
                         <Hammer className="w-3 h-3" />
                         <span>Customise</span>
                       </button>
                     </div>
 
+                    {/* Action Buttons */}
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           handleProductCardClick(item);
                         }}
-                        className="w-full text-[10.5px] font-sans font-semibold uppercase tracking-wider py-2 px-2 bg-[#FAE7D8] hover:bg-[#E9D1B5] text-[#2A1612] rounded flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                        className="w-full text-[10.5px] font-sans font-semibold uppercase tracking-wider py-2 px-2 bg-[#FAE7D8] hover:bg-[#E9D1B5] text-[#2A1612] rounded flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-[#E9D1B5]"
                       >
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>Preview</span>
+                        <Eye className="w-3.5 h-3.5 text-[#4A0712]" />
+                        <span>Quick View</span>
                       </button>
 
                       <button
@@ -507,7 +561,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                         className="w-full text-[10.5px] font-sans font-semibold uppercase tracking-wider py-2 px-2 bg-[#4A0712] hover:bg-[#35050D] text-[#FFF7ED] rounded flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-sm active:scale-95"
                       >
                         <ShoppingBag className="w-3.5 h-3.5 text-[#D8B477]" />
-                        <span>Add Bag</span>
+                        <span>Add to Bag</span>
                       </button>
                     </div>
                   </div>
