@@ -24,6 +24,11 @@ import { RitualsModal } from './components/RitualsModal';
 import { ShopByTypeModal } from './components/ShopByTypeModal';
 import { InfoModal } from './components/InfoModal';
 import { CustomDesignsPage } from './components/CustomDesignsPage';
+import { GoldRateModal } from './components/GoldRateModal';
+import { GoldExchangeModal } from './components/GoldExchangeModal';
+import { SavingsSchemeModal } from './components/SavingsSchemeModal';
+import { HkPromiseSection } from './components/HkPromiseSection';
+import { RivaahBridalSection } from './components/RivaahBridalSection';
 import { CATEGORIES, ALL_CUSTOM_DESIGNS } from './data/jewelleryData';
 import type { CategoryItem, StoryItem, CustomJewelleryItem } from './data/jewelleryData';
 
@@ -77,6 +82,9 @@ export const App: React.FC = () => {
   const [isCustomStudioOpen, setIsCustomStudioOpen] = useState(false);
   const [isRitualsOpen, setIsRitualsOpen] = useState(false);
   const [isShopByTypeOpen, setIsShopByTypeOpen] = useState(false);
+  const [isGoldRateOpen, setIsGoldRateOpen] = useState(false);
+  const [isGoldExchangeOpen, setIsGoldExchangeOpen] = useState(false);
+  const [isSavingsOpen, setIsSavingsOpen] = useState(false);
   const [infoTopic, setInfoTopic] = useState<string | null>(null);
 
   const [selectedProduct, setSelectedProduct] = useState<ModalProductDetails | null>(null);
@@ -310,6 +318,32 @@ export const App: React.FC = () => {
       setIsRitualsOpen(true);
     } else if (id === 'for-you' || id === 'types') {
       setIsShopByTypeOpen(true);
+    } else if (id === 'gold-rate') {
+      setIsGoldRateOpen(true);
+    } else if (id === 'gold-exchange') {
+      setIsGoldExchangeOpen(true);
+    } else if (id === 'savings-scheme') {
+      setIsSavingsOpen(true);
+    } else if (id === 'bridal-rivaah') {
+      if (currentPage !== 'home') {
+        setCurrentPage('home');
+        setTimeout(() => {
+          document.getElementById('bridal-rivaah')?.scrollIntoView({ behavior: 'smooth' });
+        }, 80);
+      } else {
+        document.getElementById('bridal-rivaah')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else if (id === 'hk-promise') {
+      if (currentPage !== 'home') {
+        setCurrentPage('home');
+        setTimeout(() => {
+          document.getElementById('hk-promise')?.scrollIntoView({ behavior: 'smooth' });
+        }, 80);
+      } else {
+        document.getElementById('hk-promise')?.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else if (id === 'mangalsutra' || id === 'dailywear' || id === 'coins' || id === 'mens') {
+      setIsShopByTypeOpen(true);
     } else {
       if (currentPage !== 'home') {
         setCurrentPage('home');
@@ -338,7 +372,11 @@ export const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FAE7D8] text-[#2A1612] flex flex-col selection:bg-[#4A0712] selection:text-[#FFF7ED] pb-16 md:pb-0">
       {/* 1. Top Announcement Bar */}
-      <AnnouncementBar />
+      <AnnouncementBar
+        onOpenGoldRate={() => setIsGoldRateOpen(true)}
+        onOpenExchange={() => setIsGoldExchangeOpen(true)}
+        onOpenSavings={() => setIsSavingsOpen(true)}
+      />
 
       {/* 2. Luxury Sticky Header */}
       <Header
@@ -381,12 +419,29 @@ export const App: React.FC = () => {
               <CategoryCarousel onSelectCategory={handleSelectCategory} />
             </div>
 
-            {/* 6. Heritage Story Section */}
+            {/* 6. Tanishq-Style Rivaah: Brides of India Trousseau Section */}
+            <div id="bridal-rivaah" className="scroll-reveal">
+              <RivaahBridalSection
+                onSelectProduct={(product) => setSelectedProduct(product)}
+                onViewAllBridal={() => navigateTo('custom-designs')}
+              />
+            </div>
+
+            {/* 7. The HK Jewellers 10 Promises (Tanishq Trust Benchmark) */}
+            <div id="hk-promise" className="scroll-reveal">
+              <HkPromiseSection
+                onOpenGoldRate={() => setIsGoldRateOpen(true)}
+                onOpenExchange={() => setIsGoldExchangeOpen(true)}
+                onOpenSavings={() => setIsSavingsOpen(true)}
+              />
+            </div>
+
+            {/* 8. Heritage Story Section */}
             <div id="story" className="scroll-reveal">
               <StorySection onSelectStory={handleSelectStory} />
             </div>
 
-            {/* 7. Jewellery Customisation Section */}
+            {/* 9. Jewellery Customisation Section */}
             <div id="customisation" className="scroll-reveal">
               <CustomisationSection
                 onSelectDesign={handleSelectCustomDesign}
@@ -394,7 +449,7 @@ export const App: React.FC = () => {
               />
             </div>
 
-            {/* 8. Divine Idols Section */}
+            {/* 10. Divine Idols Section */}
             <div id="divine-idols" className="scroll-reveal">
               <DivineIdolsBanner onExploreDivine={handleExploreDivine} />
             </div>
@@ -544,6 +599,36 @@ export const App: React.FC = () => {
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         onSelectItem={(item) => setSelectedProduct(item)}
+      />
+
+      {/* Live Bullion Rates & Transparent Price Breakup Modal (Tanishq Benchmark) */}
+      <GoldRateModal
+        isOpen={isGoldRateOpen}
+        onClose={() => setIsGoldRateOpen(false)}
+        onOpenExchange={() => {
+          setIsGoldRateOpen(false);
+          setIsGoldExchangeOpen(true);
+        }}
+      />
+
+      {/* 100% Old Gold Exchange Modal with Karatmeter Calculator */}
+      <GoldExchangeModal
+        isOpen={isGoldExchangeOpen}
+        onClose={() => setIsGoldExchangeOpen(false)}
+        onExploreDesigns={() => {
+          setIsGoldExchangeOpen(false);
+          navigateTo('custom-designs');
+        }}
+      />
+
+      {/* Swarn Samriddhi Savings Plan Modal (Golden Harvest equivalent) */}
+      <SavingsSchemeModal
+        isOpen={isSavingsOpen}
+        onClose={() => setIsSavingsOpen(false)}
+        onExploreDesigns={() => {
+          setIsSavingsOpen(false);
+          navigateTo('custom-designs');
+        }}
       />
     </div>
   );

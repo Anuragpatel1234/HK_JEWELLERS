@@ -15,6 +15,7 @@ import {
   X,
   Layers,
   ChevronRight,
+  RefreshCw,
 } from 'lucide-react';
 import { ALL_CUSTOM_DESIGNS, JEWELLERY_FILTER_TYPES } from '../data/jewelleryData';
 import type { CustomJewelleryItem } from '../data/jewelleryData';
@@ -355,6 +356,28 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                 <option value="price-asc">Price: Low to High</option>
               </select>
             </div>
+          </div>
+        </div>
+
+        {/* Tanishq Trust & Gold Exchange Prompt Banner */}
+        <div className="bg-gradient-to-r from-[#FFF7ED] via-[#FAF3EB] to-[#FFF7ED] border border-[#B88A3B]/50 rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-[#4A0712] text-[#D8B477] flex items-center justify-center shrink-0">
+              <RefreshCw className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-xs font-serif font-bold text-[#2A1612]">
+                100% Exchange Value on Old Gold from Any Jeweller
+              </div>
+              <div className="text-[11px] text-[#8F6623]">
+                Zero stone deduction · Karatmeter non-destructive testing in Ahmedabad showroom
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-semibold text-[#4A0712] bg-[#4A0712]/5 px-2.5 py-1 rounded-full border border-[#4A0712]/15">
+              Live 22K Gold: ₹6,985/g · 100% BIS 916
+            </span>
           </div>
         </div>
 

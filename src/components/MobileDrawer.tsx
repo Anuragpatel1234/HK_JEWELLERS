@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Search, User, Heart, ShoppingBag, Phone, Mail, MapPin } from 'lucide-react';
+import { X, Search, User, Heart, ShoppingBag, Phone, Mail, MapPin, TrendingUp, RefreshCw, Sparkles, ShieldCheck } from 'lucide-react';
 import { OrnamentalFlourish } from './OrnamentalDivider';
 
 interface MobileDrawerProps {
@@ -16,14 +16,21 @@ interface MobileDrawerProps {
 }
 
 const MENU_ITEMS = [
-  { id: 'story', label: 'OUR STORY' },
-  { id: 'rituals', label: 'OUR RITUALS' },
-  { id: 'jewellery', label: 'JEWELLERY' },
-  { id: 'collections', label: 'COLLECTIONS' },
-  { id: 'customisation', label: 'CUSTOMISATION' },
-  { id: 'for-you', label: 'JUST FOR YOU' },
-  { id: 'types', label: 'SHOP BY TYPE' },
-  { id: 'divine-idols', label: 'DIVINE IDOLS' },
+  { id: 'bridal-rivaah', label: 'BRIDAL RIVAAH', badge: 'Hot' },
+  { id: 'jewellery', label: 'JEWELLERY & VAULT' },
+  { id: 'mangalsutra', label: 'MANGALSUTRAS' },
+  { id: 'dailywear', label: 'DAILY WEAR (MIA STYLE)' },
+  { id: 'coins', label: 'GOLD COINS (24K BULLION)' },
+  { id: 'mens', label: "MEN'S COLLECTION" },
+  { id: 'collections', label: 'CURATED COLLECTIONS' },
+  { id: 'customisation', label: 'BESPOKE CUSTOMISATION' },
+  { id: 'gold-rate', label: 'LIVE GOLD RATE & BREAKUP', isSpecial: true, icon: TrendingUp },
+  { id: 'gold-exchange', label: '100% OLD GOLD EXCHANGE', isSpecial: true, icon: RefreshCw },
+  { id: 'savings-scheme', label: 'SWARN SAMRIDDHI SAVINGS', isSpecial: true, icon: Sparkles },
+  { id: 'hk-promise', label: 'THE HK PROMISE (10 PILLARS)', isSpecial: true, icon: ShieldCheck },
+  { id: 'rituals', label: 'OUR HERITAGE RITUALS' },
+  { id: 'story', label: 'OUR 40-YEAR STORY' },
+  { id: 'divine-idols', label: 'DIVINE SACRED IDOLS' },
 ];
 
 export const MobileDrawer: React.FC<MobileDrawerProps> = ({
@@ -52,7 +59,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
       <div className="relative w-full max-w-xs sm:max-w-sm bg-[#FAF3EB] text-[#2A1612] h-full shadow-2xl flex flex-col justify-between overflow-y-auto border-r border-[#E9D1B5] z-10 animate-in slide-in-from-left duration-300">
         <div>
           {/* Drawer Header */}
-          <div className="flex items-center justify-between p-4 border-b border-[#E9D1B5]">
+          <div className="flex items-center justify-between p-4 border-b border-[#E9D1B5] bg-[#FFF7ED]">
             <div className="flex items-center gap-2">
               <span className="font-serif text-xl font-bold text-[#4A0712]">HK Jewellers</span>
               <span className="text-[10px] text-[#B88A3B] font-serif italic">Est. 1994</span>
@@ -67,7 +74,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           </div>
 
           {/* Quick Actions Bar */}
-          <div className="grid grid-cols-4 border-b border-[#E9D1B5] text-[#2A1612] py-2 px-1 text-center text-xs">
+          <div className="grid grid-cols-4 border-b border-[#E9D1B5] text-[#2A1612] py-2 px-1 text-center text-xs bg-white/70">
             <button
               onClick={() => { onClose(); onOpenSearch(); }}
               className="flex flex-col items-center gap-1 py-1 hover:text-[#4A0712] cursor-pointer"
@@ -99,20 +106,38 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           </div>
 
           {/* Navigation Links */}
-          <nav className="p-4 space-y-1">
-            {MENU_ITEMS.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  onClose();
-                  onSelectNavItem(item.id);
-                }}
-                className="w-full flex items-center justify-between py-2.5 px-3 rounded text-xs font-semibold tracking-[0.18em] uppercase text-[#2A1612] hover:bg-[#FAE7D8] hover:text-[#4A0712] transition-colors border-b border-[#E9D1B5]/40 text-left cursor-pointer"
-              >
-                <span>{item.label}</span>
-                <span className="text-[#B88A3B] text-xs">›</span>
-              </button>
-            ))}
+          <nav className="p-3 space-y-1">
+            {MENU_ITEMS.map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    onClose();
+                    onSelectNavItem(item.id);
+                  }}
+                  className={`w-full flex items-center justify-between py-2 px-3 rounded text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors border-b border-[#E9D1B5]/30 text-left cursor-pointer ${
+                    item.isSpecial
+                      ? 'bg-[#FFF7ED] text-[#4A0712] border-l-2 border-l-[#4A0712] hover:bg-[#FAE7D8]'
+                      : 'text-[#2A1612] hover:bg-[#FAE7D8] hover:text-[#4A0712]'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    {Icon && <Icon className="w-3.5 h-3.5 text-[#B88A3B]" />}
+                    <span>{item.label}</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    {item.badge && (
+                      <span className="text-[8px] bg-[#4A0712] text-[#FFF7ED] font-bold px-1.5 py-0.2 rounded-full uppercase">
+                        {item.badge}
+                      </span>
+                    )}
+                    <span className="text-[#B88A3B] text-xs">›</span>
+                  </div>
+                </button>
+              );
+            })}
           </nav>
 
           <div className="px-6 py-2">
