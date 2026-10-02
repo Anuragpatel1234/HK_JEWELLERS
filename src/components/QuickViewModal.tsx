@@ -191,15 +191,15 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
               </div>
 
               {/* Price Banner with Net-Weight Transparency */}
-              <div className="bg-[#FFF7ED] p-3.5 sm:p-4 rounded-xl border border-[#E9D1B5] space-y-2">
+              <div className="bg-[#FCF9F5] p-3.5 sm:p-4 rounded-2xl border border-[#EAE0D2] space-y-2">
                 <div className="flex items-baseline gap-3">
-                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#4A0712]">
+                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#2A1612]">
                     {product.price || '₹3,50,000'}
                   </span>
-                  <span className="text-sm text-[#2A1612]/50 line-through">
+                  <span className="text-sm text-[#8A7E76] line-through">
                     ₹{originalMrp.toLocaleString('en-IN')}
                   </span>
-                  <span className="text-[10px] font-sans font-bold bg-[#E6C687]/40 text-[#4A0712] px-2 py-0.5 rounded">
+                  <span className="text-[10.5px] sm:text-[11px] font-sans font-semibold bg-[#E8F8F0] border border-[#BBE7D0] text-[#166534] px-2.5 py-0.5 rounded-md">
                     Save ₹{(originalMrp - rawPrice).toLocaleString('en-IN')}
                   </span>
                 </div>
@@ -214,7 +214,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                     onClick={() => setShowPriceBreakdown(!showPriceBreakdown)}
                     className="flex items-center justify-between w-full text-xs font-semibold text-[#8F6623] hover:text-[#4A0712] cursor-pointer"
                   >
-                    <span>{showPriceBreakdown ? 'Hide Transparent Price Breakdown' : 'View Transparent Price Breakdown (Tanishq Standard)'}</span>
+                    <span>{showPriceBreakdown ? 'Hide Transparent Price Breakdown' : 'View Transparent Price Breakdown'}</span>
                     {showPriceBreakdown ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
 
@@ -366,19 +366,19 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
               <div className="pt-2 flex items-center gap-3">
                 <button
                   onClick={() => onAddToCart(product)}
-                  className="flex-1 bg-gradient-to-r from-[#D8B477] to-[#B88A3B] hover:from-[#F0D5A8] hover:to-[#D8B477] text-[#2A1612] font-sans text-xs tracking-[0.16em] uppercase font-bold py-3.5 px-4 rounded-lg border border-[#B88A3B] transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98] cursor-pointer"
+                  className="flex-1 bg-[#3B0810] hover:bg-[#2A050C] text-white font-sans text-xs tracking-[0.16em] uppercase font-bold py-3.5 px-4 rounded-xl border border-[#3B0810] transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98] cursor-pointer"
                 >
-                  <ShoppingBag className="w-4 h-4 text-[#2A1612]" />
-                  <span>Add To Bag</span>
+                  <ShoppingBag className="w-4 h-4 text-[#D8B477]" />
+                  <span>ADD TO BAG</span>
                 </button>
 
                 <button
                   onClick={() => onToggleWishlist(product)}
                   aria-label="Wishlist Item"
-                  className={`p-3.5 rounded-lg border transition-all cursor-pointer shadow-sm ${
+                  className={`p-3.5 rounded-xl border transition-all cursor-pointer shadow-sm ${
                     isWishlisted
-                      ? 'bg-[#4A0712] border-[#4A0712] text-[#D8B477]'
-                      : 'bg-[#FAE7D8] border-[#B88A3B]/40 hover:border-[#4A0712] text-[#4A0712]'
+                      ? 'bg-[#3B0810] border-[#3B0810] text-[#D8B477]'
+                      : 'bg-[#FAF4EC] border-[#DFD3C3] hover:border-[#3B0810] text-[#3B0810]'
                   }`}
                   title="Save to Wishlist"
                 >

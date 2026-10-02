@@ -7,7 +7,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
   return (
-    <section className="relative w-full overflow-visible bg-[#FAE7D8]">
+    <section className="relative w-full overflow-visible bg-[#FAF5ED]">
       {/* Full-Bleed Palace Architectural Background */}
       <div className="absolute -top-20 sm:-top-28 md:-top-36 lg:-top-44 bottom-0 left-0 right-0 z-0 overflow-visible pointer-events-none">
         <img
@@ -17,7 +17,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
           className="w-full h-full object-cover object-bottom transition-opacity duration-500"
         />
         {/* Soft subtle tint overlay for harmonious contrast */}
-        <div className="absolute inset-0 bg-[#FAE7D8]/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-[#FAF5ED]/10 pointer-events-none" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 md:px-8">
@@ -70,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
               <div className="mt-3.5 sm:mt-6">
                 <button
                   onClick={onExploreClick}
-                  className="inline-flex items-center justify-center bg-[#4A0712] hover:bg-[#35050D] text-[#FFF7ED] font-sans text-[10.5px] sm:text-xs font-semibold tracking-[0.22em] py-2.5 sm:py-3.5 px-7 sm:px-10 rounded-[2px] border border-[#B88A3B]/60 shadow-[0_6px_22px_rgba(74,7,18,0.32)] hover:shadow-[0_8px_28px_rgba(184,138,59,0.4)] transition-all duration-300 active:scale-[0.98] uppercase cursor-pointer"
+                  className="inline-flex items-center justify-center bg-[#3B0810] hover:bg-[#2A050C] text-white font-sans text-xs font-bold tracking-[0.2em] py-3 px-8 sm:px-10 rounded-xl border border-[#B88A3B]/60 shadow-[0_6px_22px_rgba(59,8,16,0.32)] hover:shadow-[0_8px_28px_rgba(184,138,59,0.4)] transition-all duration-300 active:scale-[0.98] uppercase cursor-pointer"
                 >
                   Explore Collection
                 </button>

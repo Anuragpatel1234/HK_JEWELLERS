@@ -64,18 +64,15 @@ export const HkPromiseSection: React.FC<HkPromiseSectionProps> = ({
   onOpenSavings,
 }) => {
   return (
-    <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#FAF3EB] border-t border-b border-[#E9D1B5]/60 relative overflow-hidden">
+    <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#FAF5ED] border-t border-b border-[#EAE0D2]/60 relative overflow-hidden">
       {/* Decorative subtle background aura */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#B88A3B]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#4A0712]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#3B0810]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 space-y-12">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#4A0712]/10 border border-[#4A0712]/20 text-[#4A0712] text-xs font-semibold uppercase tracking-widest">
-            <Award className="w-3.5 h-3.5" />
-            The Tanishq-Grade Standard of Trust
-          </div>
+
           <h2 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold text-[#2A1612] tracking-tight">
             The HK Jewellers Promise
           </h2>
@@ -89,13 +86,13 @@ export const HkPromiseSection: React.FC<HkPromiseSectionProps> = ({
           {onOpenGoldRate && (
             <button
               onClick={onOpenGoldRate}
-              className="p-3.5 bg-[#FFF7ED] hover:bg-[#FAF3EB] border border-[#B88A3B]/50 rounded-xl text-left transition-all hover:shadow-md flex items-center justify-between group cursor-pointer"
+              className="p-3.5 bg-[#FCF9F5] hover:bg-[#FAF4EC] border border-[#EAE0D2] hover:border-[#B88A3B] rounded-xl text-left transition-all hover:shadow-md flex items-center justify-between group cursor-pointer"
             >
               <div>
                 <span className="text-[10px] text-[#8F6623] uppercase font-bold tracking-wider">
                   Live Rate Transparency
                 </span>
-                <div className="font-serif font-bold text-sm text-[#2A1612] group-hover:text-[#4A0712]">
+                <div className="font-serif font-bold text-sm text-[#2A1612] group-hover:text-[#3B0810]">
                   Check Today's Gold Rates &rarr;
                 </div>
               </div>
@@ -106,13 +103,13 @@ export const HkPromiseSection: React.FC<HkPromiseSectionProps> = ({
           {onOpenExchange && (
             <button
               onClick={onOpenExchange}
-              className="p-3.5 bg-[#FFF7ED] hover:bg-[#FAF3EB] border border-[#B88A3B]/50 rounded-xl text-left transition-all hover:shadow-md flex items-center justify-between group cursor-pointer"
+              className="p-3.5 bg-[#FCF9F5] hover:bg-[#FAF4EC] border border-[#EAE0D2] hover:border-[#B88A3B] rounded-xl text-left transition-all hover:shadow-md flex items-center justify-between group cursor-pointer"
             >
               <div>
                 <span className="text-[10px] text-[#8F6623] uppercase font-bold tracking-wider">
                   Old Gold Upgrades
                 </span>
-                <div className="font-serif font-bold text-sm text-[#2A1612] group-hover:text-[#4A0712]">
+                <div className="font-serif font-bold text-sm text-[#2A1612] group-hover:text-[#3B0810]">
                   100% Exchange Calculator &rarr;
                 </div>
               </div>
@@ -123,13 +120,13 @@ export const HkPromiseSection: React.FC<HkPromiseSectionProps> = ({
           {onOpenSavings && (
             <button
               onClick={onOpenSavings}
-              className="p-3.5 bg-[#FFF7ED] hover:bg-[#FAF3EB] border border-[#B88A3B]/50 rounded-xl text-left transition-all hover:shadow-md flex items-center justify-between group cursor-pointer"
+              className="p-3.5 bg-[#FCF9F5] hover:bg-[#FAF4EC] border border-[#EAE0D2] hover:border-[#B88A3B] rounded-xl text-left transition-all hover:shadow-md flex items-center justify-between group cursor-pointer"
             >
               <div>
                 <span className="text-[10px] text-[#8F6623] uppercase font-bold tracking-wider">
                   Monthly Savings Plan
                 </span>
-                <div className="font-serif font-bold text-sm text-[#2A1612] group-hover:text-[#4A0712]">
+                <div className="font-serif font-bold text-sm text-[#2A1612] group-hover:text-[#3B0810]">
                   Swarn Samriddhi (75% Bonus) &rarr;
                 </div>
               </div>
@@ -145,10 +142,10 @@ export const HkPromiseSection: React.FC<HkPromiseSectionProps> = ({
             return (
               <div
                 key={index}
-                className="bg-white/90 backdrop-blur-sm border border-[#E9D1B5] hover:border-[#B88A3B] rounded-xl p-5 sm:p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col justify-between"
+                className="bg-[#FCF9F5] border border-[#EAE0D2] hover:border-[#B88A3B] rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col justify-between"
               >
                 <div className="space-y-3">
-                  <div className="w-10 h-10 rounded-full bg-[#4A0712]/10 border border-[#4A0712]/20 flex items-center justify-center text-[#4A0712]">
+                  <div className="w-10 h-10 rounded-xl bg-[#3B0810]/10 border border-[#3B0810]/15 flex items-center justify-center text-[#3B0810]">
                     <Icon className="w-5 h-5 stroke-[1.6]" />
                   </div>
                   <div>
@@ -163,7 +160,7 @@ export const HkPromiseSection: React.FC<HkPromiseSectionProps> = ({
                     {promise.description}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-[#E9D1B5]/40 mt-4 flex items-center gap-1.5 text-[11px] text-[#1B5E20] font-semibold">
+                <div className="pt-4 border-t border-[#EAE0D2]/60 mt-4 flex items-center gap-1.5 text-[11px] text-[#166534] font-semibold">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   Guaranteed by HK Jewellers
                 </div>

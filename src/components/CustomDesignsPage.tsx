@@ -8,6 +8,7 @@ import {
   ShoppingBag,
   Eye,
   Hammer,
+  Pencil,
   ShieldCheck,
   Clock,
   Gem,
@@ -160,17 +161,17 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
   };
 
   return (
-    <div className="w-full bg-[#FAE7D8] min-h-screen text-[#2A1612]">
+    <div className="w-full bg-[#FAF5ED] min-h-screen text-[#2A1612]">
       {/* Toast Notification */}
       {addedToast && (
-        <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 bg-[#4A0712] text-[#FFF7ED] px-4 py-3 rounded-lg shadow-xl border border-[#D8B477]/40 flex items-center gap-3 animate-in slide-in-from-bottom duration-300">
+        <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 bg-[#3B0810] text-[#FFF7ED] px-4 py-3 rounded-xl shadow-xl border border-[#D8B477]/40 flex items-center gap-3 animate-in slide-in-from-bottom duration-300">
           <CheckCircle2 className="w-5 h-5 text-[#D8B477] flex-shrink-0" />
           <span className="text-xs sm:text-sm font-sans font-medium">{addedToast}</span>
         </div>
       )}
 
       {/* Top Breadcrumb & Back Navigation Bar */}
-      <div className="border-b border-[#E9D1B5] bg-[#FFF7ED]/80 backdrop-blur-sm sticky top-[57px] sm:top-[65px] z-30">
+      <div className="border-b border-[#EAE0D2] bg-[#FAF5ED]/90 backdrop-blur-sm sticky top-[57px] sm:top-[65px] z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs text-[#8F6623]">
             <button
@@ -210,11 +211,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-48 bg-[#B88A3B]/20 blur-[100px] pointer-events-none rounded-full" />
 
         <div className="max-w-5xl mx-auto text-center relative z-10 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B88A3B]/15 border border-[#B88A3B]/40 text-[#D8B477] text-[10px] sm:text-xs font-sans tracking-[0.2em] uppercase font-semibold">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>The HK Bespoke Karigari Archive</span>
-            <Sparkles className="w-3.5 h-3.5" />
-          </div>
+
 
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#FFF7ED] font-bold tracking-tight">
             Imperial Custom Jewellery Designs
@@ -284,8 +281,8 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                   onClick={() => setSelectedCategory(type.id)}
                   className={`px-3.5 py-2 text-xs font-sans rounded-full border transition-all whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                     isSelected
-                      ? 'bg-[#4A0712] text-[#FFF7ED] border-[#4A0712] font-semibold shadow-md'
-                      : 'bg-[#FFF7ED] text-[#2A1612] border-[#E9D1B5] hover:border-[#B88A3B] hover:bg-[#FAE7D8]'
+                      ? 'bg-[#3B0810] text-[#FFF7ED] border-[#3B0810] font-semibold shadow-md'
+                      : 'bg-[#FCF9F5] text-[#2A1612] border-[#EAE0D2] hover:border-[#B88A3B] hover:bg-[#FAF5ED]'
                   }`}
                 >
                   <span>{type.label}</span>
@@ -293,7 +290,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                     className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
                       isSelected
                         ? 'bg-[#B88A3B]/40 text-[#FFF7ED]'
-                        : 'bg-[#E9D1B5] text-[#2A1612]/80'
+                        : 'bg-[#EAE0D2] text-[#2A1612]/80'
                     }`}
                   >
                     {count}
@@ -305,7 +302,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
         </div>
 
         {/* Search, Purity & Sorting Control Bar */}
-        <div className="bg-[#FFF7ED] p-3.5 sm:p-4 rounded-xl border border-[#E9D1B5] shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="bg-[#FCF9F5] p-3.5 sm:p-4 rounded-xl border border-[#EAE0D2] shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Search Input */}
           <div className="relative w-full md:w-80">
             <Search className="w-4 h-4 text-[#8F6623] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -314,12 +311,12 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by gemstone, motif, karigari craft..."
-              className="w-full bg-[#FAE7D8] border border-[#E9D1B5] rounded-lg pl-9 pr-8 py-2 text-xs text-[#2A1612] placeholder-[#2A1612]/50 focus:outline-none focus:border-[#B88A3B] transition-colors"
+              className="w-full bg-[#FAF5ED] border border-[#EAE0D2] rounded-xl pl-9 pr-8 py-2 text-xs text-[#2A1612] placeholder-[#2A1612]/50 focus:outline-none focus:border-[#B88A3B] transition-colors"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#2A1612]/60 hover:text-[#4A0712] p-0.5"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#2A1612]/60 hover:text-[#3B0810] p-0.5"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -334,7 +331,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
               <select
                 value={purityFilter}
                 onChange={(e) => setPurityFilter(e.target.value)}
-                className="bg-[#FAE7D8] border border-[#E9D1B5] rounded-lg px-2.5 py-1.5 text-xs text-[#2A1612] focus:outline-none focus:border-[#B88A3B] cursor-pointer"
+                className="bg-[#FAF5ED] border border-[#EAE0D2] rounded-xl px-2.5 py-1.5 text-xs text-[#2A1612] focus:outline-none focus:border-[#B88A3B] cursor-pointer"
               >
                 <option value="all">All Gold Purities</option>
                 <option value="Antique">22K Antique Yellow Gold</option>
@@ -348,7 +345,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-[#FAE7D8] border border-[#E9D1B5] rounded-lg px-2.5 py-1.5 text-xs text-[#2A1612] focus:outline-none focus:border-[#B88A3B] cursor-pointer"
+                className="bg-[#FAF5ED] border border-[#EAE0D2] rounded-xl px-2.5 py-1.5 text-xs text-[#2A1612] focus:outline-none focus:border-[#B88A3B] cursor-pointer"
               >
                 <option value="featured">Sort: Featured Masterpieces</option>
                 <option value="karigari-desc">Karigari Hours: High to Low</option>
@@ -359,8 +356,8 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
           </div>
         </div>
 
-        {/* Tanishq Trust & Gold Exchange Prompt Banner */}
-        <div className="bg-gradient-to-r from-[#FFF7ED] via-[#FAF3EB] to-[#FFF7ED] border border-[#B88A3B]/50 rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+        {/* Trust & Gold Exchange Prompt Banner */}
+        <div className="bg-gradient-to-r from-[#FCF9F5] via-[#FAF5ED] to-[#FCF9F5] border border-[#EAE0D2] rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-[#4A0712] text-[#D8B477] flex items-center justify-center shrink-0">
               <RefreshCw className="w-4 h-4" />
@@ -430,10 +427,10 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
               <div
                 key={item.id}
                 onClick={() => handleProductCardClick(item)}
-                className="group bg-[#FFF7ED] rounded-xl overflow-hidden border border-[#E9D1B5] hover:border-[#B88A3B] transition-all duration-300 hover:shadow-[0_12px_28px_rgba(42,22,18,0.12)] hover:-translate-y-1 flex flex-col justify-between cursor-pointer"
+                className="group bg-[#FCF9F5] rounded-2xl overflow-hidden border border-[#EAE0D2] hover:border-[#B88A3B] transition-all duration-300 hover:shadow-[0_12px_28px_rgba(42,22,18,0.10)] hover:-translate-y-1 flex flex-col justify-between cursor-pointer"
               >
                 {/* Product Image: 100% Uncluttered, Pure Luxury Visuals */}
-                <div className="relative aspect-square w-full bg-[#FAF3EB] overflow-hidden">
+                <div className="relative aspect-square w-full bg-[#FAF5ED] overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -447,7 +444,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                     aria-label={`Wishlist ${item.title}`}
                     className={`absolute top-2.5 right-2.5 p-2 rounded-full backdrop-blur-md transition-all duration-200 z-10 cursor-pointer shadow-md ${
                       isWishlisted
-                        ? 'bg-[#4A0712] text-[#D8B477] scale-105'
+                        ? 'bg-[#3B0810] text-[#D8B477] scale-105'
                         : 'bg-black/30 hover:bg-black/60 text-white/90 hover:text-white'
                     }`}
                   >
@@ -459,49 +456,49 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                 <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3">
                   <div className="space-y-1.5">
                     {/* Eyebrow: Purity & Craft Lineage */}
-                    <div className="flex items-center justify-between text-[10px] text-[#8F6623]">
+                    <div className="flex items-center justify-between text-[10px] sm:text-[10.5px] text-[#8F6623]">
                       <span className="uppercase tracking-wider font-sans font-semibold">
-                        {item.goldPurity || '22K Gold'} · {item.craft}
+                        {item.goldPurity || '22K Solid Gold'} · {item.craft || 'Heritage'}
                       </span>
-                      <span className="font-mono text-[#4A0712] font-semibold bg-[#FAE7D8] px-1.5 py-0.5 rounded border border-[#E9D1B5] text-[9px]">
+                      <span className="font-sans text-[#2A1612] font-medium bg-[#F6EFE6] px-2 py-0.5 rounded-md border border-[#E8DBCB] text-[10px] sm:text-[11px]">
                         Net: {netWeightVal}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h4 className="font-serif text-sm sm:text-base font-bold text-[#2A1612] line-clamp-1 group-hover:text-[#4A0712] transition-colors">
+                    <h4 className="font-serif text-base sm:text-[17px] font-bold text-[#3B0810] line-clamp-1 group-hover:text-[#8F6623] transition-colors leading-snug">
                       {item.title}
                     </h4>
 
                     {/* Gemstones / Craft Detail */}
-                    <p className="text-[11.5px] text-[#2A1612]/75 line-clamp-1 italic font-serif">
+                    <p className="text-[12px] sm:text-[13px] text-[#7A5B46] line-clamp-1 italic font-serif">
                       {item.gemstone}
                     </p>
 
                     {/* Trust Line */}
-                    <div className="flex items-center gap-1.5 text-[10px] text-[#2A1612]/70 pt-0.5">
-                      <ShieldCheck className="w-3 h-3 text-[#B88A3B] flex-shrink-0" />
+                    <div className="flex items-center gap-1.5 text-[10.5px] sm:text-[11px] text-[#594943] pt-0.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#8F6623] flex-shrink-0" />
                       <span className="font-sans">BIS {item.goldPurity?.includes('18K') ? '750' : '916'} Hallmarked · Net Weight Billing</span>
                     </div>
                   </div>
 
                   {/* Pricing and Action CTAs */}
-                  <div className="pt-2 border-t border-[#E9D1B5]/80 space-y-2.5">
+                  <div className="pt-2.5 border-t border-[#EAE0D2] space-y-2.5">
                     <div className="flex items-end justify-between">
                       <div>
                         {mrpVal && (
-                          <div className="flex items-center gap-1.5 text-[10.5px] text-[#2A1612]/50">
+                          <div className="flex items-center gap-2 text-xs text-[#8A7E76]">
                             <span className="line-through">{mrpVal}</span>
-                            <span className="text-[9px] font-semibold text-emerald-800 bg-emerald-100/80 px-1 py-0.2 rounded font-sans">
+                            <span className="text-[10px] sm:text-[11px] font-semibold text-[#166534] bg-[#E8F8F0] border border-[#BBE7D0] px-2 py-0.5 rounded-md font-sans">
                               Save {savingsVal}
                             </span>
                           </div>
                         )}
-                        <div className="flex items-baseline gap-1">
-                          <span className="font-serif text-base sm:text-lg font-bold text-[#4A0712]">
+                        <div className="flex items-baseline gap-1 mt-0.5">
+                          <span className="font-serif text-lg sm:text-xl font-bold text-[#2A1612]">
                             {item.priceEst}
                           </span>
-                          <span className="text-[9px] text-[#8F6623] font-sans">
+                          <span className="text-[10px] text-[#6E6259] font-sans">
                             (Incl. 3% GST)
                           </span>
                         </div>
@@ -512,33 +509,33 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                           e.stopPropagation();
                           onOpenCustomStudio(item);
                         }}
-                        className="text-[10px] font-sans font-semibold text-[#8F6623] hover:text-[#4A0712] underline flex items-center gap-1 cursor-pointer"
+                        className="text-xs font-sans font-semibold text-[#8F6623] hover:text-[#3B0810] underline flex items-center gap-1 cursor-pointer"
                         title="Modify Karigari or Gemstones"
                       >
-                        <Hammer className="w-3 h-3" />
-                        <span>Customise</span>
+                        <Pencil className="w-3.5 h-3.5" />
+                        <span className="underline decoration-1 underline-offset-2">Customise</span>
                       </button>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-2 pt-1">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           handleProductCardClick(item);
                         }}
-                        className="w-full text-[10.5px] font-sans font-semibold uppercase tracking-wider py-2 px-2 bg-[#FAE7D8] hover:bg-[#E9D1B5] text-[#2A1612] rounded flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-[#E9D1B5]"
+                        className="w-full text-xs font-sans font-bold uppercase tracking-wider py-2.5 px-3 bg-[#FAF4EC] hover:bg-[#F2E8DC] text-[#3B0810] rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer border border-[#DFD3C3] shadow-xs"
                       >
-                        <Eye className="w-3.5 h-3.5 text-[#4A0712]" />
-                        <span>Quick View</span>
+                        <Eye className="w-4 h-4 text-[#3B0810]" />
+                        <span>QUICK VIEW</span>
                       </button>
 
                       <button
                         onClick={(e) => handleAddCardToBag(e, item)}
-                        className="w-full text-[10.5px] font-sans font-semibold uppercase tracking-wider py-2 px-2 bg-[#4A0712] hover:bg-[#35050D] text-[#FFF7ED] rounded flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-sm active:scale-95"
+                        className="w-full text-xs font-sans font-bold uppercase tracking-wider py-2.5 px-3 bg-[#3B0810] hover:bg-[#2A050C] text-white rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-md active:scale-95"
                       >
-                        <ShoppingBag className="w-3.5 h-3.5 text-[#D8B477]" />
-                        <span>Add to Bag</span>
+                        <ShoppingBag className="w-4 h-4 text-[#D8B477]" />
+                        <span>ADD TO BAG</span>
                       </button>
                     </div>
                   </div>
@@ -553,10 +550,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
           <div className="absolute right-0 bottom-0 translate-x-12 translate-y-12 w-64 h-64 bg-[#B88A3B]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="max-w-3xl space-y-4 relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#B88A3B]/20 border border-[#B88A3B]/40 text-[#D8B477] text-[10px] uppercase tracking-widest font-semibold">
-              <Hammer className="w-3.5 h-3.5" />
-              <span>Ancestral Remodelling & Bespoke Commissions</span>
-            </div>
+
 
             <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-[#FFF7ED]">
               Have a Rare Vision or Ancestral Gold to Reset?

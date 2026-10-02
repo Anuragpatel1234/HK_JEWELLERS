@@ -42,7 +42,7 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
   }, []);
 
   return (
-    <section className="w-full bg-[#FAE7D8] pt-4 sm:pt-6 pb-6 sm:pb-8">
+    <section className="w-full bg-[#FAF5ED] pt-4 sm:pt-6 pb-6 sm:pb-8">
       {/* Section Heading with Ornamental Flourishes */}
       <SectionHeading title="Collection made just for her." />
 
@@ -57,7 +57,7 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
               aria-label={`Go to item ${idx + 1}`}
               className={`transition-all duration-300 rounded-full focus:outline-none focus:ring-1 focus:ring-[#B88A3B] cursor-pointer ${
                 isActive
-                  ? 'w-3 h-2 bg-[#4A0712] rounded-full scale-105'
+                  ? 'w-3 h-2 bg-[#3B0810] rounded-full scale-105'
                   : 'w-1.5 h-1.5 bg-[#D8B477]/60 hover:bg-[#B88A3B]'
               }`}
             />

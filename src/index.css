@@ -4,15 +4,15 @@
 
 @layer base {
   :root {
-    --color-bg: #FAE7D8;
-    --color-burgundy: #4A0712;
+    --color-bg: #FAF5ED;
+    --color-burgundy: #3B0810;
     --color-gold: #B88A3B;
     --color-gold-soft: #D8B477;
     --color-brown: #2A1612;
   }
 
   body {
-    background-color: #FAE7D8;
+    background-color: #FAF5ED;
     color: #2A1612;
     overflow-x: hidden;
   }
@@ -23,7 +23,7 @@
     height: 4px;
   }
   ::-webkit-scrollbar-track {
-    background: #FAE7D8;
+    background: #FAF5ED;
   }
   ::-webkit-scrollbar-thumb {
     background: #D8B477;

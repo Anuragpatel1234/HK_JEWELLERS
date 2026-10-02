@@ -112,17 +112,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
         {/* Drawer Bottom Actions */}
         {items.length > 0 && (
-          <div className="p-4 bg-[#FAF3EB] border-t border-[#E9D1B5] space-y-3">
+          <div className="p-4 bg-[#FCF9F5] border-t border-[#EAE0D2] space-y-3">
             <div className="flex items-center justify-between text-xs text-[#2A1612]/80">
-              <span className="flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#B88A3B]" /> 100% Certified & Insured
+              <span className="flex items-center gap-1 text-[11px] text-[#8F6623]">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#166534]" /> 100% Certified & Insured
               </span>
-              <span className="text-[#4A0712] font-semibold">Ready for Dispatch</span>
+              <span className="text-[#3B0810] font-semibold text-xs">Ready for Dispatch</span>
             </div>
 
             <button
               onClick={onCheckout}
-              className="w-full bg-[#4A0712] hover:bg-[#35050D] text-[#FFF7ED] font-sans text-xs tracking-[0.18em] uppercase font-semibold py-3 px-4 rounded-[4px] border border-[#B88A3B]/40 hover:border-[#D8B477] transition-all flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(74,7,18,0.3)] active:scale-[0.98]"
+              className="w-full bg-[#3B0810] hover:bg-[#2A050C] text-white font-sans text-xs tracking-[0.18em] uppercase font-bold py-3.5 px-4 rounded-xl border border-[#3B0810] transition-all flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(59,8,16,0.3)] active:scale-[0.98]"
             >
               <span>Proceed to Checkout</span>
               <ArrowRight className="w-4 h-4" />

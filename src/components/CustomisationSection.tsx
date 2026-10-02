@@ -13,7 +13,7 @@ export const CustomisationSection: React.FC<CustomisationSectionProps> = ({
   onViewAllClick,
 }) => {
   return (
-    <section className="w-full bg-[#FAE7D8] pt-4 sm:pt-6 pb-6 sm:pb-8 px-2.5 sm:px-4 md:px-6">
+    <section className="w-full bg-[#FAF5ED] pt-4 sm:pt-6 pb-6 sm:pb-8 px-2.5 sm:px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Section Heading with Ornamental Flourishes */}
         <SectionHeading title="Jewellery Customisation" />
@@ -57,7 +57,7 @@ export const CustomisationSection: React.FC<CustomisationSectionProps> = ({
         <div className="text-center mt-6 sm:mt-7">
           <button
             onClick={onViewAllClick}
-            className="inline-flex items-center justify-center bg-transparent hover:bg-[#4A0712] text-[#2A1612] hover:text-[#FFF7ED] font-sans text-[10.5px] sm:text-xs tracking-[0.2em] font-semibold py-2.5 sm:py-3 px-8 sm:px-10 rounded-[3px] border-2 border-[#2A1612] hover:border-[#4A0712] transition-all duration-300 shadow-[0_2px_8px_rgba(42,22,18,0.1)] hover:shadow-[0_6px_20px_rgba(74,7,18,0.3)] active:scale-[0.98] uppercase cursor-pointer"
+            className="inline-flex items-center justify-center bg-[#FAF4EC] hover:bg-[#3B0810] text-[#3B0810] hover:text-white font-sans text-xs tracking-[0.2em] font-bold py-3 px-8 sm:px-10 rounded-xl border border-[#DFD3C3] hover:border-[#3B0810] transition-all duration-300 shadow-xs hover:shadow-[0_6px_20px_rgba(59,8,16,0.25)] active:scale-[0.98] uppercase cursor-pointer"
           >
             View All Custom Designs
           </button>

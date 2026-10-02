@@ -38,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full bg-[#FAE7D8]/95 backdrop-blur-md transition-all duration-300 ${
+      className={`sticky top-0 z-40 w-full bg-[#FAF5ED]/95 border-b border-[#EAE0D2]/60 backdrop-blur-md transition-all duration-300 ${
         isScrolled ? 'shadow-[0_4px_16px_rgba(42,22,18,0.06)] py-1.5' : 'py-2.5'
       }`}
     >
@@ -102,11 +102,11 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onOpenWishlist}
             aria-label="Wishlist"
-            className="p-1 hover:text-[#4A0712] transition-colors rounded-sm relative"
+            className="p-1 hover:text-[#3B0810] transition-colors rounded-sm relative"
           >
             <Heart className="w-[18px] h-[18px] sm:w-5 sm:h-5 stroke-[1.4]" />
             {wishlistCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-[#4A0712] text-[#FFF7ED] text-[9px] font-sans font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-0.5 -right-0.5 bg-[#3B0810] text-[#FFF7ED] text-[9px] font-sans font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
                 {wishlistCount}
               </span>
             )}
@@ -115,11 +115,11 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onOpenCart}
             aria-label="Shopping Bag"
-            className="p-1 hover:text-[#4A0712] transition-colors rounded-sm relative"
+            className="p-1 hover:text-[#3B0810] transition-colors rounded-sm relative"
           >
             <ShoppingBag className="w-[18px] h-[18px] sm:w-5 sm:h-5 stroke-[1.4]" />
             {cartCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-[#4A0712] text-[#FFF7ED] text-[9px] font-sans font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-0.5 -right-0.5 bg-[#3B0810] text-[#FFF7ED] text-[9px] font-sans font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">
                 {cartCount}
               </span>
             )}

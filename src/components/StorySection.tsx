@@ -12,7 +12,7 @@ export const StorySection: React.FC<StorySectionProps> = ({ onSelectStory }) => 
   const chhankaarStory = STORIES[2]; // Chhankaar
 
   return (
-    <section className="w-full bg-[#FAE7D8] px-3 sm:px-4 md:px-6 py-3 sm:py-5">
+    <section className="w-full bg-[#FAF5ED] px-3 sm:px-4 md:px-6 py-3 sm:py-5">
       <div className="max-w-7xl mx-auto">
         {/* Perfectly Aligned Bento Layout:
             Left Column: Swarn Shringaar (aspect-[1122/1402])

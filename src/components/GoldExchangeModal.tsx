@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, RefreshCw, Sparkles, Scale, ArrowRight, PhoneCall, Award } from 'lucide-react';
+import { X, RefreshCw, Scale, ArrowRight, PhoneCall, Award } from 'lucide-react';
 
 interface GoldExchangeModalProps {
   isOpen: boolean;
@@ -73,10 +73,7 @@ export const GoldExchangeModal: React.FC<GoldExchangeModalProps> = ({
           {/* Banner Proposition */}
           <div className="bg-gradient-to-r from-[#4A0712] to-[#6E0F1E] text-[#FFF7ED] rounded-xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-md">
             <div className="space-y-1 text-center md:text-left">
-              <div className="inline-flex items-center gap-1.5 text-[#D8B477] text-xs font-semibold uppercase tracking-widest">
-                <Sparkles className="w-3.5 h-3.5" />
-                The Tanishq-Grade Purity Benchmark
-              </div>
+
               <h4 className="font-serif text-xl sm:text-2xl font-bold text-[#FFF7ED]">
                 Upgrade Your Outdated Gold to New Masterpieces
               </h4>

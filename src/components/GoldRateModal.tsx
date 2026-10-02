@@ -123,7 +123,7 @@ export const GoldRateModal: React.FC<GoldRateModalProps> = ({ isOpen, onClose, o
               <div className="flex items-center gap-2">
                 <Scale className="w-4 h-4 text-[#4A0712]" />
                 <h4 className="font-serif font-bold text-sm sm:text-base text-[#2A1612]">
-                  Tanishq-Standard Transparent Price Breakup Calculator
+                  Transparent Price Breakup Calculator
                 </h4>
               </div>
               <span className="text-[11px] text-[#8F6623] font-medium hidden sm:inline">

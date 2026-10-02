@@ -370,7 +370,7 @@ export const App: React.FC = () => {
   const cartTotalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#FAE7D8] text-[#2A1612] flex flex-col selection:bg-[#4A0712] selection:text-[#FFF7ED] pb-16 md:pb-0">
+    <div className="min-h-screen bg-[#FAF5ED] text-[#2A1612] flex flex-col selection:bg-[#3B0810] selection:text-[#FFF7ED] pb-16 md:pb-0">
       {/* 1. Top Announcement Bar */}
       <AnnouncementBar
         onOpenGoldRate={() => setIsGoldRateOpen(true)}

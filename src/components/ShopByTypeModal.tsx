@@ -95,7 +95,7 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="px-4 py-3 bg-[#FAE7D8] border-b border-[#E9D1B5] space-y-2">
+        <div className="px-4 py-3 bg-[#FAF5ED] border-b border-[#EAE0D2] space-y-2">
           {/* Quick Search */}
           <div className="relative">
             <Search className="w-4 h-4 text-[#8F6623] absolute left-3 top-1/2 -translate-y-1/2" />
@@ -104,12 +104,12 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
               placeholder="Search by jewellery piece, gemstone, or craft..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-1.5 bg-[#FAF3EB] text-[#2A1612] placeholder-[#2A1612]/50 text-xs rounded-lg border border-[#E9D1B5] focus:outline-none focus:border-[#B88A3B]"
+              className="w-full pl-9 pr-4 py-2 bg-[#FCF9F5] text-[#2A1612] placeholder-[#2A1612]/50 text-xs rounded-xl border border-[#EAE0D2] focus:outline-none focus:border-[#B88A3B]"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#2A1612]/60 hover:text-[#4A0712]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#2A1612]/60 hover:text-[#3B0810]"
               >
                 Clear
               </button>
@@ -127,14 +127,14 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
                 <button
                   key={t.id}
                   onClick={() => setSelectedType(t.id)}
-                  className={`px-3 py-1 text-xs font-sans rounded-full border transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+                  className={`px-3 py-1.5 text-xs font-sans rounded-full border transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                     selectedType === t.id
-                      ? 'bg-[#4A0712] text-[#FFF7ED] border-[#4A0712] font-semibold'
-                      : 'bg-[#FAF3EB] text-[#2A1612] border-[#E9D1B5] hover:border-[#B88A3B]'
+                      ? 'bg-[#3B0810] text-[#FFF7ED] border-[#3B0810] font-semibold'
+                      : 'bg-[#FCF9F5] text-[#2A1612] border-[#EAE0D2] hover:border-[#B88A3B]'
                   }`}
                 >
                   <span>{t.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${selectedType === t.id ? 'bg-[#D8B477] text-[#2A1612]' : 'bg-[#E9D1B5]/70 text-[#2A1612]'}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${selectedType === t.id ? 'bg-[#D8B477] text-[#2A1612]' : 'bg-[#EAE0D2] text-[#2A1612]/80'}`}>
                     {count}
                   </span>
                 </button>
@@ -168,10 +168,10 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
               return (
                 <div
                   key={`${item.title}-${idx}`}
-                  className="bg-[#FAF3EB] rounded-lg border border-[#E9D1B5] hover:border-[#B88A3B] shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
+                  className="bg-[#FCF9F5] rounded-xl border border-[#EAE0D2] hover:border-[#B88A3B] shadow-xs hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
                 >
                   {/* Image Container: 100% Uncluttered */}
-                  <div className="relative aspect-square bg-[#FAF3EB] overflow-hidden">
+                  <div className="relative aspect-square bg-[#FAF5ED] overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -183,7 +183,7 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
                     <button
                       onClick={() => onToggleWishlist(item)}
                       className={`absolute top-2 right-2 p-1.5 rounded-full backdrop-blur-md transition-colors cursor-pointer z-10 shadow-sm ${
-                        isWishlisted ? 'bg-[#4A0712] text-[#D8B477]' : 'bg-black/30 text-white hover:bg-black/60'
+                        isWishlisted ? 'bg-[#3B0810] text-[#D8B477]' : 'bg-black/30 text-white hover:bg-black/60'
                       }`}
                       title="Wishlist"
                     >
@@ -197,49 +197,49 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
                         <span className="text-[8.5px] font-bold uppercase tracking-wider text-[#8F6623]">
                           {item.subtitle}
                         </span>
-                        <span className="text-[9px] font-mono text-[#4A0712] bg-[#FAE7D8] px-1 py-0.2 rounded">
+                        <span className="text-[9.5px] font-sans text-[#2A1612] bg-[#F6EFE6] px-1.5 py-0.5 rounded-md border border-[#E8DBCB]">
                           Net: {netWeightVal}
                         </span>
                       </div>
-                      <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#2A1612] truncate mt-0.5" title={item.title}>
+                      <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#3B0810] truncate mt-0.5" title={item.title}>
                         {item.title}
                       </h4>
                       {item.tagline && (
-                        <p className="text-[10px] text-[#8F6623] italic font-serif truncate mt-0.5">
+                        <p className="text-[10px] text-[#7A5B46] italic font-serif truncate mt-0.5">
                           {item.tagline}
                         </p>
                       )}
                       
                       <div className="mt-1 flex items-baseline gap-1.5">
-                        <span className="text-xs sm:text-sm font-bold text-[#4A0712] font-serif">
+                        <span className="text-xs sm:text-sm font-bold text-[#2A1612] font-serif">
                           {item.price}
                         </span>
                         {mrpVal && (
-                          <span className="text-[9px] text-[#2A1612]/50 line-through font-sans">
+                          <span className="text-[9px] text-[#8A7E76] line-through font-sans">
                             {mrpVal}
                           </span>
                         )}
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 pt-2 border-t border-[#E9D1B5]/70">
+                    <div className="flex items-center gap-2 pt-2 border-t border-[#EAE0D2]">
                       <button
                         onClick={() => {
                           onClose();
                           onSelectItem(item);
                         }}
-                        className="flex-1 text-[10px] font-sans font-semibold uppercase tracking-wider py-1.5 px-2 bg-[#FAE7D8] hover:bg-[#E9D1B5] text-[#2A1612] rounded flex items-center justify-center gap-1 transition-colors cursor-pointer border border-[#E9D1B5]"
+                        className="flex-1 text-[10px] font-sans font-bold uppercase tracking-wider py-2 px-2 bg-[#FAF4EC] hover:bg-[#F2E8DC] text-[#3B0810] rounded-xl flex items-center justify-center gap-1 transition-colors cursor-pointer border border-[#DFD3C3]"
                       >
-                        <Eye className="w-3 h-3 text-[#4A0712]" />
-                        <span>Quick View</span>
+                        <Eye className="w-3.5 h-3.5 text-[#3B0810]" />
+                        <span>QUICK VIEW</span>
                       </button>
 
                       <button
                         onClick={() => onAddToCart(item)}
-                        className="flex-1 text-[10px] font-sans font-semibold uppercase tracking-wider py-1.5 px-2 bg-[#4A0712] hover:bg-[#35050D] text-[#FFF7ED] rounded flex items-center justify-center gap-1 transition-colors cursor-pointer shadow-sm active:scale-95"
+                        className="flex-1 text-[10px] font-sans font-bold uppercase tracking-wider py-2 px-2 bg-[#3B0810] hover:bg-[#2A050C] text-white rounded-xl flex items-center justify-center gap-1 transition-colors cursor-pointer shadow-sm active:scale-95"
                       >
-                        <ShoppingBag className="w-3 h-3 text-[#D8B477]" />
-                        <span>Add</span>
+                        <ShoppingBag className="w-3.5 h-3.5 text-[#D8B477]" />
+                        <span>ADD</span>
                       </button>
                     </div>
                   </div>
