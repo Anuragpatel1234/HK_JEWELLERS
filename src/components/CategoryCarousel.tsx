@@ -18,7 +18,8 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
     const maxScroll = scrollWidth - clientWidth;
     if (maxScroll <= 0) return;
     const ratio = scrollLeft / maxScroll;
-    const dotIndex = Math.min(3, Math.floor(ratio * 4));
+    const totalDots = CATEGORIES.length;
+    const dotIndex = Math.min(totalDots - 1, Math.floor(ratio * totalDots));
     setActiveIndex(dotIndex);
   };
 
@@ -26,7 +27,8 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
     if (!scrollContainerRef.current) return;
     const { scrollWidth, clientWidth } = scrollContainerRef.current;
     const maxScroll = scrollWidth - clientWidth;
-    const targetScroll = (dotIndex / 3) * maxScroll;
+    const totalDots = CATEGORIES.length;
+    const targetScroll = (dotIndex / (totalDots - 1)) * maxScroll;
     scrollContainerRef.current.scrollTo({
       left: targetScroll,
       behavior: 'smooth',
@@ -42,7 +44,7 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
   }, []);
 
   return (
-    <section className="w-full bg-[#FAF5ED] pt-4 sm:pt-6 pb-6 sm:pb-8">
+    <section className="w-full bg-[#FAE7D8] pt-4 sm:pt-6 pb-6 sm:pb-8">
       {/* Section Heading with Ornamental Flourishes */}
       <SectionHeading title="Collection made just for her." />
 
@@ -73,7 +75,7 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ onSelectCate
 
         <div
           ref={scrollContainerRef}
-          className="flex items-stretch justify-start lg:justify-center gap-3 sm:gap-4 md:gap-5 overflow-x-auto no-scrollbar scroll-smooth px-2 py-2 scroll-reveal-stagger revealed snap-x snap-mandatory"
+          className="flex items-stretch justify-start gap-3 sm:gap-4 md:gap-5 overflow-x-auto no-scrollbar scroll-smooth px-2 py-2 scroll-reveal-stagger revealed snap-x snap-mandatory"
         >
           {CATEGORIES.map((cat) => (
             <button

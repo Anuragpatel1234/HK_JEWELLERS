@@ -6,7 +6,7 @@ interface DivineIdolsBannerProps {
 
 export const DivineIdolsBanner: React.FC<DivineIdolsBannerProps> = ({ onExploreDivine }) => {
   return (
-    <section className="w-full relative overflow-hidden my-4 sm:my-6 md:my-8 bg-[#3A0510] border-y border-[#B88A3B]/30 shadow-[0_6px_20px_rgba(0,0,0,0.3)]">
+    <section className="w-full relative overflow-hidden mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-2 sm:mb-3 bg-[#3A0510] border-y border-[#B88A3B]/30 shadow-[0_6px_20px_rgba(0,0,0,0.3)]">
       
       {/* 1. Mobile Layout (< md): Dedicated stacked luxury card so Lord Ganesha is 100% visible and unblocked */}
       <div className="md:hidden flex flex-col items-center justify-center py-6 px-4 text-center bg-gradient-to-b from-[#4A0A17] via-[#3A0510] to-[#25030A]">

@@ -23,7 +23,7 @@ export const MobileBottomBar: React.FC<MobileBottomBarProps> = ({
   return (
     <nav
       aria-label="Mobile Bottom Navigation"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FAF3EB]/95 backdrop-blur-lg border-t border-[#E9D1B5] shadow-[0_-4px_20px_rgba(42,22,18,0.08)] pb-safe transition-all duration-300"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FAE7D8]/95 backdrop-blur-lg border-t border-[#DFBA9D]/80 shadow-[0_-4px_20px_rgba(42,22,18,0.12)] pb-safe transition-all duration-300"
     >
       <div className="grid grid-cols-5 h-[56px] items-center px-1">
         

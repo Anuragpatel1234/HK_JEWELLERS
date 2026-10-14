@@ -112,7 +112,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
         {/* Drawer Bottom Actions */}
         {items.length > 0 && (
-          <div className="p-4 bg-[#FCF9F5] border-t border-[#EAE0D2] space-y-3">
+          <div className="p-4 bg-[#FCEDE1] border-t border-[#E8CFB8] space-y-3">
             <div className="flex items-center justify-between text-xs text-[#2A1612]/80">
               <span className="flex items-center gap-1 text-[11px] text-[#8F6623]">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#166534]" /> 100% Certified & Insured

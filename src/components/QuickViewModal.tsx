@@ -95,7 +95,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
         <button
           onClick={onClose}
           aria-label="Close Product View"
-          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 w-8 h-8 sm:w-9 sm:py-9 rounded-full bg-black/50 hover:bg-[#4A0712] text-white flex items-center justify-center transition-colors cursor-pointer shadow-lg"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/50 hover:bg-[#4A0712] text-white flex items-center justify-center transition-colors cursor-pointer shadow-lg"
         >
           <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
@@ -193,10 +193,10 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
               {/* Price Banner with Net-Weight Transparency */}
               <div className="bg-[#FCF9F5] p-3.5 sm:p-4 rounded-2xl border border-[#EAE0D2] space-y-2">
                 <div className="flex items-baseline gap-3">
-                  <span className="font-serif text-2xl sm:text-3xl font-bold text-[#2A1612]">
+                  <span className="font-sans text-2xl sm:text-3xl font-bold text-[#2A1612] tracking-tight">
                     {product.price || '₹3,50,000'}
                   </span>
-                  <span className="text-sm text-[#8A7E76] line-through">
+                  <span className="text-sm text-[#8A7E76] line-through font-sans">
                     ₹{originalMrp.toLocaleString('en-IN')}
                   </span>
                   <span className="text-[10.5px] sm:text-[11px] font-sans font-semibold bg-[#E8F8F0] border border-[#BBE7D0] text-[#166534] px-2.5 py-0.5 rounded-md">

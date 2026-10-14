@@ -59,7 +59,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
         <div className="flex-1 overflow-y-auto p-4 space-y-3.5">
           {items.length === 0 ? (
             <div className="text-center py-20 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-[#FAF5ED] flex items-center justify-center mx-auto text-[#B88A3B]">
+              <div className="w-16 h-16 rounded-full bg-[#FAE7D8] flex items-center justify-center mx-auto text-[#B88A3B]">
                 <Heart className="w-8 h-8 stroke-[1.2]" />
               </div>
               <p className="font-serif text-xl text-[#2A1612]/80">Your Wishlist is Empty</p>
@@ -81,7 +81,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
             items.map((item) => (
               <div
                 key={item.title}
-                className="flex items-center gap-3.5 p-3.5 bg-[#FCF9F5] rounded-xl border border-[#EAE0D2] shadow-xs hover:border-[#D8B477] transition-all"
+                className="flex items-center gap-3.5 p-3.5 bg-[#FCEDE1] rounded-xl border border-[#E8CFB8] shadow-xs hover:border-[#D8B477] transition-all"
               >
                 <img
                   src={item.image}
@@ -123,7 +123,7 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
 
         {/* Wishlist Bottom Bar */}
         {items.length > 0 && (
-          <div className="p-4 bg-[#FCF9F5] border-t border-[#EAE0D2] space-y-2">
+          <div className="p-4 bg-[#FCEDE1] border-t border-[#E8CFB8] space-y-2">
             <button
               onClick={onMoveAllToBag}
               className="w-full bg-[#3B0810] hover:bg-[#2A050C] text-white font-sans text-xs tracking-[0.16em] uppercase font-bold py-3.5 px-4 rounded-xl border border-[#3B0810] transition-all flex items-center justify-center gap-2 shadow-md active:scale-[0.98] cursor-pointer"

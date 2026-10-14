@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }
   const contact = FOOTER_SECTIONS.contact;
 
   return (
-    <footer className="w-full bg-[#FAF3EB] border-t border-[#E9D1B5] text-[#2A1612]">
+    <footer className="w-full bg-[#F5DFC9] border-t border-[#DFC0A7] text-[#2A1612]">
       {/* Compact Main Content Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-9">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
@@ -60,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }
               href={contact.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#FFF7ED] border border-[#E9D1B5] hover:border-[#B88A3B] text-[11px] text-[#2A1612] transition-colors group cursor-pointer shadow-xs"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#FAF0E6] border border-[#DFC0A7] hover:border-[#B88A3B] text-[11px] text-[#2A1612] transition-colors group cursor-pointer shadow-xs"
               title="View on Google Maps"
             >
               <div className="flex items-center text-amber-500">
@@ -240,8 +240,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }
         </div>
       </div>
 
-      {/* Slim, Compact Single-Line Bottom Bar (Drastically Reduces Footer Size) */}
-      <div className="w-full bg-[#EEDCCC]/60 border-t border-[#E9D1B5] py-2.5 sm:py-3">
+      {/* Slim, Compact Single-Line Bottom Bar with mobile bottom bar clearance */}
+      <div className="w-full bg-[#EEDCCC]/60 border-t border-[#E9D1B5] py-2.5 sm:py-3 pb-20 md:pb-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-2.5 text-center md:text-left">
           
           {/* Copyright notice */}
@@ -250,29 +250,29 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInfo, onOpenShopCategory }
           </div>
 
           {/* Compact Inline Payment Badges */}
-          <div className="flex items-center gap-1.5 text-[9px] font-bold text-[#2A1612]/80">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-1.5 text-[9px] font-bold text-[#2A1612]/80">
             <span className="text-[9.5px] uppercase tracking-wider text-[#8F6623] font-semibold mr-1">
               We Accept:
             </span>
-            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] shadow-xs">
+            <span className="px-2 py-0.5 bg-[#FAF0E6] rounded text-[9px] border border-[#DFC0A7] shadow-xs">
               VISA
             </span>
-            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] shadow-xs">
+            <span className="px-2 py-0.5 bg-[#FAF0E6] rounded text-[9px] border border-[#DFC0A7] shadow-xs">
               Mastercard
             </span>
-            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] shadow-xs">
+            <span className="px-2 py-0.5 bg-[#FAF0E6] rounded text-[9px] border border-[#DFC0A7] shadow-xs">
               RuPay
             </span>
-            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] text-[#4A0712] shadow-xs">
+            <span className="px-2 py-0.5 bg-[#FAF0E6] rounded text-[9px] border border-[#DFC0A7] text-[#4A0712] shadow-xs">
               UPI
             </span>
-            <span className="px-2 py-0.5 bg-[#FAF3EB] rounded text-[9px] border border-[#E9D1B5] shadow-xs">
+            <span className="px-2 py-0.5 bg-[#FAF0E6] rounded text-[9px] border border-[#DFC0A7] shadow-xs">
               NetBanking
             </span>
           </div>
 
           {/* Trust Seals */}
-          <div className="flex items-center gap-2 text-[9.5px] text-[#8F6623] font-semibold">
+          <div className="flex items-center justify-center gap-2 text-[9.5px] text-[#8F6623] font-semibold">
             <span className="inline-flex items-center gap-1">
               <ShieldCheck className="w-3 h-3 text-[#B88A3B]" />
               <span>BIS 916 &amp; 750</span>

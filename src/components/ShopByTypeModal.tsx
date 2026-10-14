@@ -95,7 +95,7 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="px-4 py-3 bg-[#FAF5ED] border-b border-[#EAE0D2] space-y-2">
+        <div className="px-4 py-3 bg-[#FAE7D8] border-b border-[#E8CFB8] space-y-2">
           {/* Quick Search */}
           <div className="relative">
             <Search className="w-4 h-4 text-[#8F6623] absolute left-3 top-1/2 -translate-y-1/2" />
@@ -104,7 +104,7 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
               placeholder="Search by jewellery piece, gemstone, or craft..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#FCF9F5] text-[#2A1612] placeholder-[#2A1612]/50 text-xs rounded-xl border border-[#EAE0D2] focus:outline-none focus:border-[#B88A3B]"
+              className="w-full pl-9 pr-4 py-2 bg-[#FCEDE1] text-[#2A1612] placeholder-[#2A1612]/50 text-xs rounded-xl border border-[#E8CFB8] focus:outline-none focus:border-[#B88A3B]"
             />
             {searchQuery && (
               <button
@@ -130,11 +130,11 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
                   className={`px-3 py-1.5 text-xs font-sans rounded-full border transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                     selectedType === t.id
                       ? 'bg-[#3B0810] text-[#FFF7ED] border-[#3B0810] font-semibold'
-                      : 'bg-[#FCF9F5] text-[#2A1612] border-[#EAE0D2] hover:border-[#B88A3B]'
+                      : 'bg-[#FCEDE1] text-[#2A1612] border-[#E8CFB8] hover:border-[#B88A3B]'
                   }`}
                 >
                   <span>{t.label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${selectedType === t.id ? 'bg-[#D8B477] text-[#2A1612]' : 'bg-[#EAE0D2] text-[#2A1612]/80'}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${selectedType === t.id ? 'bg-[#D8B477] text-[#2A1612]' : 'bg-[#E8CFB8] text-[#2A1612]/80'}`}>
                     {count}
                   </span>
                 </button>
@@ -168,10 +168,10 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
               return (
                 <div
                   key={`${item.title}-${idx}`}
-                  className="bg-[#FCF9F5] rounded-xl border border-[#EAE0D2] hover:border-[#B88A3B] shadow-xs hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
+                  className="bg-[#FCEDE1] rounded-xl border border-[#E8CFB8] hover:border-[#B88A3B] shadow-xs hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
                 >
                   {/* Image Container: 100% Uncluttered */}
-                  <div className="relative aspect-square bg-[#FAF5ED] overflow-hidden">
+                  <div className="relative aspect-square bg-[#FAF0E6] overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -211,7 +211,7 @@ export const ShopByTypeModal: React.FC<ShopByTypeModalProps> = ({
                       )}
                       
                       <div className="mt-1 flex items-baseline gap-1.5">
-                        <span className="text-xs sm:text-sm font-bold text-[#2A1612] font-serif">
+                        <span className="text-xs sm:text-sm font-bold text-[#2A1612] font-sans tracking-tight">
                           {item.price}
                         </span>
                         {mrpVal && (

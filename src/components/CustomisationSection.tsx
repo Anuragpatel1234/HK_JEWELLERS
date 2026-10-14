@@ -13,7 +13,7 @@ export const CustomisationSection: React.FC<CustomisationSectionProps> = ({
   onViewAllClick,
 }) => {
   return (
-    <section className="w-full bg-[#FAF5ED] pt-4 sm:pt-6 pb-6 sm:pb-8 px-2.5 sm:px-4 md:px-6">
+    <section className="w-full bg-[#FAE7D8] pt-4 sm:pt-6 pb-6 sm:pb-8 px-2.5 sm:px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Section Heading with Ornamental Flourishes */}
         <SectionHeading title="Jewellery Customisation" />
@@ -54,10 +54,10 @@ export const CustomisationSection: React.FC<CustomisationSectionProps> = ({
         </div>
 
         {/* CTA Button — Outlined style matching UI */}
-        <div className="text-center mt-6 sm:mt-7">
+        <div className="text-center mt-5 sm:mt-7 px-2 sm:px-0">
           <button
             onClick={onViewAllClick}
-            className="inline-flex items-center justify-center bg-[#FAF4EC] hover:bg-[#3B0810] text-[#3B0810] hover:text-white font-sans text-xs tracking-[0.2em] font-bold py-3 px-8 sm:px-10 rounded-xl border border-[#DFD3C3] hover:border-[#3B0810] transition-all duration-300 shadow-xs hover:shadow-[0_6px_20px_rgba(59,8,16,0.25)] active:scale-[0.98] uppercase cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center bg-[#FAF4EC] hover:bg-[#3B0810] text-[#3B0810] hover:text-white font-sans text-xs tracking-[0.2em] font-bold py-3.5 sm:py-3 px-8 sm:px-10 rounded-xl border border-[#DFD3C3] hover:border-[#3B0810] transition-all duration-300 shadow-xs hover:shadow-[0_6px_20px_rgba(59,8,16,0.25)] active:scale-[0.98] uppercase cursor-pointer"
           >
             View All Custom Designs
           </button>

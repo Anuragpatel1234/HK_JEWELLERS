@@ -70,6 +70,7 @@ function useScrollReveal() {
 export const App: React.FC = () => {
   // Page view routing state
   const [currentPage, setCurrentPage] = useState<'home' | 'custom-designs'>('home');
+  const [customDesignsCategory, setCustomDesignsCategory] = useState<string>('all');
   const [studioInitialDesign, setStudioInitialDesign] = useState<CustomJewelleryItem | null>(null);
 
   // Navigation & Drawer States
@@ -225,25 +226,13 @@ export const App: React.FC = () => {
   };
 
   const handleExploreHero = () => {
-    setSelectedProduct({
-      title: 'A Legacy You Can Wear',
-      subtitle: 'Royal Heritage Signature Suite',
-      tagline: 'Exquisite craftsmanship and precious stones create a timeless allure of heritage & expression',
-      description: 'The crowning centerpiece of HK Jewellers. Featuring multi-layered 22K yellow gold harams, cabochon Zambian emerald strands, handcrafted jhumkis, and repoussé kadas.',
-      image: '/assets/hero/herojewellery_cutout.png',
-      goldPurity: '22K Antique Yellow Gold',
-    });
+    setCustomDesignsCategory('all');
+    navigateTo('custom-designs');
   };
 
   const handleExploreDivine = () => {
-    setSelectedProduct({
-      title: 'Lord Ganesha Divine Idol',
-      subtitle: 'Divine Idols Sacred Collection',
-      tagline: 'Sacred idols, crafted to fill your space with love, devotion & timeless blessings',
-      description: 'Sculpted in solid 22K hallmarked gold with intricate floral repoussé engraving and radiant lotus pedestal. Bestows prosperity, peace, and spiritual abundance.',
-      image: '/assets/divine/ganesha_idol.png',
-      goldPurity: '22K Solid Gold with 24K Leaf Finish',
-    });
+    setCustomDesignsCategory('divine');
+    navigateTo('custom-designs');
   };
 
   // Cart operations
@@ -370,7 +359,7 @@ export const App: React.FC = () => {
   const cartTotalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#FAF5ED] text-[#2A1612] flex flex-col selection:bg-[#3B0810] selection:text-[#FFF7ED] pb-16 md:pb-0">
+    <div className="min-h-screen bg-[#FAE7D8] text-[#2A1612] flex flex-col selection:bg-[#3B0810] selection:text-[#FFF7ED] pb-16 md:pb-0">
       {/* 1. Top Announcement Bar */}
       <AnnouncementBar
         onOpenGoldRate={() => setIsGoldRateOpen(true)}
@@ -406,6 +395,7 @@ export const App: React.FC = () => {
               setIsCustomStudioOpen(true);
             }}
             wishlistTitles={wishlistTitles}
+            initialCategory={customDesignsCategory}
           />
         ) : (
           <>
@@ -420,7 +410,7 @@ export const App: React.FC = () => {
             </div>
 
             {/* 6. Tanishq-Style Rivaah: Brides of India Trousseau Section */}
-            <div id="bridal-rivaah" className="scroll-reveal">
+            <div id="bridal-rivaah" className="scroll-reveal scroll-mt-20 sm:scroll-mt-24">
               <RivaahBridalSection
                 onSelectProduct={(product) => setSelectedProduct(product)}
                 onViewAllBridal={() => navigateTo('custom-designs')}

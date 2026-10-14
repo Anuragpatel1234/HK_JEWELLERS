@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   ArrowLeft,
   Search,
@@ -29,6 +29,7 @@ interface CustomDesignsPageProps {
   onToggleWishlist: (product: ModalProductDetails) => void;
   onOpenCustomStudio: (design?: CustomJewelleryItem) => void;
   wishlistTitles: string[];
+  initialCategory?: string;
 }
 
 export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
@@ -38,8 +39,16 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
   onToggleWishlist,
   onOpenCustomStudio,
   wishlistTitles,
+  initialCategory,
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory || 'all');
+
+  useEffect(() => {
+    if (initialCategory) {
+      setSelectedCategory(initialCategory);
+    }
+  }, [initialCategory]);
+
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [purityFilter, setPurityFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('featured');
@@ -161,7 +170,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
   };
 
   return (
-    <div className="w-full bg-[#FAF5ED] min-h-screen text-[#2A1612]">
+    <div className="w-full bg-[#FAE7D8] min-h-screen text-[#2A1612]">
       {/* Toast Notification */}
       {addedToast && (
         <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 bg-[#3B0810] text-[#FFF7ED] px-4 py-3 rounded-xl shadow-xl border border-[#D8B477]/40 flex items-center gap-3 animate-in slide-in-from-bottom duration-300">
@@ -171,7 +180,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
       )}
 
       {/* Top Breadcrumb & Back Navigation Bar */}
-      <div className="border-b border-[#EAE0D2] bg-[#FAF5ED]/90 backdrop-blur-sm sticky top-[57px] sm:top-[65px] z-30">
+      <div className="border-b border-[#E8CFB8] bg-[#FAE7D8]/90 backdrop-blur-sm sticky top-[57px] sm:top-[65px] z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs text-[#8F6623]">
             <button
@@ -282,7 +291,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                   className={`px-3.5 py-2 text-xs font-sans rounded-full border transition-all whitespace-nowrap cursor-pointer flex items-center gap-2 ${
                     isSelected
                       ? 'bg-[#3B0810] text-[#FFF7ED] border-[#3B0810] font-semibold shadow-md'
-                      : 'bg-[#FCF9F5] text-[#2A1612] border-[#EAE0D2] hover:border-[#B88A3B] hover:bg-[#FAF5ED]'
+                      : 'bg-[#FCEDE1] text-[#2A1612] border-[#E8CFB8] hover:border-[#B88A3B] hover:bg-[#FBE5D6]'
                   }`}
                 >
                   <span>{type.label}</span>
@@ -290,7 +299,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                     className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
                       isSelected
                         ? 'bg-[#B88A3B]/40 text-[#FFF7ED]'
-                        : 'bg-[#EAE0D2] text-[#2A1612]/80'
+                        : 'bg-[#E8CFB8] text-[#2A1612]/80'
                     }`}
                   >
                     {count}
@@ -302,7 +311,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
         </div>
 
         {/* Search, Purity & Sorting Control Bar */}
-        <div className="bg-[#FCF9F5] p-3.5 sm:p-4 rounded-xl border border-[#EAE0D2] shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="bg-[#FCEDE1] p-3.5 sm:p-4 rounded-xl border border-[#E8CFB8] shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Search Input */}
           <div className="relative w-full md:w-80">
             <Search className="w-4 h-4 text-[#8F6623] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -311,7 +320,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by gemstone, motif, karigari craft..."
-              className="w-full bg-[#FAF5ED] border border-[#EAE0D2] rounded-xl pl-9 pr-8 py-2 text-xs text-[#2A1612] placeholder-[#2A1612]/50 focus:outline-none focus:border-[#B88A3B] transition-colors"
+              className="w-full bg-[#FAF0E6] border border-[#E8CFB8] rounded-xl pl-9 pr-8 py-2 text-xs text-[#2A1612] placeholder-[#2A1612]/50 focus:outline-none focus:border-[#B88A3B] transition-colors"
             />
             {searchQuery && (
               <button
@@ -331,7 +340,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
               <select
                 value={purityFilter}
                 onChange={(e) => setPurityFilter(e.target.value)}
-                className="bg-[#FAF5ED] border border-[#EAE0D2] rounded-xl px-2.5 py-1.5 text-xs text-[#2A1612] focus:outline-none focus:border-[#B88A3B] cursor-pointer"
+                className="bg-[#FAF0E6] border border-[#E8CFB8] rounded-xl px-2.5 py-1.5 text-xs text-[#2A1612] focus:outline-none focus:border-[#B88A3B] cursor-pointer"
               >
                 <option value="all">All Gold Purities</option>
                 <option value="Antique">22K Antique Yellow Gold</option>
@@ -345,7 +354,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-[#FAF5ED] border border-[#EAE0D2] rounded-xl px-2.5 py-1.5 text-xs text-[#2A1612] focus:outline-none focus:border-[#B88A3B] cursor-pointer"
+                className="bg-[#FAF0E6] border border-[#E8CFB8] rounded-xl px-2.5 py-1.5 text-xs text-[#2A1612] focus:outline-none focus:border-[#B88A3B] cursor-pointer"
               >
                 <option value="featured">Sort: Featured Masterpieces</option>
                 <option value="karigari-desc">Karigari Hours: High to Low</option>
@@ -357,7 +366,7 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
         </div>
 
         {/* Trust & Gold Exchange Prompt Banner */}
-        <div className="bg-gradient-to-r from-[#FCF9F5] via-[#FAF5ED] to-[#FCF9F5] border border-[#EAE0D2] rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
+        <div className="bg-gradient-to-r from-[#FCEDE1] via-[#FAE7D8] to-[#FCEDE1] border border-[#E8CFB8] rounded-xl p-3.5 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xs">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-[#4A0712] text-[#D8B477] flex items-center justify-center shrink-0">
               <RefreshCw className="w-4 h-4" />
@@ -427,10 +436,10 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
               <div
                 key={item.id}
                 onClick={() => handleProductCardClick(item)}
-                className="group bg-[#FCF9F5] rounded-2xl overflow-hidden border border-[#EAE0D2] hover:border-[#B88A3B] transition-all duration-300 hover:shadow-[0_12px_28px_rgba(42,22,18,0.10)] hover:-translate-y-1 flex flex-col justify-between cursor-pointer"
+                className="group bg-[#FCEDE1] rounded-2xl overflow-hidden border border-[#E8CFB8] hover:border-[#B88A3B] transition-all duration-300 hover:shadow-[0_12px_28px_rgba(42,22,18,0.10)] hover:-translate-y-1 flex flex-col justify-between cursor-pointer"
               >
                 {/* Product Image: 100% Uncluttered, Pure Luxury Visuals */}
-                <div className="relative aspect-square w-full bg-[#FAF5ED] overflow-hidden">
+                <div className="relative aspect-square w-full bg-[#FAF0E6] overflow-hidden">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -487,18 +496,18 @@ export const CustomDesignsPage: React.FC<CustomDesignsPageProps> = ({
                     <div className="flex items-end justify-between">
                       <div>
                         {mrpVal && (
-                          <div className="flex items-center gap-2 text-xs text-[#8A7E76]">
+                          <div className="flex items-center gap-2 text-xs text-[#8A7E76] font-sans">
                             <span className="line-through">{mrpVal}</span>
                             <span className="text-[10px] sm:text-[11px] font-semibold text-[#166534] bg-[#E8F8F0] border border-[#BBE7D0] px-2 py-0.5 rounded-md font-sans">
                               Save {savingsVal}
                             </span>
                           </div>
                         )}
-                        <div className="flex items-baseline gap-1 mt-0.5">
-                          <span className="font-serif text-lg sm:text-xl font-bold text-[#2A1612]">
+                        <div className="flex items-baseline gap-1.5 mt-0.5">
+                          <span className="font-sans text-lg sm:text-xl font-bold text-[#2A1612] tracking-tight">
                             {item.priceEst}
                           </span>
-                          <span className="text-[10px] text-[#6E6259] font-sans">
+                          <span className="text-[10px] sm:text-[11px] text-[#6E6259] font-sans">
                             (Incl. 3% GST)
                           </span>
                         </div>

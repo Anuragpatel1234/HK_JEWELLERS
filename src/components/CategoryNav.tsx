@@ -37,10 +37,10 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ onSelectCategory }) =>
   };
 
   return (
-    <div className="relative w-full overflow-hidden border-b border-[#E9D1B5]/60 bg-[#FAF3EB]/60">
+    <div className="relative w-full overflow-hidden border-b border-[#DFBA9D]/60 bg-[#FAE7D8]/80">
       {/* Edge fade indicators for horizontal scroll on touch screens */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-[#FAF3EB] to-transparent md:hidden z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#FAF3EB] to-transparent md:hidden z-10" />
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-[#FAE7D8] to-transparent md:hidden z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#FAE7D8] to-transparent md:hidden z-10" />
 
       <nav 
         aria-label="Categories"

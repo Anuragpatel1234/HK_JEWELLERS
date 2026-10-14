@@ -232,7 +232,7 @@ export const GoldRateModal: React.FC<GoldRateModalProps> = ({ isOpen, onClose, o
                     Net Weight Billing · Zero Stone Deduction Guaranteed
                   </div>
                 </div>
-                <div className="font-serif font-bold text-xl sm:text-2xl text-[#4A0712]">
+                <div className="font-sans font-bold text-xl sm:text-2xl text-[#4A0712] tracking-tight">
                   ₹{finalPrice.toLocaleString('en-IN')}
                 </div>
               </div>
